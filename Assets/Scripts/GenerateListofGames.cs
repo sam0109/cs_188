@@ -9,6 +9,7 @@ public class GenerateListofGames : MonoBehaviour
 
     void OnBecameVisible()
     {
+        ((Dropdown)(transform.root.gameObject.GetComponent<Dropdown>())).ClearOptions();
         string[] files = System.IO.Directory.GetFiles(Application.persistentDataPath, "*." + ext);
         ((Dropdown)(transform.root.gameObject.GetComponent<Dropdown>())).AddOptions(new List<string>(files));
     }
