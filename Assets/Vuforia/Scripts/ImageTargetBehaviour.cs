@@ -6,6 +6,7 @@ Confidential and Proprietary - Qualcomm Connected Experiences, Inc.
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Vuforia
@@ -20,6 +21,9 @@ namespace Vuforia
 		public GameObject House;
 		public GameObject Necro;
 		public GameObject Wall;
+		public GameObject Blob;
+		public Dropdown DropdownButton;
+
 
 		public void Start()
 		{
@@ -31,10 +35,19 @@ namespace Vuforia
 
 		}
 
-		public void Update()
+		public void ButtonPressed()
 		{
 			//TreeO.SetActive(true);
-			House.SetActive(true);
+			if (DropdownButton.value == 1)
+			{
+				Necro.SetActive (true);
+				Blob.SetActive (false);
+			}
+		}
+
+		public void Update()
+		{
+			
 		}
 
 		
