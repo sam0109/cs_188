@@ -508,13 +508,14 @@ GameObject:
   - 114: {fileID: 493713194}
   - 114: {fileID: 493713193}
   - 114: {fileID: 493713196}
+  - 114: {fileID: 493713197}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &493713192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -532,8 +533,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -85, y: -15}
-  m_SizeDelta: {x: 170, y: 30}
+  m_AnchoredPosition: {x: -85, y: -30}
+  m_SizeDelta: {x: 170, y: 45}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &493713193
 MonoBehaviour:
@@ -651,6 +652,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSel: {fileID: 10853821}
   gameController: {fileID: 863126739}
+--- !u!114 &493713197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 493713191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
 --- !u!1 &538965258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,10 +1541,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 493713192}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -0.5}
-  m_SizeDelta: {x: -35, y: -13}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 25, y: -22.5}
+  m_SizeDelta: {x: 200, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097218853
 MonoBehaviour:
@@ -1553,10 +1567,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -1564,7 +1578,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: House
+  m_Text: None
 --- !u!222 &1097218854
 CanvasRenderer:
   m_ObjectHideFlags: 0
