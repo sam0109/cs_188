@@ -35,13 +35,28 @@ namespace Vuforia
 
 		}
 
-		public void ButtonPressed()
+		public void SetModel(int model)
 		{
-			//TreeO.SetActive(true);
-			if (DropdownButton.value == 1)
+			switch (model)
 			{
+			case 1:
+				House.SetActive (true);
+				Blob.SetActive (false);
+				break;
+			case 2:
 				Necro.SetActive (true);
 				Blob.SetActive (false);
+				break;
+			case 3:
+				TreeO.SetActive (true);
+				Blob.SetActive (false);
+				break;
+			case 4:
+				Wall.SetActive (true);
+				Blob.SetActive (false);
+				break;
+			default:
+				break;
 			}
 		}
 
