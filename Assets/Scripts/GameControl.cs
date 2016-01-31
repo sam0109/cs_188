@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameControl : MonoBehaviour 
 {
+    public List<int> frame_markers;
+
     public static GameControl control;
 
     public string mode;

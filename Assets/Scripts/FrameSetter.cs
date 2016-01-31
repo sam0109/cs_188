@@ -16,7 +16,10 @@ public class FrameSetter : MonoBehaviour {
 		if (targeter.target) {
 			Drop.SetActive (true);
 		}
-	
+	    else
+        {
+            Drop.SetActive(false);
+        }
 	}
 		
 }
