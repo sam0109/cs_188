@@ -10,11 +10,7 @@ public class FrameMarkerGenerator : MonoBehaviour {
 	    for (int i = 0; i < marker_count; i++)
         {
             marker_list.Add(Instantiate(frame_marker));
-<<<<<<< HEAD
 			marker_list [i].GetComponent<Vuforia.MarkerBehaviour> ();
-=======
-            marker_list[i].GetComponent<Vuforia.MarkerBehaviour>();
->>>>>>> origin/master
         }
 	}
 	
