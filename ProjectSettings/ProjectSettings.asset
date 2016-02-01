@@ -89,7 +89,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.skcEnterprises.notdnd
+  bundleIdentifier: com.cs188.cks
   bundleVersion: 0.1
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -158,7 +158,7 @@ PlayerSettings:
   AndroidTargetDevice: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
+  AndroidKeystoreName: C:/Users/Sam/Documents/cs_188/user.keystore
   AndroidKeyaliasName: 
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

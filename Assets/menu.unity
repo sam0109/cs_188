@@ -336,6 +336,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 620605618}
   - 212: {fileID: 620605617}
+  - 114: {fileID: 620605619}
   m_Layer: 0
   m_Name: backdrop
   m_TagString: Untagged
@@ -385,6 +386,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!114 &620605619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 620605616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901ef794ba3661a4bb683dc209461cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &670942970
 GameObject:
   m_ObjectHideFlags: 0
