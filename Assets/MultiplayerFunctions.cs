@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi.Multiplayer;
 using UnityEngine.SceneManagement;
-using System.Xml.Serialization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class MultiplayerFunctions : MonoBehaviour
 {
     public GameControl control;
-    TurnBasedMatch match;
 
     public void CreateWithInvitationScreen()
     {
@@ -31,9 +29,14 @@ public class MultiplayerFunctions : MonoBehaviour
         if (success)
         {
             // get the match data
-            match = new_match;
-            LoadTurn();
-            control.dm = match.SelfParticipantId;
+            if (new_match.Data != null && new_match.Data.Length > 0)
+            {
+                control.setValues((GameControl)ByteArrayToObject(new_match.Data));
+            }
+            control.match = new_match;
+            control.canPlay = (new_match.Status == TurnBasedMatch.MatchStatus.Active &&
+                    new_match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn);
+            control.dm = new_match.SelfParticipantId;
             SceneManager.LoadScene(1);
         }
         else {
@@ -41,35 +44,24 @@ public class MultiplayerFunctions : MonoBehaviour
         }
     }
 
-    void LoadTurn()
-    {
-        if(match.Data != null && match.Data.Length > 0)
-        {
-            control.setValues((GameControl)ByteArrayToObject(match.Data));
-        }
-        control.match = match;
-        control.canPlay = (match.Status == TurnBasedMatch.MatchStatus.Active &&
-                match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn);
-    }
-
     public void TakeTurn()
     {
         if (control.canPlay)
         {
-            byte[] myData = ObjectToByteArray(control);
+            byte[] myData = ObjectToByteArray(control.state);
             string nextPlayer = control.dm;
-            if (control.dm == match.SelfParticipantId)
+            if (control.dm == control.match.SelfParticipantId)
             {
-                foreach(Participant participant in match.Participants)
+                foreach(Participant participant in control.match.Participants)
                 {
-                    if(participant.ParticipantId != match.SelfParticipantId)
+                    if(participant.ParticipantId != control.match.SelfParticipantId)
                     {
                         nextPlayer = participant.ParticipantId;
                     }
                 }
                 
             }
-            PlayGamesPlatform.Instance.TurnBased.TakeTurn(match, myData, "p_2", (bool success) =>
+            PlayGamesPlatform.Instance.TurnBased.TakeTurn(control.match, myData, nextPlayer, (bool success) =>
             {
                 if (success)
                 {

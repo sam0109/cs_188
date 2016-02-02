@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using GooglePlayGames.BasicApi.Multiplayer;
 
+
 public class GameControl : MonoBehaviour
 {
     //if adding new values, don't forget to update setValues
     public List<int> frame_markers;
     public static GameControl control;
+    public GameState state;
     public string mode;
     public TurnBasedMatch match;
     public bool canPlay;
@@ -26,6 +28,11 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        state.frame_markers = frame_markers;
+    }
+
     public void setMode(string newMode)
     {
         mode = newMode;
@@ -34,6 +41,11 @@ public class GameControl : MonoBehaviour
     public void setValues(GameControl new_control)
     {
         frame_markers = new_control.frame_markers;
-        mode = new_control.mode;
     }
+}
+
+[System.Serializable]
+public class GameState
+{
+    public List<int> frame_markers;
 }

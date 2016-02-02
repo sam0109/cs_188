@@ -13,6 +13,7 @@ public class FrameMarkerController : MonoBehaviour {
     public void Start()
     {
         current_model_num = -1;
+        gameController = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameControl>();
     }
 
     public void SetModel(int i)
@@ -34,8 +35,6 @@ public class FrameMarkerController : MonoBehaviour {
 
     public void Update()
     {
-        //print(current_model_num);
-        print(gameController);
 
         if (current_model_num != gameController.frame_markers[frame_marker_identifier])
         {
