@@ -38,9 +38,9 @@ public class GameControl : MonoBehaviour
         mode = newMode;
     }
 
-    public void setValues(GameControl new_control)
+    public void setValues(GameState new_state)
     {
-        frame_markers = new_control.frame_markers;
+        frame_markers = new_state.frame_markers;
     }
 }
 

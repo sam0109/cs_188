@@ -12,6 +12,7 @@ public class MultiplayerFunctions : MonoBehaviour
 
     public void CreateWithInvitationScreen()
     {
+        SceneManager.LoadScene(1);
         const int MinPlayers = 1;
         const int MaxPlayers = 7;
         const int Variant = 0;  // default
@@ -31,12 +32,15 @@ public class MultiplayerFunctions : MonoBehaviour
             // get the match data
             if (new_match.Data != null && new_match.Data.Length > 0)
             {
-                control.setValues((GameControl)ByteArrayToObject(new_match.Data));
+                control.setValues((GameState)ByteArrayToObject(new_match.Data));
             }
             control.match = new_match;
             control.canPlay = (new_match.Status == TurnBasedMatch.MatchStatus.Active &&
                     new_match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn);
-            control.dm = new_match.SelfParticipantId;
+            if (GameControl.control.mode == "Master")
+            {
+                control.dm = new_match.SelfParticipantId;
+            }
             SceneManager.LoadScene(1);
         }
         else {

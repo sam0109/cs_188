@@ -69,9 +69,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 478474}
   - 111: {fileID: 11199536}
+  - 65: {fileID: 6568824}
+  - 114: {fileID: 11437634}
   m_Layer: 0
   m_Name: Necromancer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1383,6 +1385,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153084}
   m_Mesh: {fileID: 4300002, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
+--- !u!65 &6568824
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4, z: 4}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!111 &11199536
 Animation:
   m_ObjectHideFlags: 1
@@ -1391,7 +1405,7 @@ Animation:
   m_GameObject: {fileID: 104396}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
+  m_Animation: {fileID: 7400002, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
   - {fileID: 7400002, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
@@ -1411,6 +1425,21 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &11437634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e2e7b6c0752cd41887a950e84020ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animate: {fileID: 11199536}
+  target_selector: {fileID: 0}
+  range: 100
+  damage: 10
 --- !u!137 &13794754
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1497,6 +1526,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400002, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
