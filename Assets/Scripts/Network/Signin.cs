@@ -14,7 +14,6 @@ public class Signin : MonoBehaviour {
         Social.localUser.Authenticate((bool success) => {
             if(success)
             {
-                backdrop.SetActive(false);
                 Debug.Log("logged in properly");
             }
             else

@@ -622,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c3e1a3cf9739347b9f4cf96e9c259d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 670942971}
 --- !u!1 &670942970
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,6 +652,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frame_markers: 
   mode: 
+  canPlay: 0
+  dm: 
 --- !u!4 &670942972
 Transform:
   m_ObjectHideFlags: 0
@@ -1326,7 +1329,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22463730, guid: 95d2a670b459f6e44b1d64d6e2a1cf67, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.4
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 22463730, guid: 95d2a670b459f6e44b1d64d6e2a1cf67, type: 2}
       propertyPath: m_AnchorMin.y
@@ -1334,7 +1337,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22463730, guid: 95d2a670b459f6e44b1d64d6e2a1cf67, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.6
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 22463730, guid: 95d2a670b459f6e44b1d64d6e2a1cf67, type: 2}
       propertyPath: m_AnchorMax.y
@@ -1489,7 +1492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1896318223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1644,6 +1647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c3e1a3cf9739347b9f4cf96e9c259d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
 --- !u!1 &2127309305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,7 +1665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2127309306
 MonoBehaviour:
   m_ObjectHideFlags: 0
