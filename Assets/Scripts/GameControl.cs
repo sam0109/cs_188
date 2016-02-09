@@ -14,6 +14,8 @@ public class GameControl : MonoBehaviour
     public TurnBasedMatch match;
     public bool canPlay;
     public string dm;
+	public string playerCharacter;
+
 
     void Awake()
     {

@@ -5,12 +5,25 @@ using System.Collections.Generic;
 
 public class GenerateListofGames : MonoBehaviour 
 {
-    public string ext;
+	public Dropdown dropdown;
 
-    void OnBecameVisible()
+    void Start()
     {
-        ((Dropdown)(transform.root.gameObject.GetComponent<Dropdown>())).ClearOptions();
-        string[] files = System.IO.Directory.GetFiles(Application.persistentDataPath, "*." + ext);
-        ((Dropdown)(transform.root.gameObject.GetComponent<Dropdown>())).AddOptions(new List<string>(files));
+		dropdown.options.Clear ();
+		string[] files = System.IO.Directory.GetDirectories(Application.dataPath + "/Models/Characters");
+
+		for (int i = 0; i < files.Length; i++) 
+		{
+			files[i] = new System.IO.DirectoryInfo(files[i]).Name ;
+			dropdown.options.Add (new Dropdown.OptionData () { text = files[i]});
+		}
+
+		dropdown.value = 1;
+		dropdown.value = 0;
     }
+
+	public void SetGAMECONTROL()
+	{
+		GameControl.control.playerCharacter = dropdown.itemText.name;
+	}
 }
