@@ -118,11 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e4618365b5df6439e08cd7109174d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: FrameMarker3
+  mTrackableName: FrameMarker0
   mPreviousScale: {x: 1, y: 1, z: 1}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mMarkerID: 3
+  mMarkerID: 0
 --- !u!1002 &11400005
 EditorExtensionImpl:
   serializedVersion: 6
@@ -173,7 +173,9 @@ MonoBehaviour:
   - {fileID: 192212, guid: 55cb859f30e40484785d7d10a56d3d71, type: 2}
   DropdownButton: {fileID: 0}
   gameController: {fileID: 0}
-  frame_marker_identifier: 3
+  targeter: {fileID: 0}
+  frame_marker_identifier: 0
+  highlighted: {fileID: 19800000, guid: 3c6519cf7319347b8a36a69c2173518c, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

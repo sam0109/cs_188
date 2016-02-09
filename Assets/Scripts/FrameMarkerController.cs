@@ -6,12 +6,17 @@ public class FrameMarkerController : MonoBehaviour {
     public List<GameObject> models;
     public Dropdown DropdownButton;
     public GameControl gameController;
+    public target_selector targeter;
     public int frame_marker_identifier;
+    public GameObject highlighted;
+    public GameObject particles;
+    public bool particlesPlaying;
     int current_model_num;
     GameObject current_model;
 
     public void Start()
     {
+        particlesPlaying = false;
         current_model_num = -1;
         gameController = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameControl>();
     }
@@ -40,6 +45,21 @@ public class FrameMarkerController : MonoBehaviour {
         {
             current_model_num = gameController.frame_markers[frame_marker_identifier];
             SetModel(current_model_num);
+        }
+
+        if(targeter.target == current_model)
+        {
+            if (!particlesPlaying)
+            {
+                particlesPlaying = true;
+                particles = Instantiate(highlighted);
+                particles.transform.SetParent(gameObject.transform, false);
+            }
+        }
+        else if (particlesPlaying)
+        {
+            particlesPlaying = false;
+            Destroy(particles);
         }
     }
 }

@@ -1006,6 +1006,18 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 11460628, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460628, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_ReferenceResolution.x
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460628, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_ReferenceResolution.y
+      value: 960
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
   m_IsPrefabParent: 0
@@ -1537,10 +1549,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 640, y: 960}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1586,48 +1598,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1935241826
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -14.0575695
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -3.6059592
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 10.2752495
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 479144, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1993396229
 GameObject:
   m_ObjectHideFlags: 0
