@@ -777,7 +777,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11439822, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_Options.m_Options.Array.size
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1054,6 +1054,26 @@ Prefab:
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439822, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: FemaleWarrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439822, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: Magician
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439822, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: Samurai
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439822, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_Options.m_Options.Array.data[3].m_Text
+      value: SpartanKing
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404564, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
+      propertyPath: m_Text
+      value: Choose 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
