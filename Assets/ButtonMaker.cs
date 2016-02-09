@@ -10,6 +10,7 @@ public class ButtonMaker : MonoBehaviour {
     List<GameObject> buttons;
 	// Use this for initialization
 	void Start () {
+        targetSel = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
         gameController = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameControl>();
         for (int i = 0; i < objects.Count; i++)
         {
