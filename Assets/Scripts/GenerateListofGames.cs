@@ -14,8 +14,8 @@ public class GenerateListofGames : MonoBehaviour
 
 		for (int i = 0; i < files.Length; i++) 
 		{
-			files[i] = new System.IO.DirectoryInfo(files[i]).Name ;
-			dropdown.options.Add (new Dropdown.OptionData () { text = files[i]});
+			Dropdown.OptionData option = new Dropdown.OptionData () { text = new System.IO.DirectoryInfo (files [i]).Name };
+			dropdown.options.Add (option);
 		}
 
 		dropdown.value = 1;
@@ -24,6 +24,6 @@ public class GenerateListofGames : MonoBehaviour
 
 	public void SetGAMECONTROL()
 	{
-		GameControl.control.playerCharacter = dropdown.itemText.name;
+		GameControl.control.playerCharacter = dropdown.itemText.text;
 	}
 }
