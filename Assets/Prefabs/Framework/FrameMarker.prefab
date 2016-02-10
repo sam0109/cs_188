@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1000, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -130,13 +130,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   models:
   - {fileID: 124632, guid: 65ea256b0af8a9648a3d44fbcf1eeb72, type: 2}
+  - {fileID: 101296, guid: ef825000de1295b4c8f8ad622ba76d70, type: 2}
   - {fileID: 150606, guid: 9a3e964ad192cf44791d428df1f36d19, type: 2}
   - {fileID: 104396, guid: d0047b00372d5744f9f9266282b61c53, type: 2}
   - {fileID: 172362, guid: 209f2b73e68addc4f8e340d313a852c3, type: 2}
   - {fileID: 192212, guid: 55cb859f30e40484785d7d10a56d3d71, type: 2}
-  DropdownButton: {fileID: 0}
-  gameController: {fileID: 0}
   frame_marker_identifier: 0
+  highlighted: {fileID: 122004, guid: 5119c0e26ca1ae94b9ba7928827aedab, type: 2}
 --- !u!114 &11497848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +152,7 @@ MonoBehaviour:
   mPreviousScale: {x: 1, y: 1, z: 1}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mMarkerID: -1
+  mMarkerID: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

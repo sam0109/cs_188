@@ -6,6 +6,6 @@ public class ButtonIdentifier : MonoBehaviour {
 
     public void Pressed()
     {
-        gameObject.SendMessageUpwards("ButtonPressed", buttonID);
+        gameObject.SendMessageUpwards("ButtonPressed", gameObject);
     }
 }

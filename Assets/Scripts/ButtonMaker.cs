@@ -5,13 +5,11 @@ using UnityEngine.UI;
 public class ButtonMaker : MonoBehaviour {
     public List<string> objects;
     public GameObject button;
-    public target_selector targetSel;
-    public GameControl gameController;
+    target_selector targetSel;
     List<GameObject> buttons;
 	// Use this for initialization
 	void Start () {
         targetSel = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
-        gameController = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameControl>();
         for (int i = 0; i < objects.Count; i++)
         {
             GameObject temp_button = Instantiate(button);
@@ -23,8 +21,8 @@ public class ButtonMaker : MonoBehaviour {
         }
 	}
 
-    public void ButtonPressed(int value)
+    public void ButtonPressed(GameObject button)
     {
-        gameController.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier] = value;
+        GameControl.control.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier] = button.GetComponent<ButtonIdentifier>().buttonID;
     }
 }

@@ -4,13 +4,12 @@ using UnityEngine.UI;
 
 public class FrameMarkerController : MonoBehaviour {
     public List<GameObject> models;
-    public Dropdown DropdownButton;
-    public GameControl gameController;
-    public target_selector targeter;
     public int frame_marker_identifier;
     public GameObject highlighted;
-    public GameObject particles;
-    public bool particlesPlaying;
+    GameControl gameController;
+    target_selector targeter;
+    GameObject particles;
+    bool particlesPlaying;
     int current_model_num;
     GameObject current_model;
 
@@ -19,6 +18,7 @@ public class FrameMarkerController : MonoBehaviour {
         particlesPlaying = false;
         current_model_num = -1;
         gameController = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameControl>();
+        targeter = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
     }
 
     public void SetModel(int i)

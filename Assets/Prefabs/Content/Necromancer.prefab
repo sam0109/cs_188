@@ -70,10 +70,10 @@ GameObject:
   - 4: {fileID: 478474}
   - 111: {fileID: 11199536}
   - 65: {fileID: 6568824}
-  - 114: {fileID: 11437634}
+  - 114: {fileID: 11424024}
   m_Layer: 0
   m_Name: Necromancer
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1425,7 +1425,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11437634
+--- !u!114 &11424024
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1433,13 +1433,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 104396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e2e7b6c0752cd41887a950e84020ae, type: 3}
+  m_Script: {fileID: 11500000, guid: c015a392b56c75e43a5e9bf9831ea79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animate: {fileID: 11199536}
-  target_selector: {fileID: 0}
-  range: 100
-  damage: 10
+  explode: {fileID: 19861102, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
 --- !u!137 &13794754
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1537,8 +1534,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explode
+      value: 
+      objectReference: {fileID: 19861102, guid: fb5446fce7e121446b2533bc0ecb7842,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104396}

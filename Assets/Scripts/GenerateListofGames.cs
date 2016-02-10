@@ -26,6 +26,6 @@ public class GenerateListofGames : MonoBehaviour
 
 	public void SetGAMECONTROL()
 	{
-		GameControl.control.playerCharacter = dropdown.itemText.text;
+        GameControl.control.playerCharacter = dropdown.captionText.text;
 	}
 }

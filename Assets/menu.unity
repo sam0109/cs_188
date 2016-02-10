@@ -548,8 +548,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 620605618}
   - 212: {fileID: 620605617}
-  - 114: {fileID: 620605619}
-  - 114: {fileID: 620605620}
   m_Layer: 0
   m_Name: backdrop
   m_TagString: Untagged
@@ -599,30 +597,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!114 &620605619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 620605616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901ef794ba3661a4bb683dc209461cb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backdrop: {fileID: 620605616}
---- !u!114 &620605620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 620605616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c3e1a3cf9739347b9f4cf96e9c259d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  control: {fileID: 670942971}
 --- !u!1 &670942970
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +606,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 670942972}
   - 114: {fileID: 670942971}
-  - 114: {fileID: 670942973}
   m_Layer: 0
   m_Name: GameControl
   m_TagString: GameControl
@@ -670,18 +643,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
---- !u!114 &670942973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 670942970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c3e1a3cf9739347b9f4cf96e9c259d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  control: {fileID: 670942971}
 --- !u!1 &698239316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,10 +963,10 @@ Prefab:
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 620605620}
+      objectReference: {fileID: 1996587099}
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AcceptFromInbox
+      value: SetGAMECONTROL
       objectReference: {fileID: 0}
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1046,10 +1007,10 @@ Prefab:
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1996587099}
+      objectReference: {fileID: 670942971}
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetGAMECONTROL
+      value: AcceptFromInbox
       objectReference: {fileID: 0}
     - target: {fileID: 11475172, guid: 0f27ca142f83c6c4eae8247284ef3317, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1228,7 +1189,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 620605620}
+      - m_Target: {fileID: 670942971}
         m_MethodName: CreateWithInvitationScreen
         m_Mode: 1
         m_Arguments:
@@ -1728,22 +1689,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 968269081}
   m_Script: {fileID: 853051423, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!1 &2110487366 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 141926, guid: 95d2a670b459f6e44b1d64d6e2a1cf67, type: 2}
-  m_PrefabInternal: {fileID: 1806765521}
---- !u!114 &2110487367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2110487366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c3e1a3cf9739347b9f4cf96e9c259d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  control: {fileID: 0}
 --- !u!1 &2127309305
 GameObject:
   m_ObjectHideFlags: 0
