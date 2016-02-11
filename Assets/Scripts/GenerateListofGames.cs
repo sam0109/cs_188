@@ -20,12 +20,10 @@ public class GenerateListofGames : MonoBehaviour
 			dropdown.options.Add (option);
 		}
 		*/
-		dropdown.value = 1;
-		dropdown.value = 0;
     }
 
-	public void SetGAMECONTROL()
+	public void SetGameControl()
 	{
-        GameControl.control.playerCharacter = dropdown.captionText.text;
+        GameControl.control.playerCharacter = dropdown.value;
 	}
 }

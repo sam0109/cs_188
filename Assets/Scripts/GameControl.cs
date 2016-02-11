@@ -18,7 +18,7 @@ public class GameControl : MonoBehaviour
     public TurnBasedMatch match;
     public bool canPlay;
     public string dm;
-	public string playerCharacter;
+	public int playerCharacter;
 
     void Start()
     {
@@ -53,6 +53,11 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         state.frame_markers = frame_markers;
+    }
+
+    public void setPlayerModel(int i)
+    {
+        control.playerCharacter = i;
     }
 
     public void setMode(string newMode)
@@ -96,7 +101,14 @@ public class GameControl : MonoBehaviour
 
     public void AcceptFromInbox()
     {
-        PlayGamesPlatform.Instance.TurnBased.AcceptFromInbox(OnMatchStarted);
+        if (!Application.isEditor)
+        {
+            PlayGamesPlatform.Instance.TurnBased.AcceptFromInbox(OnMatchStarted);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     // Callback:
