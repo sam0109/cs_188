@@ -7,6 +7,7 @@ using System;
 using GooglePlayGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Vuforia;
 
 public class GameControl : MonoBehaviour
 {
@@ -22,10 +23,13 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
+        VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPaused);
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
-        Social.localUser.Authenticate((bool success) => {
+        Social.localUser.Authenticate((bool success) =>
+        {
             if (success)
             {
                 Debug.Log("logged in properly");
@@ -179,6 +183,22 @@ public class GameControl : MonoBehaviour
             memStream.Seek(0, SeekOrigin.Begin);
             var obj = binForm.Deserialize(memStream);
             return obj;
+        }
+    }
+
+    private void OnVuforiaStarted()
+    {
+        CameraDevice.Instance.SetFocusMode(
+        CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
+    }
+
+    private void OnPaused(bool paused)
+    {
+        if (!paused) // resumed
+        {
+            // Set again autofocus mode when app is resumed
+            CameraDevice.Instance.SetFocusMode(
+            CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
         }
     }
 }
