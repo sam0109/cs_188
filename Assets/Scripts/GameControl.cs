@@ -207,4 +207,13 @@ public class GameControl : MonoBehaviour
 public class GameState
 {
     public List<int> frame_markers;
+    public List<Character> Characters;
+}
+
+[System.Serializable]
+public class Character
+{
+    public string name;
+    public string player;
+    public int model;
 }

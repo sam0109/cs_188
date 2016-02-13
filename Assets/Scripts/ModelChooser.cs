@@ -30,5 +30,6 @@ public class ModelChooser : MonoBehaviour
         current_model = (GameObject) Instantiate(models[GameControl.control.playerCharacter], Vector3.zero, Quaternion.identity);
         current_model_num = GameControl.control.playerCharacter;
         current_model.transform.SetParent(gameObject.transform, false);
+        GetComponent<character_controller>().animate = current_model.GetComponent<Animation>();
     }
 }
