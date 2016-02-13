@@ -1393,7 +1393,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11459388, guid: c149abe96a93dd14e898635056c84267, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 22448166, guid: c149abe96a93dd14e898635056c84267, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1542,6 +1542,26 @@ Prefab:
     - target: {fileID: 198192, guid: c149abe96a93dd14e898635056c84267, type: 2}
       propertyPath: m_Name
       value: Create
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459388, guid: c149abe96a93dd14e898635056c84267, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459388, guid: c149abe96a93dd14e898635056c84267, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459388, guid: c149abe96a93dd14e898635056c84267, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1469085559}
+    - target: {fileID: 11459388, guid: c149abe96a93dd14e898635056c84267, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SaveCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459388, guid: c149abe96a93dd14e898635056c84267, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11445676, guid: c149abe96a93dd14e898635056c84267, type: 2}
