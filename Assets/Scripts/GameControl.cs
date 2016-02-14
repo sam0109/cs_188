@@ -24,17 +24,6 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
-        VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPaused);
-        PlayGamesPlatform.DebugLogEnabled = true;
-
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-        // enables saving game progress.
-        .DisableSavedGames()
-        .Build();
-
-        PlayGamesPlatform.InitializeInstance(config);
-        // recommended for debugging:
         PlayGamesPlatform.DebugLogEnabled = true;
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
@@ -50,6 +39,9 @@ public class GameControl : MonoBehaviour
                 Debug.Log("did not log in properly");
             }
         });
+
+        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
+        VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPaused);
     }
 
     void Awake()
