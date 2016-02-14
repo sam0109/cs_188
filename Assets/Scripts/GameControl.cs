@@ -39,9 +39,6 @@ public class GameControl : MonoBehaviour
                 Debug.Log("did not log in properly");
             }
         });
-
-        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
-        VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPaused);
     }
 
     void Awake()
@@ -186,22 +183,6 @@ public class GameControl : MonoBehaviour
             memStream.Seek(0, SeekOrigin.Begin);
             var obj = binForm.Deserialize(memStream);
             return obj;
-        }
-    }
-
-    private void OnVuforiaStarted()
-    {
-        CameraDevice.Instance.SetFocusMode(
-        CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
-    }
-
-    private void OnPaused(bool paused)
-    {
-        if (!paused) // resumed
-        {
-            // Set again autofocus mode when app is resumed
-            CameraDevice.Instance.SetFocusMode(
-            CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
         }
     }
 }
