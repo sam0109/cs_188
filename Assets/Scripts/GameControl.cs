@@ -8,6 +8,7 @@ using GooglePlayGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Vuforia;
+using GooglePlayGames.BasicApi;
 
 public class GameControl : MonoBehaviour
 {
@@ -26,6 +27,16 @@ public class GameControl : MonoBehaviour
         VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
         VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPaused);
         PlayGamesPlatform.DebugLogEnabled = true;
+
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+        // enables saving game progress.
+        .DisableSavedGames()
+        .Build();
+
+        PlayGamesPlatform.InitializeInstance(config);
+        // recommended for debugging:
+        PlayGamesPlatform.DebugLogEnabled = true;
+        // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
 
         Social.localUser.Authenticate((bool success) =>

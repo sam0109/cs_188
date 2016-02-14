@@ -179,6 +179,12 @@ namespace GooglePlayGames.BasicApi
                 return this;
             }
 
+            public Builder DisableSavedGames()
+            {
+                mEnableSaveGames = false;
+                return this;
+            }
+
             /// <summary>
             /// Requests use of the player's Google+ social graph.
             /// </summary>
