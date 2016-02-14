@@ -3,14 +3,30 @@ using System.Collections;
 using Vuforia;
 
 public class SetAutoFocus : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-        CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
+    void Start()
+    {
+        VuforiaAbstractBehaviour vuforiaBehaviour = (VuforiaAbstractBehaviour)FindObjectOfType(typeof(VuforiaAbstractBehaviour));
+        if (vuforiaBehaviour)
+        {
+            vuforiaBehaviour.RegisterVuforiaStartedCallback(EnableContinuousAutoFocus);
+            vuforiaBehaviour.RegisterOnPauseCallback(OnPause);
+        }
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
+    private void EnableContinuousAutoFocus()
+    {
+        if (!CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO))
+        {
+            CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_NORMAL);
+        }
+    }
+
+    private void OnPause(bool pause)
+    {
+        if (!pause)
+        {
+            // set to continous autofocus
+            CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
+        }
+    }
 }
