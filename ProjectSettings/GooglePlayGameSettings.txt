@@ -1,8 +1,8 @@
 lastUpgrade=00930
 ios.ClientId=54046390500-2k5t3d7f606fbqad0q0ruu7p5nuei49g.apps.googleusercontent.com
-ios.BundleId=com.cs188.cks
+ios.BundleId=com.cs188.cksgame
 proj.ConstantsClassName=Constants
-ios.ResourceData=%23define+CLIENT_ID+%40%2254046390500-2k5t3d7f606fbqad0q0ruu7p5nuei49g.apps.googleusercontent.com%22%0d%0a%23define+BUNDLE_ID+%40%22com.cs188.cks%22%0d%0a%23define+ACH_GETTING_STARTED+%40%22CgkI5PGpq8kBEAIQAQ%22
+ios.ResourceData=%23define+CLIENT_ID+%40%2254046390500-2k5t3d7f606fbqad0q0ruu7p5nuei49g.apps.googleusercontent.com%22%0d%0a%23define+BUNDLE_ID+%40%22com.cs188.cksgame%22%0d%0a%23define+ACH_GETTING_STARTED+%40%22CgkI5PGpq8kBEAIQAQ%22
 and.ClientId=54046390500-2k5t3d7f606fbqad0q0ruu7p5nuei49g.apps.googleusercontent.com
 proj.requireGPlus=false
 ios.SetupDone=true
