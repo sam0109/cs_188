@@ -6,7 +6,7 @@ public class FrameMarkerController : MonoBehaviour {
     public List<GameObject> models;
     public int frame_marker_identifier;
     public GameObject highlighted;
-    GameControl gameController;
+    public string owner;
     target_selector targeter;
     GameObject particles;
     bool particlesPlaying;
@@ -17,8 +17,9 @@ public class FrameMarkerController : MonoBehaviour {
     {
         particlesPlaying = false;
         current_model_num = -1;
-        gameController = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameControl>();
         targeter = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
+        owner = "";
+        //fix once frame markers are dynamic
     }
 
     public void SetModel(int i)
@@ -34,17 +35,20 @@ public class FrameMarkerController : MonoBehaviour {
         }
         else
         {
-            print(i + " is out of range");
+            Debug.Log(i + " is out of range");
         }
     }
 
     public void Update()
     {
-
-        if (current_model_num != gameController.frame_markers[frame_marker_identifier])
+        if (current_model_num != GameControl.control.state.frame_markers[frame_marker_identifier].model)
         {
-            current_model_num = gameController.frame_markers[frame_marker_identifier];
+            current_model_num = GameControl.control.state.frame_markers[frame_marker_identifier].model;
             SetModel(current_model_num);
+        }
+        if(GameControl.control.state.frame_markers[frame_marker_identifier].model == 1)
+        {
+            owner = GameControl.control.state.frame_markers[frame_marker_identifier].player;
         }
 
         if(targeter.target == current_model)

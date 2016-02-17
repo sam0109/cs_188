@@ -22,8 +22,7 @@ public class LoadCharacter : MonoBehaviour
             Character obj = (Character)formatter.Deserialize(stream);
             stream.Close();
 
-            GameControl.control.state.Characters.Add(obj);
-
+            GameControl.control.myCharacter = obj;
             GameControl.control.AcceptFromInbox();
         }
     }

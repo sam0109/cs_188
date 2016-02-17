@@ -8,19 +8,19 @@ using System.IO;
 public class CreateCharacter : MonoBehaviour {
 
     public Dropdown model;
-    public InputField name;
+    public InputField characterName;
 
     public void SaveCharacter ()
     {
         Character newCharater = new Character();
 
-        newCharater.name = name.text;
+        newCharater.characterName = characterName.text;
         newCharater.player = model.options[model.value].text;
         newCharater.model = model.value;
 
         IFormatter formatter = new BinaryFormatter();
 
-        string path = Path.Combine(Application.persistentDataPath, newCharater.name + ".char");
+        string path = Path.Combine(Application.persistentDataPath, newCharater.characterName + ".char");
         
         Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
         formatter.Serialize(stream, newCharater);

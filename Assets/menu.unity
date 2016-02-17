@@ -504,14 +504,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43431a8bf14c7e94190dae8e32ddc52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frame_markers: 0000000000000000000000000000000000000000
   state:
-    frame_markers: 
-    Characters: []
+    dm: 
   mode: 
-  canPlay: 0
-  dm: 
   playerCharacter: 0
+  playerID: 
+  myCharacter:
+    characterName: 
+    player: 
+    model: 0
 --- !u!4 &670942972
 Transform:
   m_ObjectHideFlags: 0
@@ -1708,7 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 808474712}
-  name: {fileID: 1756620178}
+  characterName: {fileID: 1756620178}
 --- !u!224 &1721585173 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22448166, guid: c149abe96a93dd14e898635056c84267,

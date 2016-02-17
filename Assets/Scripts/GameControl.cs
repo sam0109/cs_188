@@ -12,18 +12,17 @@ using GooglePlayGames.BasicApi;
 
 public class GameControl : MonoBehaviour
 {
-    //if adding new values, don't forget to update setValues
-    public List<int> frame_markers;
     public static GameControl control;
     public GameState state;
     public string mode;
     public TurnBasedMatch match;
-    public bool canPlay;
-    public string dm;
 	public int playerCharacter;
+    public string playerID;
+    public Character myCharacter;
 
     void Start()
     {
+        playerCharacter = 0;
         PlayGamesPlatform.DebugLogEnabled = true;
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
@@ -54,32 +53,31 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        state.frame_markers = frame_markers;
-    }
-
-    public void setPlayerModel(int i)
-    {
-        control.playerCharacter = i;
-    }
-
     public void setMode(string newMode)
     {
         mode = newMode;
     }
 
+    public void setPlayerModel(int model)
+    {
+        playerCharacter = model;
+    }
+
     public void setValues(GameState new_state)
     {
-        frame_markers = new_state.frame_markers;
+        state = new_state;
     }
 
     public Dictionary<string, string> GetPlayers()
     {
         Dictionary<string, string> players = new Dictionary<string, string>();
-        foreach (Participant p in match.Participants)
+        if (Application.isEditor)
         {
-            if (p.ParticipantId != dm)
+            return players;
+        }
+            foreach (Participant p in match.Participants)
+        {
+            if (p.ParticipantId != state.dm)
             {
                 players.Add(p.Player.userName, p.ParticipantId);
                 Debug.Log("Play Unity adding player " + p.Player.userName);
@@ -92,6 +90,14 @@ public class GameControl : MonoBehaviour
     {
         if (Application.isEditor)
         {
+            state = new GameState();
+            state.dm = "meee";
+            state.frame_markers = new List<model_player>();
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
             SceneManager.LoadScene(1);
         }
         else
@@ -111,6 +117,14 @@ public class GameControl : MonoBehaviour
         }
         else
         {
+            state = new GameState();
+            state.dm = "meee";
+            state.frame_markers = new List<model_player>();
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
+            state.frame_markers.Add(new model_player(0, state.dm));
             SceneManager.LoadScene(1);
         }
     }
@@ -125,12 +139,33 @@ public class GameControl : MonoBehaviour
             {
                 setValues((GameState)ByteArrayToObject(new_match.Data));
             }
+            else
+            {
+                state = new GameState();
+            }
             match = new_match;
-            canPlay = (new_match.Status == TurnBasedMatch.MatchStatus.Active &&
-                    new_match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn);
+            playerID = match.SelfParticipantId;
             if (mode == "Master")
             {
-                dm = new_match.SelfParticipantId;
+                state = new GameState();
+                state.dm = playerID;
+                state.frame_markers = new List<model_player>();
+                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new model_player(0, state.dm));
+            }
+            if (mode == "Player")
+            {
+                if(!state.Characters.ContainsKey(playerID))
+                {
+                    state.Characters.Add(playerID, myCharacter);
+                }
+                else
+                {
+                    state.Characters[playerID] = myCharacter;
+                }
             }
             SceneManager.LoadScene(1);
         }
@@ -141,7 +176,8 @@ public class GameControl : MonoBehaviour
 
     public bool TakeTurn(string next)
     {
-        if (canPlay)
+        if (match.Status == TurnBasedMatch.MatchStatus.Active &&
+                    match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn)
         {
             byte[] myData = ObjectToByteArray(state);
 
@@ -190,14 +226,27 @@ public class GameControl : MonoBehaviour
 [System.Serializable]
 public class GameState
 {
-    public List<int> frame_markers;
-    public List<Character> Characters;
+    public string dm;
+    public List<model_player> frame_markers;
+    public Dictionary<string, Character> Characters;
 }
 
 [System.Serializable]
 public class Character
 {
-    public string name;
+    public string characterName;
     public string player;
     public int model;
+}
+
+[System.Serializable]
+public class model_player
+{
+    public model_player(int new_model, string new_player)
+    {
+        model = new_model;
+        player = new_player;
+    }
+    public int model;
+    public string player;
 }

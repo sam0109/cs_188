@@ -3,6 +3,7 @@ using System.Collections;
 using Vuforia;
 
 public class SetAutoFocus : MonoBehaviour {
+#if UNITY_ANDROID
     void Start()
     {
         VuforiaAbstractBehaviour vuforiaBehaviour = (VuforiaAbstractBehaviour)FindObjectOfType(typeof(VuforiaAbstractBehaviour));
@@ -29,4 +30,5 @@ public class SetAutoFocus : MonoBehaviour {
             CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
         }
     }
+#endif
 }
