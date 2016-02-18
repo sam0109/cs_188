@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.iOS;
 
 public class LightSensor : MonoBehaviour
 {
@@ -15,12 +16,8 @@ public class LightSensor : MonoBehaviour
         {
             platform = "ios";
         }
+        AndroidJavaClass cls = new AndroidJavaClass("android.hardware.SensorManager");
     }
-	
-	void Update ()
-    {
-	
-	}
 
     public string getPlatformType()
     {
