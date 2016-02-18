@@ -1244,7 +1244,7 @@ Transform:
   m_GameObject: {fileID: 104396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.083333336, y: 0.083333336, z: 0.083333336}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 492556}
   - {fileID: 460884}
@@ -1437,6 +1437,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explode: {fileID: 19861102, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
+  height: {x: 0, y: 7, z: 0}
+  healthBar: {fileID: 181158, guid: c042b5982bf4d184e86cddee70a3434f, type: 2}
+  health: 100
+  currentHealth: 0
 --- !u!137 &13794754
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1541,6 +1545,34 @@ Prefab:
       value: 
       objectReference: {fileID: 19861102, guid: fb5446fce7e121446b2533bc0ecb7842,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 181158, guid: c042b5982bf4d184e86cddee70a3434f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height.y
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104396}

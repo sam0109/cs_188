@@ -8,6 +8,7 @@ TagManager:
   - GameControl
   - Targeter
   - Player
+  - FrameMarker
   layers:
   - Default
   - TransparentFX

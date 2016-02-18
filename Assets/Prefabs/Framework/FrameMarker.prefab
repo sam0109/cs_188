@@ -17,7 +17,7 @@ GameObject:
   - 114: {fileID: 11473304}
   m_Layer: 0
   m_Name: FrameMarker
-  m_TagString: Untagged
+  m_TagString: FrameMarker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   - {fileID: 192212, guid: 55cb859f30e40484785d7d10a56d3d71, type: 2}
   frame_marker_identifier: 0
   highlighted: {fileID: 122004, guid: 5119c0e26ca1ae94b9ba7928827aedab, type: 2}
+  owner: 
 --- !u!114 &11497848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +153,7 @@ MonoBehaviour:
   mPreviousScale: {x: 1, y: 1, z: 1}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mMarkerID: 0
+  mMarkerID: -1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -163,6 +164,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mMarkerID
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: FrameMarker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

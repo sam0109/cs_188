@@ -142,6 +142,8 @@ public class GameControl : MonoBehaviour
             else
             {
                 state = new GameState();
+                state.frame_markers = new List<model_player>();
+                state.Characters = new Dictionary<string, Character>();
             }
             match = new_match;
             playerID = match.SelfParticipantId;
@@ -155,6 +157,8 @@ public class GameControl : MonoBehaviour
                 state.frame_markers.Add(new model_player(0, state.dm));
                 state.frame_markers.Add(new model_player(0, state.dm));
                 state.frame_markers.Add(new model_player(0, state.dm));
+                state.Characters = new Dictionary<string, Character>();
+
             }
             if (mode == "Player")
             {
@@ -237,6 +241,9 @@ public class Character
     public string characterName;
     public string player;
     public int model;
+    public string characterClass;
+    public string characterRace;
+    public int str, dex, con, intelligence, wiz, cha;
 }
 
 [System.Serializable]
