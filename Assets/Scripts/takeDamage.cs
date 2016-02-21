@@ -15,12 +15,16 @@ public class takeDamage : MonoBehaviour {
         myHealthBar.transform.SetParent(gameObject.transform, false);
 	}
 
-    void Damage(float damage)
+    //void Damage(float damage)
+	void Damage(attack_values values)
     {
+		//TODO: add a condition for whether or not the hit actually happens 
+		float damage = values.attackDamageWithDice;
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             Instantiate(explode, transform.position, Quaternion.identity);
+			//GameControl.control.state.frame_markers
             Destroy(gameObject);
         }
     }
