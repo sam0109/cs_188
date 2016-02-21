@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 480078}
-  - 114: {fileID: 11424076}
   - 114: {fileID: 11491938}
   m_Layer: 0
   m_Name: PlayerCharacter
@@ -29,22 +28,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11424076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc704cf7ddc064440809bb022d531f6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  models:
-  - {fileID: 107074, guid: 8df77c6edce8d174aa068cd57c684503, type: 2}
-  - {fileID: 135282, guid: 885e275fc974e5a42b7354f7b136939d, type: 2}
-  - {fileID: 132004, guid: 0e4928b3bb92969449723d867cbb40e6, type: 2}
-  - {fileID: 110752, guid: ed1fae89eab1d3045a30e1e7f9824fcc, type: 2}
 --- !u!114 &11491938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animate: {fileID: 0}
   range: 20
-  damage: 10
+  models: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

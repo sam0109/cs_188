@@ -56,17 +56,18 @@ public class character_controller : MonoBehaviour {
 
 		if (GameControl.control.isMyTurn && myPlayer == playerID) 
 		{
-
-			//damage = dice roll + strength modifier 
 			int diceRollHitOrNot = randomNum ();
+
 			Character chara = new Character();
 			chara = GameControl.control.state.Characters [playerID];
 			int strength = chara.str;
-			//next step: calculate strength modifier, add to dice, then set it to damage
-			//move this to new function called calcDamage
-			int strengthMod = stat_converter.calc_modifier(strength);
+
+			stat_converter mod = new stat_converter (strength);
+			int strengthMod = mod.modifierValue;
+
 			int diceRollDamage = randomNum ();
 			int attackDamage = strengthMod + diceRollDamage;
+
 			values = new attack_values (diceRollHitOrNot, attackDamage);
 
 
@@ -108,16 +109,17 @@ public class attack_values
 		diceRollToHit = diceRollVal;
 		attackDamageWithDice = attackDamageVal;
 	}
+
 	public int diceRollToHit;
 	public int attackDamageWithDice;
 }
 
 public class stat_converter
 {
-	public static int calc_modifier(int stat)
+	public stat_converter(int stat)
 	{
 		modifierValue = (stat / 2) - 5;
-		return modifierValue;
 	}
-	public static int modifierValue;
+
+	public int modifierValue;
 }
