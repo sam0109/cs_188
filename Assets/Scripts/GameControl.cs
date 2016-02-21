@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Vuforia;
 using GooglePlayGames.BasicApi;
+using System.Linq;
 
 public class GameControl : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class GameControl : MonoBehaviour
     public string playerID;
     public Character myCharacter;
 	public bool isMyTurn;
+    public int numMarkers;
+    public List<GameObject> models;
+    public GameObject highlighted;
 
     void Start()
     {

@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Vuforia;
 
 public class FrameMarkerGenerator : MonoBehaviour {
-    public int marker_count;
-    public GameObject frame_marker;
-    List<GameObject> marker_list;
-	// Use this for initialization
-	void Start () {
-	    for (int i = 0; i < marker_count; i++)
+    public int numMarkers;
+
+    // Use this for initialization
+    void Start () {
+        MarkerTracker mt = TrackerManager.Instance.GetTracker<MarkerTracker>();
+        for (int i = 0; i < numMarkers; i++)
         {
-            marker_list.Add(Instantiate(frame_marker));
-            marker_list[i].GetComponent<Vuforia.MarkerBehaviour>();
+            MarkerAbstractBehaviour marker = mt.CreateMarker(i, "Marker" + i.ToString(), 100);
+            marker.gameObject.AddComponent<FrameMarkerController>();
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }
