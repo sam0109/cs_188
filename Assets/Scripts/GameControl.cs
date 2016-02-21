@@ -19,6 +19,7 @@ public class GameControl : MonoBehaviour
 	public int playerCharacter;
     public string playerID;
     public Character myCharacter;
+	public bool isMyTurn;
 
     void Start()
     {
@@ -52,6 +53,19 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
+		
+	void Update()
+	{
+		if (match.Status == TurnBasedMatch.MatchStatus.Active &&
+		    match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn) 
+		{
+			isMyTurn = true;
+		} 
+		else 
+		{
+			isMyTurn = false;
+		}
+	}
 
     public void setMode(string newMode)
     {
