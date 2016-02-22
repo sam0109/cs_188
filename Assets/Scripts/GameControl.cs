@@ -27,6 +27,7 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        numMarkers = 10;
         playerCharacter = 0;
         PlayGamesPlatform.DebugLogEnabled = true;
         // Activate the Google Play Games platform
@@ -60,15 +61,18 @@ public class GameControl : MonoBehaviour
 		
 	void Update()
 	{
-		if (match.Status == TurnBasedMatch.MatchStatus.Active &&
-		    match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn) 
-		{
-			isMyTurn = true;
-		} 
-		else 
-		{
-			isMyTurn = false;
-		}
+        if (match != null)
+        {
+            if (match.Status == TurnBasedMatch.MatchStatus.Active &&
+                match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn)
+            {
+                isMyTurn = true;
+            }
+            else
+            {
+                isMyTurn = false;
+            }
+        }
 	}
 
     public void setMode(string newMode)
@@ -111,11 +115,10 @@ public class GameControl : MonoBehaviour
             state = new GameState();
             state.dm = "meee";
             state.frame_markers = new List<model_player>();
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
+            for (int i = 0; i < numMarkers; i++)
+            {
+                state.frame_markers.Add(new model_player(0, state.dm));
+            }
             SceneManager.LoadScene(1);
         }
         else
@@ -129,21 +132,20 @@ public class GameControl : MonoBehaviour
 
     public void AcceptFromInbox()
     {
-        if (!Application.isEditor)
-        {
-            PlayGamesPlatform.Instance.TurnBased.AcceptFromInbox(OnMatchStarted);
-        }
-        else
+        if (Application.isEditor)
         {
             state = new GameState();
             state.dm = "meee";
             state.frame_markers = new List<model_player>();
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
-            state.frame_markers.Add(new model_player(0, state.dm));
+            for (int i = 0; i < numMarkers; i++)
+            {
+                state.frame_markers.Add(new model_player(0, state.dm));
+            }
             SceneManager.LoadScene(1);
+        }
+        else
+        {
+            PlayGamesPlatform.Instance.TurnBased.AcceptFromInbox(OnMatchStarted);
         }
     }
 
@@ -170,11 +172,10 @@ public class GameControl : MonoBehaviour
                 state = new GameState();
                 state.dm = playerID;
                 state.frame_markers = new List<model_player>();
-                state.frame_markers.Add(new model_player(0, state.dm));
-                state.frame_markers.Add(new model_player(0, state.dm));
-                state.frame_markers.Add(new model_player(0, state.dm));
-                state.frame_markers.Add(new model_player(0, state.dm));
-                state.frame_markers.Add(new model_player(0, state.dm));
+                for(int i = 0; i < numMarkers; i++)
+                {
+                    state.frame_markers.Add(new model_player(0, state.dm));
+                }
                 state.Characters = new Dictionary<string, Character>();
 
             }

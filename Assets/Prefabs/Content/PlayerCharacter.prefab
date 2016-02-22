@@ -39,9 +39,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e2e7b6c0752cd41887a950e84020ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animate: {fileID: 0}
   range: 20
-  models: []
+  models:
+  - {fileID: 107074, guid: 8df77c6edce8d174aa068cd57c684503, type: 2}
+  - {fileID: 135282, guid: 885e275fc974e5a42b7354f7b136939d, type: 2}
+  - {fileID: 132004, guid: 0e4928b3bb92969449723d867cbb40e6, type: 2}
+  - {fileID: 110752, guid: ed1fae89eab1d3045a30e1e7f9824fcc, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -49,6 +52,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: models.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: range
       value: 20
@@ -73,6 +80,22 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: models.Array.data[0]
+      value: 
+      objectReference: {fileID: 107074, guid: 8df77c6edce8d174aa068cd57c684503, type: 2}
+    - target: {fileID: 0}
+      propertyPath: models.Array.data[1]
+      value: 
+      objectReference: {fileID: 135282, guid: 885e275fc974e5a42b7354f7b136939d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: models.Array.data[2]
+      value: 
+      objectReference: {fileID: 132004, guid: 0e4928b3bb92969449723d867cbb40e6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: models.Array.data[3]
+      value: 
+      objectReference: {fileID: 110752, guid: ed1fae89eab1d3045a30e1e7f9824fcc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101296}

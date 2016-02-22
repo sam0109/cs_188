@@ -18,17 +18,11 @@ public class EndPlayerTurn : MonoBehaviour {
 
     void Update()
     {
-        if (GameControl.control.match.Status == TurnBasedMatch.MatchStatus.Active &&
-           GameControl.control.match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn &&
-           nextTurn.interactable == false
-           )
+        if (GameControl.control.isMyTurn && nextTurn.interactable == false)
         {
             nextTurn.interactable = true;
         }
-        else if (!(GameControl.control.match.Status == TurnBasedMatch.MatchStatus.Active &&
-           GameControl.control.match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn) &&
-           nextTurn.interactable == true
-            )
+        else if (!GameControl.control.isMyTurn && nextTurn.interactable == true)
         {
             nextTurn.interactable = false;
         }

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class character_controller : MonoBehaviour {
-    public Animation animate;
     public float range;
 	target_selector target_selector;
 	public attack_values values;
@@ -98,7 +97,6 @@ public class character_controller : MonoBehaviour {
 		current_model = Instantiate(models[new_model]);
 		current_model_num = new_model;
 		current_model.transform.SetParent(gameObject.transform, false);
-		GetComponent<character_controller>().animate = current_model.GetComponent<Animation>();
 	}
 }
 
