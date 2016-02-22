@@ -17,7 +17,7 @@ public class LightSensor : MonoBehaviour
         {
             platform = "android";
             AndroidJNI.AttachCurrentThread();
-            androidClass = new AndroidJavaClass("cksgame.cs188.com.ambientlightsensor");
+            androidClass = new AndroidJavaClass("cksgame.cs188.com.lightsensor.MainActivity");
             object[] args = new[] { this.gameObject.name, "checkSensor" };
             androidClass.Call("initSensor", args);
             androidClass.Call("startSensor");
