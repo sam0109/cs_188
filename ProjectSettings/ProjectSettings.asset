@@ -158,7 +158,7 @@ PlayerSettings:
   AndroidTargetDevice: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
+  AndroidKeystoreName: C:/Users/Chandler Brown/Documents/cs_188/user.keystore
   AndroidKeyaliasName: game
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

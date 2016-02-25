@@ -7,6 +7,7 @@ public class LightSensor : MonoBehaviour
 {
     private string platform;
     AndroidJavaClass androidClass;
+    AndroidJavaObject jo;
     double sensorValue;
     public Text found;
     public Text light;
@@ -17,7 +18,8 @@ public class LightSensor : MonoBehaviour
         {
             platform = "android";
             AndroidJNI.AttachCurrentThread();
-            androidClass = new AndroidJavaClass("cksgame.cs188.com.lightsensor.MainActivity");
+            androidClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            jo = androidClass.GetStatic<AndroidJavaObject>("currentActivity");
             object[] args = new[] { this.gameObject.name, "checkSensor" };
             androidClass.Call("initSensor", args);
             androidClass.Call("startSensor");
@@ -33,7 +35,7 @@ public class LightSensor : MonoBehaviour
     {
         if (message == "Update Sensor")
         {
-            sensorValue = androidClass.CallStatic<double>("getSensorValue");
+            sensorValue = jo.Call<double>("getSensorValue");
             light.text = "" + sensorValue;
         }
         else if(message == "Sensor Exists")
