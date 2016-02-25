@@ -158,7 +158,7 @@ PlayerSettings:
   AndroidTargetDevice: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Sam/Documents/cs_188/user.keystore
+  AndroidKeystoreName: 
   AndroidKeyaliasName: game
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

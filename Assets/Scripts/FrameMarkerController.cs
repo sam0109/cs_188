@@ -10,6 +10,7 @@ public class FrameMarkerController : MonoBehaviour {
     bool particlesPlaying;
     int current_model_num;
     GameObject current_model;
+    Vuforia.MarkerBehaviour marker;
 
     public void Start()
     {
@@ -17,7 +18,8 @@ public class FrameMarkerController : MonoBehaviour {
         current_model_num = -1;
         targeter = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
         owner = "";
-        frame_marker_identifier = gameObject.GetComponent<Vuforia.MarkerBehaviour>().Marker.MarkerID;
+        marker = gameObject.GetComponent<Vuforia.MarkerBehaviour>();
+        frame_marker_identifier = marker.Marker.MarkerID;
     }
 
     public void SetModel(int i)
@@ -39,29 +41,40 @@ public class FrameMarkerController : MonoBehaviour {
 
     public void Update()
     {
-        if (current_model_num != GameControl.control.state.frame_markers[frame_marker_identifier].model)
+        if (marker.CurrentStatus == Vuforia.TrackableBehaviour.Status.TRACKED)
         {
-            current_model_num = GameControl.control.state.frame_markers[frame_marker_identifier].model;
-            SetModel(current_model_num);
-        }
-        if(GameControl.control.state.frame_markers[frame_marker_identifier].model == 1)
-        {
-            owner = GameControl.control.state.frame_markers[frame_marker_identifier].player;
-        }
-
-        if(targeter.target == current_model)
-        {
-            if (!particlesPlaying)
+            if (current_model_num != GameControl.control.state.frame_markers[frame_marker_identifier].model)
             {
-                particlesPlaying = true;
-                particles = Instantiate(GameControl.control.highlighted);
-                particles.transform.SetParent(gameObject.transform, false);
+                current_model_num = GameControl.control.state.frame_markers[frame_marker_identifier].model;
+                SetModel(current_model_num);
+            }
+            if (GameControl.control.state.frame_markers[frame_marker_identifier].model == 1)
+            {
+                owner = GameControl.control.state.frame_markers[frame_marker_identifier].player;
+            }
+
+            if (targeter.target == current_model)
+            {
+                if (!particlesPlaying)
+                {
+                    particlesPlaying = true;
+                    particles = Instantiate(GameControl.control.highlighted);
+                    particles.transform.SetParent(gameObject.transform, false);
+                }
+            }
+            else if (particlesPlaying)
+            {
+                particlesPlaying = false;
+                Destroy(particles);
             }
         }
-        else if (particlesPlaying)
+        else
         {
-            particlesPlaying = false;
-            Destroy(particles);
+            if (current_model)
+            {
+                Destroy(current_model);
+                current_model_num = -1;
+            }
         }
     }
 }
