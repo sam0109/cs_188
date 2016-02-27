@@ -15,16 +15,12 @@ public class takeDamage : MonoBehaviour {
         myHealthBar.transform.SetParent(gameObject.transform, false);
 	}
 
-	public int randomNum ()
-	{
-		int answ = Random.Range(1,20);
-		return answ;
-	}
+
 
     //void Damage(float damage)
 	void Damage(attack_values values)
     {
-		int chanceToHit = randomNum ();
+		int chanceToHit = values.diceRollToHit;
 		int targetArmor = 10; //This needs to change
 		if (chanceToHit > targetArmor) {
 			float damage = values.attackDamageWithDice;

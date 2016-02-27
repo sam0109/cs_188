@@ -49,13 +49,19 @@ public class character_controller : MonoBehaviour {
 		return answ;
 	}
 
+	public int randomNumBigger ()
+	{
+		int answ = Random.Range(1,20);
+		return answ;
+	}
+
     public void Attack ()
     {
 		string playerID = GameControl.control.match.SelfParticipantId;
 
 		if (GameControl.control.isMyTurn && myPlayer == playerID) 
 		{
-			int diceRollHitOrNot = randomNum ();
+			int diceRollHitOrNot = randomNumBigger ();
 
 			Character chara = new Character();
 			chara = GameControl.control.state.Characters [playerID];
