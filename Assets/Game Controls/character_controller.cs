@@ -45,7 +45,7 @@ public class character_controller : MonoBehaviour {
 		//Random rnd = new Random ();
 		//int answ = rnd.Next (1, 21);
 		//return answ;
-		int answ = Random.Range(1,20);
+		int answ = Random.Range(1,8);
 		return answ;
 	}
 

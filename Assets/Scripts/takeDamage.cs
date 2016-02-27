@@ -15,17 +15,25 @@ public class takeDamage : MonoBehaviour {
         myHealthBar.transform.SetParent(gameObject.transform, false);
 	}
 
+	public int randomNum ()
+	{
+		int answ = Random.Range(1,20);
+		return answ;
+	}
+
     //void Damage(float damage)
 	void Damage(attack_values values)
     {
-		//TODO: add a condition for whether or not the hit actually happens 
-		float damage = values.attackDamageWithDice;
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Instantiate(explode, transform.position, Quaternion.identity);
-			//GameControl.control.state.frame_markers
-            Destroy(gameObject);
-        }
+		int chanceToHit = randomNum ();
+		int targetArmor = 10; //This needs to change
+		if (chanceToHit > targetArmor) {
+			float damage = values.attackDamageWithDice;
+			currentHealth -= damage;
+			if (currentHealth <= 0) {
+				Instantiate (explode, transform.position, Quaternion.identity);
+				//GameControl.control.state.frame_markers
+				Destroy (gameObject);
+			}
+		}
     }
 }

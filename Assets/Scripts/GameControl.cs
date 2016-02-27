@@ -117,7 +117,7 @@ public class GameControl : MonoBehaviour
             state.frame_markers = new List<model_player>();
             for (int i = 0; i < numMarkers; i++)
             {
-                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new model_player(0, state.dm, 10));
             }
             SceneManager.LoadScene(1);
         }
@@ -139,7 +139,7 @@ public class GameControl : MonoBehaviour
             state.frame_markers = new List<model_player>();
             for (int i = 0; i < numMarkers; i++)
             {
-                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new model_player(0, state.dm, 10));
             }
             SceneManager.LoadScene(1);
         }
@@ -174,7 +174,7 @@ public class GameControl : MonoBehaviour
                 state.frame_markers = new List<model_player>();
                 for(int i = 0; i < numMarkers; i++)
                 {
-                    state.frame_markers.Add(new model_player(0, state.dm));
+                    state.frame_markers.Add(new model_player(0, state.dm, 10));
                 }
                 state.Characters = new Dictionary<string, Character>();
 
@@ -266,13 +266,25 @@ public class Character
 }
 
 [System.Serializable]
+public class Armor
+{
+	public void changeArmorVal (int armor)
+	{
+		armorVal = armor;
+	}
+	public int armorVal;
+}
+
+[System.Serializable]
 public class model_player
 {
-    public model_player(int new_model, string new_player)
+    public model_player(int new_model, string new_player, int armorValue)
     {
         model = new_model;
         player = new_player;
+		armor.changeArmorVal (armorValue);
     }
     public int model;
     public string player;
+	public Armor armor;
 }
