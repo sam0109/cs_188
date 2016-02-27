@@ -8,6 +8,7 @@ public class takeDamage : MonoBehaviour {
     GameObject myHealthBar;
     public float health;
     public float currentHealth;
+	GUIText gText;
 	// Use this for initialization
 	void Start () {
         currentHealth = health;
@@ -22,7 +23,9 @@ public class takeDamage : MonoBehaviour {
     {
 		int chanceToHit = values.diceRollToHit;
 		int targetArmor = 10; //This needs to change
-		if (chanceToHit > targetArmor) {
+		if (chanceToHit > targetArmor)
+		{
+			ShowMessage ("You hit!", 2);
 			float damage = values.attackDamageWithDice;
 			currentHealth -= damage;
 			if (currentHealth <= 0) {
@@ -31,5 +34,18 @@ public class takeDamage : MonoBehaviour {
 				Destroy (gameObject);
 			}
 		}
+		else 
+		{
+			ShowMessage ("You couldn't make it through the armor. Your attack failed.", 3);
+		}
     }
+
+	IEnumerator ShowMessage(string message, float delay)
+	{
+		gText = new GUIText ();
+		gText.text = message;
+		gText.enabled = true;
+		yield return new WaitForSeconds(delay);
+		gText.enabled = false;	
+	}
 }

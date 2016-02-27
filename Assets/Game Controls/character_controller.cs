@@ -11,6 +11,7 @@ public class character_controller : MonoBehaviour {
 	GameObject current_model;
 	int current_model_num;
 	string myPlayer;
+	GUIText gText;
 
     RaycastHit hit;
     // Use this for initialization
@@ -62,7 +63,7 @@ public class character_controller : MonoBehaviour {
 		if (GameControl.control.isMyTurn && myPlayer == playerID) 
 		{
 			int diceRollHitOrNot = randomNumBigger ();
-
+		
 			Character chara = new Character();
 			chara = GameControl.control.state.Characters [playerID];
 			int strength = chara.str;
@@ -72,6 +73,8 @@ public class character_controller : MonoBehaviour {
 
 			int diceRollDamage = randomNum ();
 			int attackDamage = strengthMod + diceRollDamage;
+
+			ShowMessage ("Your potential attack damage is " + attackDamage, 3);
 
 			values = new attack_values (diceRollHitOrNot, attackDamage);
 
@@ -93,6 +96,15 @@ public class character_controller : MonoBehaviour {
 			}
 		}
     }
+
+	IEnumerator ShowMessage(string message, float delay)
+	{
+		gText = new GUIText ();
+		gText.text = message;
+		gText.enabled = true;
+		yield return new WaitForSeconds(delay);
+		gText.enabled = false;	
+	}
 
 	void UpdateModel(int new_model)
 	{
