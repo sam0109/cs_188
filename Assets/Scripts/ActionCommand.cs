@@ -14,7 +14,9 @@ public class ActionCommand : MonoBehaviour
 
     public void onAction()
     {
-        PlayerAttack pa = new PlayerAttack();
-        pa.Attack(inventory);
+        foreach (FrameMarkerController character in GameControl.control.frame_markers)
+        {
+            character.Action(inventory);
+        }
     }
 }

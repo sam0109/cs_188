@@ -10,7 +10,6 @@ public class FrameMarkerController : MonoBehaviour {
     bool particlesPlaying;
     int current_model_num;
     GameObject current_model;
-    public ParticleSystem explode;
     Vuforia.MarkerBehaviour marker;
     GameObject myHealthBar;
     static ItemDataBaseList inventoryItemList;
@@ -38,8 +37,12 @@ public class FrameMarkerController : MonoBehaviour {
             current_model.transform.SetParent(gameObject.transform, false);
             if (GameControl.control.getActor(frame_marker_identifier).maxHealth > 0)
             {
-                myHealthBar = (GameObject)Instantiate(GameControl.control.healthbar, new Vector3(0, 1, 0), Quaternion.identity);
+                myHealthBar = (GameObject)Instantiate(GameControl.control.healthbar, new Vector3(0, 1.5f, 0), Quaternion.identity);
                 myHealthBar.transform.SetParent(gameObject.transform, false);
+            }
+            else if(myHealthBar)
+            {
+                Destroy(myHealthBar);
             }
         }
         else
@@ -83,30 +86,30 @@ public class FrameMarkerController : MonoBehaviour {
         }
     }
 
-    public void Action(GameObject inventory = null)
+    public void Action(GameObject inventory)
     {
-        string playerID = GameControl.control.match.SelfParticipantId;
+        //string playerID = GameControl.control.match.SelfParticipantId;
 
         if (GameControl.control.isMyTurn && 
-            GameControl.control.getActor(frame_marker_identifier).player == playerID &&
+            GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.playerID &&
             GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
 
             if (targeter.target)
             {
-                if(GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
+                if (GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
                 {
-                    string item = GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).chestItem;
+                    string item = GameControl.control.getActor(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).chestItem;
 
-                    GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).inventory.Add(item);
+                    GameControl.control.getActor(frame_marker_identifier).inventory.Add(item);
 
                     Inventory mainInventory = inventory.GetComponent<Inventory>();
 
                     int id = 0;
 
-                    for(int i = 0; i < inventoryItemList.itemList.Count; i++)
+                    for (int i = 0; i < inventoryItemList.itemList.Count; i++)
                     {
-                        if(inventoryItemList.itemList[i].itemName == item)
+                        if (inventoryItemList.itemList[i].itemName == item)
                         {
                             id = inventoryItemList.itemList[i].itemID;
                         }
@@ -114,39 +117,35 @@ public class FrameMarkerController : MonoBehaviour {
 
                     mainInventory.addItemToInventory(id);
 
-                    GameControl.control.getActor(frame_marker_identifier).model = 0;
-                    Destroy(gameObject);
+                    GameControl.control.updateMarker(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Sphere");
                 }
+                else {
 
-                int diceRollHitOrNot = randomNum(20);
+                    int diceRollHitOrNot = randomNum(20);
 
-                int strength = GameControl.control.myCharacter.str;
+                    int strength = GameControl.control.myCharacter.str;
 
-                stat_converter mod = new stat_converter(strength);
-                int strengthMod = mod.modifierValue;
+                    stat_converter mod = new stat_converter(strength);
+                    int strengthMod = mod.modifierValue;
 
-                int diceRollDamage = randomNum(8);
-                int attackDamage = strengthMod + diceRollDamage;
+                    int diceRollDamage = randomNum(8);
+                    int attackDamage = strengthMod + diceRollDamage;
 
-                attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
+                    attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
 
-                if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).range)
-                {
-                    print("Too far away!");
-                }
-                else
-                {
-                    targeter.target.BroadcastMessage("Damage", values);
+                    //if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.getActor(frame_marker_identifier).range)
+                    //{
+                    //    print("Too far away!");
+                    //}
+                    //else
+                    //{
+                        targeter.target.transform.parent.BroadcastMessage("Damage", values);
+                    //}
                 }
             }
             else
             {
                 print("Nothing selected!");
-            }
-
-            if (gameObject.GetComponent<Animation>()["Attack"])
-            {
-                gameObject.GetComponent<Animation>().Play("Attack");
             }
         }
     }
@@ -167,9 +166,8 @@ public class FrameMarkerController : MonoBehaviour {
                 GameControl.control.getActor(frame_marker_identifier).currentHealth -= attackDamage;
                 if (GameControl.control.getActor(frame_marker_identifier).currentHealth <= 0)
                 {
-                    Instantiate(explode, transform.position, Quaternion.identity);
-                    GameControl.control.getActor(frame_marker_identifier).model = 0;
-                    Destroy(gameObject);
+                    Instantiate(GameControl.control.explode, transform.position, Quaternion.identity);
+                    GameControl.control.updateMarker(frame_marker_identifier, "Sphere");
                 }
             }
         }

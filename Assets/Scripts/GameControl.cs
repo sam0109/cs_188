@@ -26,6 +26,7 @@ public class GameControl : MonoBehaviour
     public List<FrameMarkerController> frame_markers;
     public GameObject highlighted;
     public GameObject healthbar;
+    public ParticleSystem explode;
 
     public string getDM()
     {
@@ -47,7 +48,7 @@ public class GameControl : MonoBehaviour
             model_lookup.Add(model_names[i], i);
             rev_model_lookup.Add(i, model_names[i]);
         }
-        numMarkers = 10;
+        numMarkers = 31;
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 
         // registers a callback for turn based match notifications.
