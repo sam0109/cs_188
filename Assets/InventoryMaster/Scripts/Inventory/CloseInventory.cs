@@ -7,9 +7,15 @@ public class CloseInventory : MonoBehaviour, IPointerDownHandler
 {
 
     Inventory inv;
+    public GameObject characterSystem;
+    private Inventory characterSystemInventory;
+
     void Start()
     {
         inv = transform.parent.GetComponent<Inventory>();
+
+        if (characterSystem != null)
+            characterSystemInventory = characterSystem.GetComponent<Inventory>();
 
     }
     public void OnPointerDown(PointerEventData eventData)
@@ -17,6 +23,7 @@ public class CloseInventory : MonoBehaviour, IPointerDownHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             inv.closeInventory();
+            characterSystemInventory.closeInventory();
         }
     }
 }
