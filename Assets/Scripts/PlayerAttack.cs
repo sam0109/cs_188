@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour {
     {
 		foreach (FrameMarkerController character in GameControl.control.frame_markers) 
 		{
-			character.Attack ();
+			character.Action ();
 		}
     }
 }

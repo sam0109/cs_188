@@ -21,6 +21,7 @@ public class GameControl : MonoBehaviour
     public List<GameObject> models;
     public List<string> model_names;
     public Dictionary<string, int> model_lookup;
+    public Dictionary<int, string> rev_model_lookup;
     public List<Actor> actors;
     public List<FrameMarkerController> frame_markers;
     public GameObject highlighted;
@@ -43,6 +44,7 @@ public class GameControl : MonoBehaviour
         for(int i = 0; i < model_names.Count; i++)
         {
             model_lookup.Add(model_names[i], i);
+            rev_model_lookup.Add(i, model_names[i]);
         }
         numMarkers = 10;
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()

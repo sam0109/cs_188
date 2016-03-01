@@ -80,7 +80,7 @@ public class FrameMarkerController : MonoBehaviour {
         }
     }
 
-    public void Attack()
+    public void Action()
     {
         string playerID = GameControl.control.match.SelfParticipantId;
 
@@ -89,21 +89,22 @@ public class FrameMarkerController : MonoBehaviour {
             GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
 
-            int diceRollHitOrNot = randomNum(20);
-
-            int strength = GameControl.control.myCharacter.str;
-
-            stat_converter mod = new stat_converter(strength);
-            int strengthMod = mod.modifierValue;
-
-            int diceRollDamage = randomNum(8);
-            int attackDamage = strengthMod + diceRollDamage;
-
-            attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
-
             if (targeter.target)
             {
-                if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.getActor(frame_marker_identifier).range)
+                if(GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
+                int diceRollHitOrNot = randomNum(20);
+
+                int strength = GameControl.control.myCharacter.str;
+
+                stat_converter mod = new stat_converter(strength);
+                int strengthMod = mod.modifierValue;
+
+                int diceRollDamage = randomNum(8);
+                int attackDamage = strengthMod + diceRollDamage;
+
+                attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
+
+                if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).range)
                 {
                     print("Too far away!");
                 }
