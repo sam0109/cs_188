@@ -9,6 +9,20 @@ TagManager:
   - Targeter
   - Player
   - FrameMarker
+  - Slot
+  - Slots
+  - Hotbar
+  - CraftSystem
+  - ResultSlot
+  - Canvas
+  - Panel
+  - DraggingItem
+  - Item
+  - ItemIcon
+  - Tooltip
+  - EventSystem
+  - EquipmentSystem
+  - MainInventory
   layers:
   - Default
   - TransparentFX
