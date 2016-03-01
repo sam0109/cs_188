@@ -8,6 +8,7 @@ public class ButtonMaker : MonoBehaviour {
     target_selector targetSel;
     List<GameObject> buttons;
     public GameObject playerSelector;
+	public GameObject treasureSelector;
 	// Use this for initialization
 	void Start () {
         targetSel = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
@@ -29,6 +30,11 @@ public class ButtonMaker : MonoBehaviour {
             playerSelector.SetActive(true);
             gameObject.transform.parent.gameObject.SetActive(false);
         }
+		if (button.GetComponent<ButtonIdentifier>().buttonID == 6)
+		{
+			treasureSelector.SetActive(true);
+			gameObject.transform.parent.gameObject.SetActive(false);
+		}
         else
         {
             GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].model = button.GetComponent<ButtonIdentifier>().buttonID;
