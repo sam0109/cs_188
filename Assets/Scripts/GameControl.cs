@@ -146,7 +146,7 @@ public class GameControl : MonoBehaviour
 
     public void updateMarker(int frameMarker, string model)
     {
-        state.frame_markers[frameMarker] = actors[model_lookup[model]];
+        state.frame_markers[frameMarker] = new Actor(actors[model_lookup[model]]);
     }
 
     public Dictionary<string, string> GetPlayers()
@@ -321,6 +321,25 @@ public class Actor
     {
         model = new_model;
         player = new_player;
+    }
+
+    public Actor(Actor old_actor)
+    {
+        isPlayer = old_actor.isPlayer;
+        model = old_actor.model;
+        player = GameControl.control.getDM();
+        characterName = old_actor.characterName;
+        characterClass = old_actor.characterClass;
+        characterRace = old_actor.characterRace;
+        str = old_actor.str;
+        dex = old_actor.dex;
+        con = old_actor.con;
+        intelligence = old_actor.intelligence;
+        wiz = old_actor.wiz;
+        cha = old_actor.cha;
+        maxHealth = old_actor.maxHealth;
+        currentHealth = old_actor.currentHealth;
+        range = old_actor.range;
     }
 
     public bool isPlayer;
