@@ -8,21 +8,30 @@ public class treasureMaker : MonoBehaviour {
 	target_selector targetSel;
 	List<GameObject> buttons;
 	public GameObject objectSelector;
-	List<string> treasures; 
+	List<string> treasures;
+    static ItemDataBaseList inventoryItemList;
 
 	void Start()
 	{
 		targetSel = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
-		// treasures = Chandler fill this in - Right now treasures is declared above as a list of strings.
-		for (int i = 0; i < treasures.Count; i++)
+        treasures = new List<string>();
+
+        inventoryItemList = (ItemDataBaseList)Resources.Load("ItemDatabase");
+
+        for(int i = 0; i < inventoryItemList.itemList.Count; i++)
+        {
+            treasures.Add(inventoryItemList.itemList[i].itemName);
+        }
+
+        treasures[0] = "Back";
+
+        for (int i = 0; i < treasures.Count; i++)
 		{
 			GameObject temp_button = Instantiate(button);
 			temp_button.transform.SetParent(gameObject.transform, false);
 			temp_button.GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, i * 30, 30);
 			temp_button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
 			temp_button.GetComponentInChildren<Text>().text = treasures[i];
-			temp_button.GetComponent<ButtonIdentifier>().buttonID = i;
-			i++;
 		}
 	}
 

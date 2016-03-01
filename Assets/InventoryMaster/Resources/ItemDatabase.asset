@@ -36,13 +36,37 @@ MonoBehaviour:
     indexItemInList: 999
     rarity: 0
     itemAttributes: []
-  - itemName: Basic Shoe
+  - itemName: Wood Shield
     itemID: 2
-    itemDesc: Simple Shoe
-    itemIcon: {fileID: 21300000, guid: 3677eacbc4390644e97df27f50b96587, type: 3}
+    itemDesc: Bssic Shield
+    itemIcon: {fileID: 21300000, guid: c8e5c40abbfc5984c8fc245572dd93a4, type: 3}
     itemModel: {fileID: 0}
     itemValue: 1
-    itemType: 0
+    itemType: 1
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 0
+    itemAttributes: []
+  - itemName: Leather Vest
+    itemID: 3
+    itemDesc: Basic Armor
+    itemIcon: {fileID: 21300000, guid: fcd8bd2db18e92d42a7d14fc0e395888, type: 3}
+    itemModel: {fileID: 0}
+    itemValue: 1
+    itemType: 6
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 0
+    itemAttributes: []
+  - itemName: Regular Sword
+    itemID: 4
+    itemDesc: Basic Sword
+    itemIcon: {fileID: 21300000, guid: 439486a4aa566984eba71b527d0ceaf7, type: 3}
+    itemModel: {fileID: 0}
+    itemValue: 1
+    itemType: 1
     itemWeight: 0
     maxStack: 1
     indexItemInList: 999

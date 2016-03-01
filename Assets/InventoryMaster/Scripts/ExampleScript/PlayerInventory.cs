@@ -192,6 +192,7 @@ public class PlayerInventory : MonoBehaviour
     public void onDisplayInventory()
     {
         mainInventory.openInventory();
+        characterSystemInventory.openInventory();
     }
 
     //void UpdateHPBar()
@@ -319,6 +320,7 @@ public class PlayerInventory : MonoBehaviour
                 if (toolTip != null)
                     toolTip.deactivateTooltip();
                 mainInventory.closeInventory();
+                characterSystemInventory.closeInventory();
             }
         }
 
