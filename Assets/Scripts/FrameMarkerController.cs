@@ -13,9 +13,12 @@ public class FrameMarkerController : MonoBehaviour {
     public ParticleSystem explode;
     Vuforia.MarkerBehaviour marker;
     GameObject myHealthBar;
+    static ItemDataBaseList inventoryItemList;
 
     public void Start()
     {
+        inventoryItemList = (ItemDataBaseList)Resources.Load("ItemDatabase");
+
         particlesPlaying = false;
         current_model_num = -1;
         targeter = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
@@ -80,7 +83,7 @@ public class FrameMarkerController : MonoBehaviour {
         }
     }
 
-    public void Action()
+    public void Action(GameObject inventory = null)
     {
         string playerID = GameControl.control.match.SelfParticipantId;
 
@@ -93,7 +96,26 @@ public class FrameMarkerController : MonoBehaviour {
             {
                 if(GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
                 {
+                    string item = GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).chestItem;
 
+                    GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).inventory.Add(item);
+
+                    Inventory mainInventory = inventory.GetComponent<Inventory>();
+
+                    int id = 0;
+
+                    for(int i = 0; i < inventoryItemList.itemList.Count; i++)
+                    {
+                        if(inventoryItemList.itemList[i].itemName == item)
+                        {
+                            id = inventoryItemList.itemList[i].itemID;
+                        }
+                    }
+
+                    mainInventory.addItemToInventory(id);
+
+                    GameControl.control.getActor(frame_marker_identifier).model = 0;
+                    Destroy(gameObject);
                 }
 
                 int diceRollHitOrNot = randomNum(20);

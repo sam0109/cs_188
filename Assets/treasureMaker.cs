@@ -37,14 +37,9 @@ public class treasureMaker : MonoBehaviour {
 
 	public void ButtonPressed(GameObject button)
 	{
-		// Add in logic here to equip object that came out of chest
-		// The below line sets the frame marker. It is commented out because GameControl needs a new field in model_player called treasure (or whatever) but since Sam's editing it I can't change it right now.
-
-		//GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].treasure = treasures[button.GetComponentInChildren<Text>().text];
-
-		// playerMaker.cs has an example for creating the players so if this makes no sense blame Sam because he made that
-
-		objectSelector.SetActive(true);
-		gameObject.transform.parent.gameObject.SetActive(false);
-	}
+        GameControl.control.updateMarker(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Treasure Chest");
+        GameControl.control.getActor(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).chestItem = button.GetComponentInChildren<Text>().text;
+        objectSelector.SetActive(true);
+        gameObject.transform.parent.gameObject.SetActive(false);
+    }
 }
