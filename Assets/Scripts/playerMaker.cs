@@ -22,14 +22,13 @@ public class playerMaker : MonoBehaviour {
             temp_button.GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, i * 30, 30);
             temp_button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             temp_button.GetComponentInChildren<Text>().text = kvp.Key;
-            temp_button.GetComponent<ButtonIdentifier>().buttonID = i;
             i++;
         }
     }
 
     public void ButtonPressed(GameObject button)
     {
-        GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].model = 1;
+        GameControl.control.updateModel(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Amazonian");
         GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].player = players[button.GetComponentInChildren<Text>().text];
         objectSelector.SetActive(true);
         gameObject.transform.parent.gameObject.SetActive(false);

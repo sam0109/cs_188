@@ -10,21 +10,29 @@ using GooglePlayGames.BasicApi;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
+    public TurnBasedMatch match;
     public GameState state;
     public string mode;
-    public TurnBasedMatch match;
-	public int playerCharacter;
+    public Actor myCharacter;
     public string playerID;
-    public Character myCharacter;
 	public bool isMyTurn;
     public int numMarkers;
+
     public List<GameObject> models;
+    public List<string> model_names;
+    public Dictionary<string, int> model_lookup;
+    public List<FrameMarkerController> frame_markers;
     public GameObject highlighted;
 
     void Start()
     {
+        frame_markers = new List<FrameMarkerController>();
+        model_lookup = new Dictionary<string, int>();
+        for(int i = 0; i < model_names.Count; i++)
+        {
+            model_lookup.Add(model_names[i], i);
+        }
         numMarkers = 10;
-        playerCharacter = 0;
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 
         // registers a callback for turn based match notifications.
@@ -63,8 +71,7 @@ public class GameControl : MonoBehaviour
         else
         {
             state = new GameState();
-            state.frame_markers = new List<model_player>();
-            state.Characters = new Dictionary<string, Character>();
+            state.frame_markers = new List<Actor>();
         }
 
         match = new_match;
@@ -72,13 +79,12 @@ public class GameControl : MonoBehaviour
 
         if (mode == "Player")
         {
-            if (!state.Characters.ContainsKey(playerID))
+            for (int i = 0; i < state.frame_markers.Count; i++)
             {
-                state.Characters.Add(playerID, myCharacter);
-            }
-            else
-            {
-                myCharacter = state.Characters[playerID];
+                if (state.frame_markers[i].player == playerID)
+                {
+                    state.frame_markers[i] = myCharacter;
+                }
             }
         }
         if (SceneManager.GetActiveScene().buildIndex < 1)
@@ -121,14 +127,14 @@ public class GameControl : MonoBehaviour
         mode = newMode;
     }
 
-    public void setPlayerModel(int model)
-    {
-        playerCharacter = model;
-    }
-
     public void setValues(GameState new_state)
     {
         state = new_state;
+    }
+
+    public void updateModel(int frameMarker, string model)
+    {
+        state.frame_markers[frameMarker].model = model_lookup[model];
     }
 
     public Dictionary<string, string> GetPlayers()
@@ -155,10 +161,10 @@ public class GameControl : MonoBehaviour
         {
             state = new GameState();
             state.dm = "meee";
-            state.frame_markers = new List<model_player>();
+            state.frame_markers = new List<Actor>();
             for (int i = 0; i < numMarkers; i++)
             {
-                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new Actor(0, state.dm));
             }
             SceneManager.LoadScene(1);
         }
@@ -177,10 +183,10 @@ public class GameControl : MonoBehaviour
         {
             state = new GameState();
             state.dm = "meee";
-            state.frame_markers = new List<model_player>();
+            state.frame_markers = new List<Actor>();
             for (int i = 0; i < numMarkers; i++)
             {
-                state.frame_markers.Add(new model_player(0, state.dm));
+                state.frame_markers.Add(new Actor(0, state.dm));
             }
             SceneManager.LoadScene(1);
         }
@@ -203,8 +209,7 @@ public class GameControl : MonoBehaviour
             else
             {
                 state = new GameState();
-                state.frame_markers = new List<model_player>();
-                state.Characters = new Dictionary<string, Character>();
+                state.frame_markers = new List<Actor>();
             }
             match = new_match;
             playerID = match.SelfParticipantId;
@@ -212,23 +217,21 @@ public class GameControl : MonoBehaviour
             {
                 state = new GameState();
                 state.dm = playerID;
-                state.frame_markers = new List<model_player>();
+                state.frame_markers = new List<Actor>();
                 for(int i = 0; i < numMarkers; i++)
                 {
-                    state.frame_markers.Add(new model_player(0, state.dm));
+                    state.frame_markers.Add(new Actor(0, state.dm));
                 }
-                state.Characters = new Dictionary<string, Character>();
 
             }
             if (mode == "Player")
             {
-                if(!state.Characters.ContainsKey(playerID))
+                for(int i = 0; i < state.frame_markers.Count; i++)
                 {
-                    state.Characters.Add(playerID, myCharacter);
-                }
-                else
-                {
-                    state.Characters[playerID] = myCharacter;
+                    if(state.frame_markers[i].player == playerID)
+                    {
+                        state.frame_markers[i] = myCharacter;
+                    }
                 }
             }
             SceneManager.LoadScene(1);
@@ -240,8 +243,7 @@ public class GameControl : MonoBehaviour
 
     public bool TakeTurn(string next)
     {
-        if (match.Status == TurnBasedMatch.MatchStatus.Active &&
-                    match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn)
+        if (isMyTurn)
         {
             byte[] myData = ObjectToByteArray(state);
 
@@ -291,30 +293,32 @@ public class GameControl : MonoBehaviour
 public class GameState
 {
     public string dm;
-    public List<model_player> frame_markers;
-    public Dictionary<string, Character> Characters;
-}
-
-[System.Serializable]
-public class Character
-{
-    public string characterName;
-    public string player;
-    public int model;
-    public string characterClass;
-    public string characterRace;
-    public int str, dex, con, intelligence, wiz, cha;
+    public List<Actor> frame_markers;
 }
 	
 
 [System.Serializable]
-public class model_player
+public class Actor
 {
-    public model_player(int new_model, string new_player)
+    public Actor()
+    {
+        return;
+    }
+
+    public Actor(int new_model, string new_player)
     {
         model = new_model;
         player = new_player;
     }
+
+    public bool isPlayer;
     public int model;
     public string player;
+    public string characterName;
+    public string characterClass;
+    public string characterRace;
+    public int str, dex, con, intelligence, wiz, cha;
+    public int maxHealth;
+    public int currentHealth;
+    public int range;
 }

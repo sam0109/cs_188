@@ -21,11 +21,12 @@ public class CreateCharacter : MonoBehaviour {
 
     public void SaveCharacter ()
     {
-        Character newCharacter = new Character();
+        Actor newCharacter = new Actor();
 
         newCharacter.characterName = characterName.text;
+        newCharacter.isPlayer = true;
         newCharacter.player = "";
-        newCharacter.model = model.value;
+        newCharacter.model = GameControl.control.model_lookup[model.options[model.value].text];
         newCharacter.characterClass = characterClass.options[characterClass.value].text;
         newCharacter.characterRace = characterRace.options[characterRace.value].text;
 

@@ -1439,8 +1439,10 @@ MonoBehaviour:
   explode: {fileID: 19861102, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
   height: {x: 0, y: 7, z: 0}
   healthBar: {fileID: 181158, guid: c042b5982bf4d184e86cddee70a3434f, type: 2}
-  health: 100
+  health: 15
   currentHealth: 0
+  armorClass: 0
+  damageText: 
 --- !u!137 &13794754
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1551,7 +1553,7 @@ Prefab:
       objectReference: {fileID: 181158, guid: c042b5982bf4d184e86cddee70a3434f, type: 2}
     - target: {fileID: 0}
       propertyPath: health
-      value: 100
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: height

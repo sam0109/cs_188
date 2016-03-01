@@ -23,7 +23,6 @@ public class TurnSelector : MonoBehaviour {
             temp_button.GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, i * 30, 30);
             temp_button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             temp_button.GetComponentInChildren<Text>().text = kvp.Key;
-            temp_button.GetComponent<ButtonIdentifier>().buttonID = i;
             buttons.Add(temp_button);
             i++;
         }

@@ -18,7 +18,7 @@ public class LoadCharacter : MonoBehaviour
 
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            Character obj = (Character)formatter.Deserialize(stream);
+            Actor obj = (Actor)formatter.Deserialize(stream);
             stream.Close();
 
             GameControl.control.myCharacter = obj;

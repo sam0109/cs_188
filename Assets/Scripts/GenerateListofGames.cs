@@ -30,9 +30,4 @@ public class GenerateListofGames : MonoBehaviour
             dropdown.value = 0;
         }
     }
-
-	public void SetGameControl()
-	{
-        GameControl.control.playerCharacter = dropdown.value;
-	}
 }

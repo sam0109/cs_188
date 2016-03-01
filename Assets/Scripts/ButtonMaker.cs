@@ -18,20 +18,19 @@ public class ButtonMaker : MonoBehaviour {
             temp_button.GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, i * 30, 30);
             temp_button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             temp_button.GetComponentInChildren<Text>().text = objects[i];
-            temp_button.GetComponent<ButtonIdentifier>().buttonID = i;
         }
 	}
 
     public void ButtonPressed(GameObject button)
     {
-        if (button.GetComponent<ButtonIdentifier>().buttonID == 1)
+        if (button.GetComponentInChildren<Text>().text == "Player")
         {
             playerSelector.SetActive(true);
             gameObject.transform.parent.gameObject.SetActive(false);
         }
         else
         {
-            GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].model = button.GetComponent<ButtonIdentifier>().buttonID;
+            GameControl.control.updateModel(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, button.GetComponentInChildren<Text>().text);
         }
     }
 }

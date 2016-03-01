@@ -11,6 +11,7 @@ public class FrameMarkerGenerator : MonoBehaviour {
         {
             MarkerAbstractBehaviour marker = mt.CreateMarker(i, "Marker" + i.ToString(), 1);
             marker.gameObject.AddComponent<FrameMarkerController>();
+            GameControl.control.frame_markers.Add(marker.gameObject.GetComponent<FrameMarkerController>());
         }
     }
 }
