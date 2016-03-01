@@ -18,13 +18,13 @@ public class EndPlayerTurn : MonoBehaviour {
 
     void Update()
     {
-        if (GameControl.control.isMyTurn && nextTurn.interactable == false)
+        if (GameControl.control.isMyTurn && !nextTurn.gameObject.activeSelf)
         {
-            nextTurn.interactable = true;
+            nextTurn.gameObject.SetActive(false);
         }
-        else if (!GameControl.control.isMyTurn && nextTurn.interactable == true)
+        else if (!GameControl.control.isMyTurn && nextTurn.gameObject.activeSelf)
         {
-            nextTurn.interactable = false;
+            nextTurn.gameObject.SetActive(false);
         }
     }
 }

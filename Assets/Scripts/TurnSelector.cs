@@ -7,6 +7,7 @@ public class TurnSelector : MonoBehaviour {
     target_selector targetSel;
     List<GameObject> buttons;
     Dictionary<string, string> players;
+    bool interactable;
 
     void Start()
     {
@@ -28,5 +29,25 @@ public class TurnSelector : MonoBehaviour {
     public void ButtonPressed(GameObject pressed_button)
     {
         GameControl.control.TakeTurn(players[pressed_button.GetComponentInChildren<Text>().text]);
+    }
+
+    void Update()
+    {
+        if (GameControl.control.isMyTurn && !interactable)
+        {
+            foreach (GameObject button in buttons)
+            {
+                button.SetActive(false);
+            }
+            interactable = false;
+        }
+        else if (!GameControl.control.isMyTurn && interactable)
+        {
+            foreach (GameObject button in buttons)
+            {
+                button.SetActive(true);
+            }
+            interactable = true;
+        }
     }
 }

@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour
     public GameObject inventory;
     public GameObject characterSystem;
     public GameObject craftSystem;
+    public Button displayInventory;
     private Inventory craftSystemInventory;
     private CraftSystem cS;
     private Inventory mainInventory;
@@ -170,6 +171,8 @@ public class PlayerInventory : MonoBehaviour
         //    UpdateManaBar();
         //}
 
+        displayInventory.onClick.AddListener(delegate { onDisplayInventory(); });
+
         if (inputManagerDatabase == null)
             inputManagerDatabase = (InputManager)Resources.Load("InputManager");
 
@@ -184,6 +187,11 @@ public class PlayerInventory : MonoBehaviour
             characterSystemInventory = characterSystem.GetComponent<Inventory>();
         if (craftSystem != null)
             craftSystemInventory = craftSystem.GetComponent<Inventory>();
+    }
+
+    public void onDisplayInventory()
+    {
+        mainInventory.openInventory();
     }
 
     //void UpdateHPBar()
