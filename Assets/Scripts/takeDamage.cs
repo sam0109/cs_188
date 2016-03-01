@@ -16,8 +16,6 @@ public class takeDamage : MonoBehaviour {
         myHealthBar.transform.SetParent(gameObject.transform, false);
 	}
 
-
-
     //void Damage(float damage)
 	void Damage(attack_values values)
     {
