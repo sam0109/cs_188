@@ -41,6 +41,7 @@ public class GameControl : MonoBehaviour
     {
         frame_markers = new List<FrameMarkerController>();
         model_lookup = new Dictionary<string, int>();
+        rev_model_lookup = new Dictionary<int, string>();
         for(int i = 0; i < model_names.Count; i++)
         {
             model_lookup.Add(model_names[i], i);
@@ -317,14 +318,12 @@ public class Actor
     public Actor()
     {
         return;
-        inventory = new List<string>();
     }
 
     public Actor(int new_model, string new_player)
     {
         model = new_model;
         player = new_player;
-        inventory = new List<string>();
     }
 
     public Actor(Actor old_actor)
@@ -344,11 +343,6 @@ public class Actor
         maxHealth = old_actor.maxHealth;
         currentHealth = old_actor.currentHealth;
         range = old_actor.range;
-        chestItem = old_actor.chestItem;
-        rightHandWeapon = old_actor.rightHandWeapon;
-        leftHandWeapon = old_actor.leftHandWeapon;
-        chestArmor = old_actor.chestArmor;
-        inventory = new List<string>(old_actor.inventory);
     }
 
     public bool isPlayer;
@@ -361,9 +355,4 @@ public class Actor
     public int maxHealth;
     public int currentHealth;
     public int range;
-    public string chestItem;
-    public string rightHandWeapon;
-    public string leftHandWeapon;
-    public string chestArmor;
-    public List<string> inventory;
 }

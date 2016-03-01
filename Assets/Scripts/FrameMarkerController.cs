@@ -38,7 +38,7 @@ public class FrameMarkerController : MonoBehaviour {
             current_model.transform.SetParent(gameObject.transform, false);
             if (GameControl.control.getActor(frame_marker_identifier).maxHealth > 0)
             {
-                myHealthBar = (GameObject)Instantiate(GameControl.control.healthbar, new Vector3(0, 7, 0), Quaternion.identity);
+                myHealthBar = (GameObject)Instantiate(GameControl.control.healthbar, new Vector3(0, 1, 0), Quaternion.identity);
                 myHealthBar.transform.SetParent(gameObject.transform, false);
             }
         }

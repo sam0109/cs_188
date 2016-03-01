@@ -797,9 +797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43431a8bf14c7e94190dae8e32ddc52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state:
-    dm: 
-    frame_markers: []
   mode: 
   myCharacter:
     isPlayer: 0
@@ -840,7 +837,145 @@ MonoBehaviour:
   - Samurai
   - Spartan
   - Wizard
+  actors:
+  - isPlayer: 0
+    model: 0
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 0
+    currentHealth: 0
+    range: 0
+  - isPlayer: 0
+    model: 1
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 0
+    currentHealth: 0
+    range: 0
+  - isPlayer: 0
+    model: 2
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 10
+    dex: 10
+    con: 10
+    intelligence: 10
+    wiz: 10
+    cha: 10
+    maxHealth: 15
+    currentHealth: 15
+    range: 5
+  - isPlayer: 0
+    model: 3
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 0
+    currentHealth: 0
+    range: 0
+  - isPlayer: 0
+    model: 4
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 0
+    currentHealth: 0
+    range: 0
+  - isPlayer: 1
+    model: 5
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 30
+    currentHealth: 30
+    range: 5
+  - isPlayer: 1
+    model: 6
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 30
+    currentHealth: 30
+    range: 5
+  - isPlayer: 1
+    model: 7
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 30
+    currentHealth: 30
+    range: 5
+  - isPlayer: 1
+    model: 8
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 30
+    currentHealth: 30
+    range: 5
+  frame_markers: []
   highlighted: {fileID: 122004, guid: 5119c0e26ca1ae94b9ba7928827aedab, type: 2}
+  healthbar: {fileID: 0}
 --- !u!4 &670942972
 Transform:
   m_ObjectHideFlags: 0
