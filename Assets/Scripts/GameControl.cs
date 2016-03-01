@@ -29,7 +29,18 @@ public class GameControl : MonoBehaviour
     {
         numMarkers = 10;
         playerCharacter = 0;
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+
+        // registers a callback for turn based match notifications.
+        .WithMatchDelegate(OnGotMatch)
+
+        .Build();
+
+        PlayGamesPlatform.InitializeInstance(config);
+
+        // recommended for debugging:
         PlayGamesPlatform.DebugLogEnabled = true;
+
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
 
@@ -44,6 +55,10 @@ public class GameControl : MonoBehaviour
                 Debug.Log("did not log in properly");
             }
         });
+    }
+
+    private void OnGotMatch(TurnBasedMatch match, bool shouldAutoLaunch)
+    {
     }
 
     void Awake()
@@ -282,6 +297,7 @@ public class model_player
     {
         model = new_model;
         player = new_player;
+        armor = new Armor();
 		armor.changeArmorVal (armorValue);
     }
     public int model;
