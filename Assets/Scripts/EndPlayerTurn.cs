@@ -20,7 +20,7 @@ public class EndPlayerTurn : MonoBehaviour {
     {
         if (GameControl.control.isMyTurn && !nextTurn.gameObject.activeSelf)
         {
-            nextTurn.gameObject.SetActive(false);
+            nextTurn.gameObject.SetActive(true);
         }
         else if (!GameControl.control.isMyTurn && nextTurn.gameObject.activeSelf)
         {

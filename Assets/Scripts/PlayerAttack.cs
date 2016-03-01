@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerAttack : MonoBehaviour {
     public void Attack ()
     {
-		GameObject[] characters = GameObject.FindGameObjectsWithTag ("Player");
+		GameObject[] characters = GameObject.FindGameObjectsWithTag ("PlayerCharacter");
 		foreach (GameObject character in characters) 
 		{
 			character.GetComponent<character_controller> ().Attack ();

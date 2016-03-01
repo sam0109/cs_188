@@ -11,8 +11,10 @@ public class TurnSelector : MonoBehaviour {
 
     void Start()
     {
+        interactable = true;
         targetSel = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
         players = GameControl.control.GetPlayers();
+        buttons = new List<GameObject>();
         int i = 0;
         foreach (KeyValuePair<string,string> kvp in players)
         {
@@ -22,6 +24,7 @@ public class TurnSelector : MonoBehaviour {
             temp_button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             temp_button.GetComponentInChildren<Text>().text = kvp.Key;
             temp_button.GetComponent<ButtonIdentifier>().buttonID = i;
+            buttons.Add(temp_button);
             i++;
         }
     }
@@ -37,17 +40,17 @@ public class TurnSelector : MonoBehaviour {
         {
             foreach (GameObject button in buttons)
             {
-                button.SetActive(false);
+                button.SetActive(true);
             }
-            interactable = false;
+            interactable = true;
         }
         else if (!GameControl.control.isMyTurn && interactable)
         {
             foreach (GameObject button in buttons)
             {
-                button.SetActive(true);
+                button.SetActive(false);
             }
-            interactable = true;
+            interactable = false;
         }
     }
 }

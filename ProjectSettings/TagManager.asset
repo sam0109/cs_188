@@ -23,6 +23,7 @@ TagManager:
   - EventSystem
   - EquipmentSystem
   - MainInventory
+  - PlayerCharacter
   layers:
   - Default
   - TransparentFX
