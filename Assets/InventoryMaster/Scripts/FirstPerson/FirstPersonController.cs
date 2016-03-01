@@ -47,7 +47,7 @@ public class FirstPersonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (!lockMovement())
         {
             //Rotation
@@ -75,6 +75,7 @@ public class FirstPersonController : MonoBehaviour
 
             characterController.Move(speed * Time.deltaTime);
         }
+        */
 
     }
 
