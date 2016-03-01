@@ -17,7 +17,7 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.localScale = new Vector3(GameControl.control.state.frame_markers[parentFrameMarker.frame_marker_identifier].currentHealth / GameControl.control.state.frame_markers[parentFrameMarker.frame_marker_identifier].maxHealth, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(GameControl.control.getActor(parentFrameMarker.frame_marker_identifier).currentHealth / GameControl.control.getActor(parentFrameMarker.frame_marker_identifier).maxHealth, transform.localScale.y, transform.localScale.z);
         image_target.color = Color.Lerp(minColor, maxColor, transform.localScale.x);
     }
 }

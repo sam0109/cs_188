@@ -36,7 +36,7 @@ public class ButtonMaker : MonoBehaviour {
 		}
         else
         {
-            GameControl.control.updateModel(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, button.GetComponentInChildren<Text>().text);
+            GameControl.control.updateMarker(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, button.GetComponentInChildren<Text>().text);
         }
     }
 }

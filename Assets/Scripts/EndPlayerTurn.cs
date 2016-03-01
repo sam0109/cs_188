@@ -13,7 +13,7 @@ public class EndPlayerTurn : MonoBehaviour {
     
 	public void EndTurn()
     {
-        GameControl.control.TakeTurn(GameControl.control.state.dm);
+        GameControl.control.TakeTurn(GameControl.control.getDM());
     }
 
     void Update()

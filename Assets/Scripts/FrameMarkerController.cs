@@ -12,6 +12,7 @@ public class FrameMarkerController : MonoBehaviour {
     GameObject current_model;
     public ParticleSystem explode;
     Vuforia.MarkerBehaviour marker;
+    GameObject myHealthBar;
 
     public void Start()
     {
@@ -32,6 +33,11 @@ public class FrameMarkerController : MonoBehaviour {
             }
             current_model = Instantiate(GameControl.control.models[i]);
             current_model.transform.SetParent(gameObject.transform, false);
+            if (GameControl.control.getActor(frame_marker_identifier).maxHealth > 0)
+            {
+                myHealthBar = (GameObject)Instantiate(GameControl.control.healthbar, new Vector3(0, 7, 0), Quaternion.identity);
+                myHealthBar.transform.SetParent(gameObject.transform, false);
+            }
         }
         else
         {
@@ -43,9 +49,9 @@ public class FrameMarkerController : MonoBehaviour {
     {
         if (marker.CurrentStatus == Vuforia.TrackableBehaviour.Status.TRACKED)
         {
-            if (current_model_num != GameControl.control.state.frame_markers[frame_marker_identifier].model)
+            if (current_model_num != GameControl.control.getActor(frame_marker_identifier).model)
             {
-                current_model_num = GameControl.control.state.frame_markers[frame_marker_identifier].model;
+                current_model_num = GameControl.control.getActor(frame_marker_identifier).model;
                 SetModel(current_model_num);
             }
 
@@ -79,8 +85,8 @@ public class FrameMarkerController : MonoBehaviour {
         string playerID = GameControl.control.match.SelfParticipantId;
 
         if (GameControl.control.isMyTurn && 
-            GameControl.control.state.frame_markers[frame_marker_identifier].player == playerID &&
-            GameControl.control.state.frame_markers[frame_marker_identifier].isPlayer == true)
+            GameControl.control.getActor(frame_marker_identifier).player == playerID &&
+            GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
 
             int diceRollHitOrNot = randomNum(20);
@@ -97,7 +103,7 @@ public class FrameMarkerController : MonoBehaviour {
 
             if (targeter.target)
             {
-                if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.state.frame_markers[frame_marker_identifier].range)
+                if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.getActor(frame_marker_identifier).range)
                 {
                     print("Too far away!");
                 }
@@ -120,7 +126,7 @@ public class FrameMarkerController : MonoBehaviour {
 
     void Damage(attack_values values)
     {
-        if (GameControl.control.state.frame_markers[frame_marker_identifier].maxHealth > 0)
+        if (GameControl.control.getActor(frame_marker_identifier).maxHealth > 0)
         {
             int chanceToHit = values.diceRollToHit;
             int attackDamage = values.attackDamageWithDice;
@@ -131,11 +137,11 @@ public class FrameMarkerController : MonoBehaviour {
             {
                 //ShowMessage("You hit!", 2);
 
-                GameControl.control.state.frame_markers[frame_marker_identifier].currentHealth -= attackDamage;
-                if (GameControl.control.state.frame_markers[frame_marker_identifier].currentHealth <= 0)
+                GameControl.control.getActor(frame_marker_identifier).currentHealth -= attackDamage;
+                if (GameControl.control.getActor(frame_marker_identifier).currentHealth <= 0)
                 {
                     Instantiate(explode, transform.position, Quaternion.identity);
-                    GameControl.control.state.frame_markers[frame_marker_identifier].model = 0;
+                    GameControl.control.getActor(frame_marker_identifier).model = 0;
                     Destroy(gameObject);
                 }
             }

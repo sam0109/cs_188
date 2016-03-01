@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl control;
     public TurnBasedMatch match;
-    public GameState state;
+    private GameState state;
     public string mode;
     public Actor myCharacter;
     public string playerID;
@@ -21,8 +21,20 @@ public class GameControl : MonoBehaviour
     public List<GameObject> models;
     public List<string> model_names;
     public Dictionary<string, int> model_lookup;
+    public List<Actor> actors;
     public List<FrameMarkerController> frame_markers;
     public GameObject highlighted;
+    public GameObject healthbar;
+
+    public string getDM()
+    {
+        return state.dm;
+    }
+
+    public Actor getActor(int actor)
+    {
+        return state.frame_markers[actor];
+    }
 
     void Start()
     {
@@ -132,9 +144,9 @@ public class GameControl : MonoBehaviour
         state = new_state;
     }
 
-    public void updateModel(int frameMarker, string model)
+    public void updateMarker(int frameMarker, string model)
     {
-        state.frame_markers[frameMarker].model = model_lookup[model];
+        state.frame_markers[frameMarker] = actors[model_lookup[model]];
     }
 
     public Dictionary<string, string> GetPlayers()

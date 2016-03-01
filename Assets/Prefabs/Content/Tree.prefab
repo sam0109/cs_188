@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2393210}
   - 64: {fileID: 6461432}
   - 95: {fileID: 9559576}
-  - 114: {fileID: 11498792}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Tree
@@ -170,22 +169,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11498792
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c015a392b56c75e43a5e9bf9831ea79f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explode: {fileID: 19861102, guid: fb5446fce7e121446b2533bc0ecb7842, type: 2}
-  height: {x: 0, y: 0, z: 10}
-  healthBar: {fileID: 181158, guid: c042b5982bf4d184e86cddee70a3434f, type: 2}
-  health: 100
-  currentHealth: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
