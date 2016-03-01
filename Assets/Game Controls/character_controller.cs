@@ -55,6 +55,7 @@ public class character_controller : MonoBehaviour {
 
 		if (GameControl.control.isMyTurn && myPlayer == playerID) 
 		{
+
 			int diceRollHitOrNot = randomNum (20);
 		
 			Character chara = new Character();
@@ -84,7 +85,12 @@ public class character_controller : MonoBehaviour {
 			{
 				print("Nothing selected!");
 			}
-		}
+
+            if (gameObject.GetComponent<Animation>()["Attack"])
+            {
+                gameObject.GetComponent<Animation>().Play("Attack");
+            }
+        }
     }
 
 	void UpdateModel(int new_model)

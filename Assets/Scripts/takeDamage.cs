@@ -21,6 +21,7 @@ public class takeDamage : MonoBehaviour {
     //void Damage(float damage)
 	void Damage(attack_values values)
     {
+        print("ouch");
 		float chanceToHit = values.diceRollToHit;
 		float attackDamage = values.attackDamageWithDice;
 		ShowMessage ("Your potential attack damage is " + attackDamage, 3);
