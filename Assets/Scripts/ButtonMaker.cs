@@ -29,7 +29,7 @@ public class ButtonMaker : MonoBehaviour {
             playerSelector.SetActive(true);
             gameObject.transform.parent.gameObject.SetActive(false);
         }
-		if (button.GetComponent<ButtonIdentifier>().buttonID == 6)
+		else if (button.GetComponentInChildren<Text>().text == "Treasure Chest")
 		{
 			treasureSelector.SetActive(true);
 			gameObject.transform.parent.gameObject.SetActive(false);
