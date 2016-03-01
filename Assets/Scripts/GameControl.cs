@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using GooglePlayGames.BasicApi.Multiplayer;
 using UnityEngine.SceneManagement;
-using System;
 using GooglePlayGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Vuforia;
 using GooglePlayGames.BasicApi;
-using System.Linq;
 
 public class GameControl : MonoBehaviour
 {
@@ -57,8 +53,38 @@ public class GameControl : MonoBehaviour
         });
     }
 
-    private void OnGotMatch(TurnBasedMatch match, bool shouldAutoLaunch)
+    private void OnGotMatch(TurnBasedMatch new_match, bool shouldAutoLaunch)
     {
+        // get the match data
+        if (new_match.Data != null && new_match.Data.Length > 0)
+        {
+            setValues((GameState)ByteArrayToObject(new_match.Data));
+        }
+        else
+        {
+            state = new GameState();
+            state.frame_markers = new List<model_player>();
+            state.Characters = new Dictionary<string, Character>();
+        }
+
+        match = new_match;
+        playerID = match.SelfParticipantId;
+
+        if (mode == "Player")
+        {
+            if (!state.Characters.ContainsKey(playerID))
+            {
+                state.Characters.Add(playerID, myCharacter);
+            }
+            else
+            {
+                myCharacter = state.Characters[playerID];
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex < 1)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     void Awake()
