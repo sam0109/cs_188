@@ -78,7 +78,6 @@ public class character_controller : MonoBehaviour {
 
 			values = new attack_values (diceRollHitOrNot, attackDamage);
 
-
 			if (target_selector.target)
 			{
 				if ((target_selector.target.transform.position - transform.position).magnitude > range)
