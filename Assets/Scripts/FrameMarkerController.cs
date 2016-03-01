@@ -92,6 +92,10 @@ public class FrameMarkerController : MonoBehaviour {
             if (targeter.target)
             {
                 if(GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
+                {
+
+                }
+
                 int diceRollHitOrNot = randomNum(20);
 
                 int strength = GameControl.control.myCharacter.str;

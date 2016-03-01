@@ -13,7 +13,6 @@ public class ActionCommand : MonoBehaviour
 
     public void onAction()
     {
-
         PlayerAttack pa = new PlayerAttack();
         pa.Attack();
     }
