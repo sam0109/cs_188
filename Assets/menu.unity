@@ -797,6 +797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43431a8bf14c7e94190dae8e32ddc52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state:
+    dm: 
+    frame_markers: []
   mode: 
   myCharacter:
     isPlayer: 0
@@ -814,6 +817,11 @@ MonoBehaviour:
     maxHealth: 0
     currentHealth: 0
     range: 0
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   playerID: 
   isMyTurn: 1
   numMarkers: 0
@@ -837,6 +845,7 @@ MonoBehaviour:
   - Samurai
   - Spartan
   - Wizard
+  - Treasure Chest
   actors:
   - isPlayer: 0
     model: 0
@@ -853,6 +862,11 @@ MonoBehaviour:
     maxHealth: 0
     currentHealth: 0
     range: 0
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 0
     model: 1
     player: 
@@ -868,6 +882,11 @@ MonoBehaviour:
     maxHealth: 0
     currentHealth: 0
     range: 0
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 0
     model: 2
     player: 
@@ -883,6 +902,11 @@ MonoBehaviour:
     maxHealth: 15
     currentHealth: 15
     range: 5
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 0
     model: 3
     player: 
@@ -898,6 +922,11 @@ MonoBehaviour:
     maxHealth: 0
     currentHealth: 0
     range: 0
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 0
     model: 4
     player: 
@@ -913,6 +942,11 @@ MonoBehaviour:
     maxHealth: 0
     currentHealth: 0
     range: 0
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 1
     model: 5
     player: 
@@ -928,6 +962,11 @@ MonoBehaviour:
     maxHealth: 30
     currentHealth: 30
     range: 5
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 1
     model: 6
     player: 
@@ -943,6 +982,11 @@ MonoBehaviour:
     maxHealth: 30
     currentHealth: 30
     range: 5
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 1
     model: 7
     player: 
@@ -958,6 +1002,11 @@ MonoBehaviour:
     maxHealth: 30
     currentHealth: 30
     range: 5
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   - isPlayer: 1
     model: 8
     player: 
@@ -973,9 +1022,14 @@ MonoBehaviour:
     maxHealth: 30
     currentHealth: 30
     range: 5
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   frame_markers: []
   highlighted: {fileID: 122004, guid: 5119c0e26ca1ae94b9ba7928827aedab, type: 2}
-  healthbar: {fileID: 0}
+  healthbar: {fileID: 181158, guid: c042b5982bf4d184e86cddee70a3434f, type: 2}
 --- !u!4 &670942972
 Transform:
   m_ObjectHideFlags: 0

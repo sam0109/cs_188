@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl control;
     public TurnBasedMatch match;
-    private GameState state;
+    public GameState state;
     public string mode;
     public Actor myCharacter;
     public string playerID;
