@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ActionCommand : MonoBehaviour
 {
     public Button btn;
+    public GameObject inventory;
 
 	void Start ()
     {
@@ -14,6 +15,6 @@ public class ActionCommand : MonoBehaviour
     public void onAction()
     {
         PlayerAttack pa = new PlayerAttack();
-        pa.Attack();
+        pa.Attack(inventory);
     }
 }

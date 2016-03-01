@@ -5783,9 +5783,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1886701522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13e96b0d4f622f247b9c8babbfc3da2b, type: 3}
+  m_Script: {fileID: 11500000, guid: d0c0991fd3d572e41aaa45f65a1426f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btn: {fileID: 1886701525}
+  inventory: {fileID: 471528108}
 --- !u!114 &1886701525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5824,18 +5826,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1886701526}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1886701524}
-        m_MethodName: Attack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1886701526
