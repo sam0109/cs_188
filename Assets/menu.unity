@@ -870,6 +870,7 @@ MonoBehaviour:
   - {fileID: 104396, guid: d0047b00372d5744f9f9266282b61c53, type: 2}
   - {fileID: 172362, guid: 209f2b73e68addc4f8e340d313a852c3, type: 2}
   - {fileID: 192212, guid: 55cb859f30e40484785d7d10a56d3d71, type: 2}
+  - {fileID: 190234, guid: 03605cf8d755743c481aaa50a095c142, type: 2}
   highlighted: {fileID: 122004, guid: 5119c0e26ca1ae94b9ba7928827aedab, type: 2}
 --- !u!4 &670942972
 Transform:

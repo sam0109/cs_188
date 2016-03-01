@@ -2775,6 +2775,7 @@ MonoBehaviour:
   - Necromancer
   - Tree
   - Wall
+  - Treasure Chest
   button: {fileID: 198192, guid: c149abe96a93dd14e898635056c84267, type: 2}
   playerSelector: {fileID: 675023517}
 --- !u!1 &1054770091
