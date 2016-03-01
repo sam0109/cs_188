@@ -11,7 +11,6 @@ public class character_controller : MonoBehaviour {
 	GameObject current_model;
 	int current_model_num;
 	string myPlayer;
-	GUIText gText;
 
     RaycastHit hit;
     // Use this for initialization
@@ -41,18 +40,12 @@ public class character_controller : MonoBehaviour {
 		}
 	}
 
-	public int randomNum ()
+	public int randomNum (int max)
 	{
 		//Random rnd = new Random ();
 		//int answ = rnd.Next (1, 21);
 		//return answ;
-		int answ = Random.Range(1,8);
-		return answ;
-	}
-
-	public int randomNumBigger ()
-	{
-		int answ = Random.Range(1,20);
+		int answ = Random.Range(1, max);
 		return answ;
 	}
 
@@ -62,7 +55,7 @@ public class character_controller : MonoBehaviour {
 
 		if (GameControl.control.isMyTurn && myPlayer == playerID) 
 		{
-			int diceRollHitOrNot = randomNumBigger ();
+			int diceRollHitOrNot = randomNum (20);
 		
 			Character chara = new Character();
 			chara = GameControl.control.state.Characters [playerID];
@@ -71,10 +64,8 @@ public class character_controller : MonoBehaviour {
 			stat_converter mod = new stat_converter (strength);
 			int strengthMod = mod.modifierValue;
 
-			int diceRollDamage = randomNum ();
+			int diceRollDamage = randomNum (8);
 			int attackDamage = strengthMod + diceRollDamage;
-
-			ShowMessage ("Your potential attack damage is " + attackDamage, 3);
 
 			values = new attack_values (diceRollHitOrNot, attackDamage);
 
@@ -96,15 +87,6 @@ public class character_controller : MonoBehaviour {
 			}
 		}
     }
-
-	IEnumerator ShowMessage(string message, float delay)
-	{
-		gText = new GUIText ();
-		gText.text = message;
-		gText.enabled = true;
-		yield return new WaitForSeconds(delay);
-		gText.enabled = false;	
-	}
 
 	void UpdateModel(int new_model)
 	{
