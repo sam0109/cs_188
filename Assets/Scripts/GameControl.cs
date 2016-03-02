@@ -6,6 +6,8 @@ using GooglePlayGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using GooglePlayGames.BasicApi;
+using UnityEngine.UI;
+using System.Collections;
 
 public class GameControl : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class GameControl : MonoBehaviour
     public string playerID;
 	public bool isMyTurn;
     public int numMarkers;
+	public Text displayText;
 
     public List<GameObject> models;
     public List<string> model_names;
@@ -36,6 +39,13 @@ public class GameControl : MonoBehaviour
     public Actor getActor(int actor)
     {
         return state.frame_markers[actor];
+    }
+
+	public IEnumerator ShowMessage(string message, float delay)
+    {
+		displayText.text = message;
+        yield return new WaitForSeconds(delay);
+		displayText.text = "";
     }
 
     void Start()
@@ -75,6 +85,7 @@ public class GameControl : MonoBehaviour
                 Debug.Log("did not log in properly");
             }
         });
+		displayText.text = "";
     }
 
     private void OnGotMatch(TurnBasedMatch new_match, bool shouldAutoLaunch)
