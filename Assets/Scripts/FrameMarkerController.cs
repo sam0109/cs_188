@@ -121,6 +121,7 @@ public class FrameMarkerController : MonoBehaviour {
                 }
                 else {
 
+					Handheld.Vibrate ();
                     int diceRollHitOrNot = randomNum(20);
 
                     int strength = GameControl.control.myCharacter.str;
