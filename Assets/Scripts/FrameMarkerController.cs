@@ -94,7 +94,6 @@ public class FrameMarkerController : MonoBehaviour {
             GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.playerID &&
             GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
-
             if (targeter.target)
             {
                 if (GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
@@ -140,7 +139,7 @@ public class FrameMarkerController : MonoBehaviour {
                     //}
                     //else
                     //{
-                        targeter.target.transform.parent.BroadcastMessage("Damage", values);
+                    targeter.target.transform.parent.BroadcastMessage("Damage", values);
                     //}
                 }
             }
@@ -157,13 +156,11 @@ public class FrameMarkerController : MonoBehaviour {
         {
             int chanceToHit = values.diceRollToHit;
             int attackDamage = values.attackDamageWithDice;
-            //ShowMessage("Your potential attack damage is " + attackDamage, 3);
 
             int targetArmor = 10; //This needs to change
             if (chanceToHit > targetArmor)
             {
-                //ShowMessage("You hit!", 2);
-
+                GameControl.control.PopupMessage("dealt " + attackDamage.ToString() + " damage!");
                 GameControl.control.getActor(frame_marker_identifier).currentHealth -= attackDamage;
                 if (GameControl.control.getActor(frame_marker_identifier).currentHealth <= 0)
                 {
@@ -171,19 +168,12 @@ public class FrameMarkerController : MonoBehaviour {
                     GameControl.control.updateMarker(frame_marker_identifier, "Sphere");
                 }
             }
+            else
+            {
+                GameControl.control.PopupMessage("Missed!");
+            }
         }
-        /*else
-        {
-            ShowMessage("You couldn't make it through the armor. Your attack failed.", 3);
-        }*/
     }
-
-    /*IEnumerator ShowMessage(string message, float delay)
-    {
-        damageText = message;
-        yield return new WaitForSeconds(delay);
-        damageText = "";
-    }*/
 
     public int randomNum(int max)
     {

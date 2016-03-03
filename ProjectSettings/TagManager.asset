@@ -24,6 +24,7 @@ TagManager:
   - EquipmentSystem
   - MainInventory
   - PlayerCharacter
+  - Notification
   layers:
   - Default
   - TransparentFX

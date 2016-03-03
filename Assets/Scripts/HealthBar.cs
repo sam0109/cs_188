@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour {
         }
         else
         {
-            transform.localScale = new Vector3(parentFrameMarker.currentHealth / parentFrameMarker.maxHealth, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3((float)parentFrameMarker.currentHealth / (float)parentFrameMarker.maxHealth, 1, 1);
             image_target.color = Color.Lerp(minColor, maxColor, transform.localScale.x);
         }
     }

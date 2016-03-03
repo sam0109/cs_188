@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour
     public string playerID;
 	public bool isMyTurn;
     public int numMarkers;
-	public Text displayText;
+    public GameObject notificationText;
 
     public List<GameObject> models;
     public List<string> model_names;
@@ -39,13 +39,6 @@ public class GameControl : MonoBehaviour
     public Actor getActor(int actor)
     {
         return state.frame_markers[actor];
-    }
-
-	public IEnumerator ShowMessage(string message, float delay)
-    {
-		displayText.text = message;
-        yield return new WaitForSeconds(delay);
-		displayText.text = "";
     }
 
     void Start()
@@ -85,7 +78,6 @@ public class GameControl : MonoBehaviour
                 Debug.Log("did not log in properly");
             }
         });
-		displayText.text = "";
     }
 
     private void OnGotMatch(TurnBasedMatch new_match, bool shouldAutoLaunch)
@@ -291,6 +283,23 @@ public class GameControl : MonoBehaviour
             Debug.Log("Not my turn play");
             return false;
         }
+    }
+
+    public void PopupMessage(string message)
+    {
+        /*notificationText = GameObject.FindWithTag("Notification");
+        Text text = notificationText.GetComponent<Text>();
+        text.color = Color.white;
+        text.text = message;
+        WaitAndClear();*/
+    }
+
+    IEnumerator WaitAndClear()
+    {
+        yield return new WaitForSeconds(1);
+        notificationText = GameObject.FindWithTag("Notification");
+        Text text = notificationText.GetComponent<Text>();
+        text.text = "";
     }
 
     public static byte[] ObjectToByteArray(System.Object obj)
