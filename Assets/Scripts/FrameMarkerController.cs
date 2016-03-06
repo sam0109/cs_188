@@ -120,16 +120,22 @@ public class FrameMarkerController : MonoBehaviour {
                     GameControl.control.updateMarker(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Sphere");
                 }
                 else {
+					attacker = current_model;
+					Animation anim;
+					anim = attacker.GetComponent<Animation> ();
+					//attacker = GameObject.FindGameObjectWithTag ("Player");
 
-					attacker = GameObject.FindGameObjectWithTag ("Player");
-					if(attacker.GetComponent<Animation>()["Attack"] != null)
-						attacker.GetComponent<Animation>().Play ("Attack");
+					//This is a crappy way to do this, but each character's attack animation is named something different and it won't let me change the names.
+					//Doing a null check should remove the crash issue from last time.
 
-					if(attacker.GetComponent<Animation>()["attack"] != null)
-						attacker.GetComponent<Animation>().Play ("attack");
+					if(anim["Attack"] != null)
+						anim.Play ("Attack");
 
-					if(attacker.GetComponent<Animation>()["1HAttack"] != null)
-						attacker.GetComponent<Animation>().Play ("1HAttack");
+					if(anim["attack"] != null)
+						anim.Play ("attack");
+
+					if(anim["1HAttack"] != null)
+						anim.Play ("1HAttack");
 
                     int diceRollHitOrNot = randomNum(20);
 
