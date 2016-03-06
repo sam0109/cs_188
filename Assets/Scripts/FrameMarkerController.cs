@@ -13,6 +13,7 @@ public class FrameMarkerController : MonoBehaviour {
     Vuforia.MarkerBehaviour marker;
     GameObject myHealthBar;
     static ItemDataBaseList inventoryItemList;
+	GameObject attacker;
 
     public void Start()
     {
@@ -120,7 +121,16 @@ public class FrameMarkerController : MonoBehaviour {
                 }
                 else {
 
-					Handheld.Vibrate ();
+					attacker = GameObject.FindGameObjectWithTag ("Player");
+					if(attacker.GetComponent<Animation>()["Attack"] != null)
+						attacker.GetComponent<Animation>().Play ("Attack");
+
+					if(attacker.GetComponent<Animation>()["attack"] != null)
+						attacker.GetComponent<Animation>().Play ("attack");
+
+					if(attacker.GetComponent<Animation>()["1HAttack"] != null)
+						attacker.GetComponent<Animation>().Play ("1HAttack");
+
                     int diceRollHitOrNot = randomNum(20);
 
                     int strength = GameControl.control.myCharacter.str;
@@ -160,6 +170,7 @@ public class FrameMarkerController : MonoBehaviour {
             int targetArmor = 10; //This needs to change
             if (chanceToHit > targetArmor)
             {
+				Handheld.Vibrate ();
                 GameControl.control.PopupMessage("dealt " + attackDamage.ToString() + " damage!");
                 GameControl.control.getActor(frame_marker_identifier).currentHealth -= attackDamage;
                 if (GameControl.control.getActor(frame_marker_identifier).currentHealth <= 0)
