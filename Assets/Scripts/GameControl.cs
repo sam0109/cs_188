@@ -250,6 +250,7 @@ public class GameControl : MonoBehaviour
                     if(state.frame_markers[i].player == playerID)
                     {
                         state.frame_markers[i] = myCharacter;
+                        state.frame_markers[i].player = playerID;
                     }
                 }
             }

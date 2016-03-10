@@ -89,10 +89,8 @@ public class FrameMarkerController : MonoBehaviour {
 
     public void Action(GameObject inventory)
     {
-        //string playerID = GameControl.control.match.SelfParticipantId;
-
-        if (GameControl.control.isMyTurn && 
-            GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.playerID &&
+        if (//GameControl.control.isMyTurn && 
+            //GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.playerID &&
             GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
             if (targeter.target)
