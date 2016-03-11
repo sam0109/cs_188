@@ -13,6 +13,9 @@
 //  See the License for the specific language governing permissions and
 //    limitations under the License.
 // </copyright>
+// Keep this even if NO_GPGS is defined so we can clean up the project
+// post build.
+#if (UNITY_ANDROID || UNITY_IPHONE)
 
 namespace GooglePlayGames.Editor
 {
@@ -68,6 +71,9 @@ namespace GooglePlayGames.Editor
         /// <summary>Property key for project settings.</summary>
         public const string IOSSETUPDONEKEY = "ios.SetupDone";
 
+        /// <summary>Property key for plugin version.</summary>
+        public const string PLUGINVERSIONKEY = "proj.pluginVersion";
+
         /// <summary>Property key for nearby settings done.</summary>
         public const string NEARBYSETUPDONEKEY = "android.NearbySetupDone";
 
@@ -91,6 +97,9 @@ namespace GooglePlayGames.Editor
 
         /// <summary>Constant for token replacement</summary>
         private const string IOSBUNDLEIDPLACEHOLDER = "__BUNDLEID__";
+
+        /// <summary>Constant for token replacement</summary>
+        private const string PLUGINVERSIONPLACEHOLDER = "__PLUGIN_VERSION__";
 
         /// <summary>Constant for token replacement</summary>
         private const string TOKENPERMISSIONSHOLDER = "__TOKEN_PERMISSIONS__";
@@ -137,7 +146,8 @@ namespace GooglePlayGames.Editor
                 { IOSCLIENTIDPLACEHOLDER, IOSCLIENTIDKEY },
                 { IOSBUNDLEIDPLACEHOLDER, IOSBUNDLEIDKEY },
                 { TOKENPERMISSIONSHOLDER, TOKENPERMISSIONKEY },
-                { REQUIREGOOGLEPLUSPLACEHOLDER, REQUIREGOOGLEPLUSKEY }
+                { REQUIREGOOGLEPLUSPLACEHOLDER, REQUIREGOOGLEPLUSKEY },
+                { PLUGINVERSIONPLACEHOLDER, PLUGINVERSIONKEY}
             };
 
         /// <summary>
@@ -638,3 +648,4 @@ namespace GooglePlayGames.Editor
         }
     }
 }
+#endif

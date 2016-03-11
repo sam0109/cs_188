@@ -10,10 +10,10 @@ public class FrameMarkerController : MonoBehaviour {
     bool particlesPlaying;
     int current_model_num;
     GameObject current_model;
-    Vuforia.MarkerBehaviour marker;
+    public Vuforia.MarkerBehaviour marker;
     GameObject myHealthBar;
     static ItemDataBaseList inventoryItemList;
-	GameObject attacker;
+	//GameObject attacker;
 
     public void Start()
     {
@@ -89,8 +89,8 @@ public class FrameMarkerController : MonoBehaviour {
 
     public void Action(GameObject inventory)
     {
-        if (//GameControl.control.isMyTurn && 
-            //GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.playerID &&
+        if (GameControl.control.isMyTurn && 
+            GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.myself. &&
             GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
             if (targeter.target)
@@ -118,7 +118,7 @@ public class FrameMarkerController : MonoBehaviour {
                     GameControl.control.updateMarker(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Sphere");
                 }
                 else {
-					attacker = current_model;
+					/*attacker = current_model;
 					Animation anim;
 					anim = attacker.GetComponent<Animation> ();
 					//attacker = GameObject.FindGameObjectWithTag ("Player");
@@ -133,7 +133,7 @@ public class FrameMarkerController : MonoBehaviour {
 						anim.Play ("attack");
 
 					if(anim["1HAttack"] != null)
-						anim.Play ("1HAttack");
+						anim.Play ("1HAttack");*/
 
                     int diceRollHitOrNot = randomNum(20);
 
@@ -176,7 +176,7 @@ public class FrameMarkerController : MonoBehaviour {
             {
 				Handheld.Vibrate ();
                 GameControl.control.PopupMessage("dealt " + attackDamage.ToString() + " damage!");
-                GameControl.control.getActor(frame_marker_identifier).currentHealth -= attackDamage;
+                GameControl.control.dealDamage(frame_marker_identifier, attackDamage);
                 if (GameControl.control.getActor(frame_marker_identifier).currentHealth <= 0)
                 {
                     Instantiate(GameControl.control.explode, transform.position, Quaternion.identity);

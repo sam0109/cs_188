@@ -797,34 +797,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43431a8bf14c7e94190dae8e32ddc52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state:
-    dm: 
-    frame_markers: []
   mode: 
-  myCharacter:
-    isPlayer: 0
-    model: 0
-    player: 
-    characterName: 
-    characterClass: 
-    characterRace: 
-    str: 0
-    dex: 0
-    con: 0
-    intelligence: 0
-    wiz: 0
-    cha: 0
-    maxHealth: 0
-    currentHealth: 0
-    range: 0
-    chestItem: 
-    rightHandWeapon: 
-    leftHandWeapon: 
-    chestArmor: 
-    inventory: []
-  playerID: 
   isMyTurn: 1
   numMarkers: 0
+  notificationText: {fileID: 0}
   models:
   - {fileID: 124632, guid: 65ea256b0af8a9648a3d44fbcf1eeb72, type: 2}
   - {fileID: 150606, guid: 9a3e964ad192cf44791d428df1f36d19, type: 2}
