@@ -28,7 +28,7 @@ MonoBehaviour:
     itemID: 1
     itemDesc: Simple Axe
     itemIcon: {fileID: 21300000, guid: 765073e72e123734d92c234eec3d6017, type: 3}
-    itemModel: {fileID: 100000, guid: 0db22df3b6ff99449a94be14869e6c20, type: 2}
+    itemModel: {fileID: 0}
     itemValue: 1
     itemType: 1
     itemWeight: 0
