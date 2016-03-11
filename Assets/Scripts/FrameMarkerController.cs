@@ -10,9 +10,10 @@ public class FrameMarkerController : MonoBehaviour {
     bool particlesPlaying;
     int current_model_num;
     GameObject current_model;
-    Vuforia.MarkerBehaviour marker;
+    public Vuforia.MarkerBehaviour marker;
     GameObject myHealthBar;
     static ItemDataBaseList inventoryItemList;
+	//GameObject attacker;
 
     public void Start()
     {
@@ -88,13 +89,10 @@ public class FrameMarkerController : MonoBehaviour {
 
     public void Action(GameObject inventory)
     {
-        //string playerID = GameControl.control.match.SelfParticipantId;
-
         if (GameControl.control.isMyTurn && 
-            GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.playerID &&
+            GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.myself. &&
             GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
         {
-
             if (targeter.target)
             {
                 if (GameControl.control.rev_model_lookup[GameControl.control.getActor(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).model] == "Treasure Chest")
@@ -120,6 +118,22 @@ public class FrameMarkerController : MonoBehaviour {
                     GameControl.control.updateMarker(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Sphere");
                 }
                 else {
+					/*attacker = current_model;
+					Animation anim;
+					anim = attacker.GetComponent<Animation> ();
+					//attacker = GameObject.FindGameObjectWithTag ("Player");
+
+					//This is a crappy way to do this, but each character's attack animation is named something different and it won't let me change the names.
+					//Doing a null check should remove the crash issue from last time.
+
+					if(anim["Attack"] != null)
+						anim.Play ("Attack");
+
+					if(anim["attack"] != null)
+						anim.Play ("attack");
+
+					if(anim["1HAttack"] != null)
+						anim.Play ("1HAttack");*/
 
                     int diceRollHitOrNot = randomNum(20);
 
@@ -139,7 +153,7 @@ public class FrameMarkerController : MonoBehaviour {
                     //}
                     //else
                     //{
-                        targeter.target.transform.parent.BroadcastMessage("Damage", values);
+                    targeter.target.transform.parent.BroadcastMessage("Damage", values);
                     //}
                 }
             }
@@ -156,33 +170,25 @@ public class FrameMarkerController : MonoBehaviour {
         {
             int chanceToHit = values.diceRollToHit;
             int attackDamage = values.attackDamageWithDice;
-            //ShowMessage("Your potential attack damage is " + attackDamage, 3);
 
             int targetArmor = 10; //This needs to change
             if (chanceToHit > targetArmor)
             {
-                //ShowMessage("You hit!", 2);
-
-                GameControl.control.getActor(frame_marker_identifier).currentHealth -= attackDamage;
+				Handheld.Vibrate ();
+                GameControl.control.PopupMessage("dealt " + attackDamage.ToString() + " damage!");
+                GameControl.control.dealDamage(frame_marker_identifier, attackDamage);
                 if (GameControl.control.getActor(frame_marker_identifier).currentHealth <= 0)
                 {
                     Instantiate(GameControl.control.explode, transform.position, Quaternion.identity);
                     GameControl.control.updateMarker(frame_marker_identifier, "Sphere");
                 }
             }
+            else
+            {
+                GameControl.control.PopupMessage("Missed!");
+            }
         }
-        /*else
-        {
-            ShowMessage("You couldn't make it through the armor. Your attack failed.", 3);
-        }*/
     }
-
-    /*IEnumerator ShowMessage(string message, float delay)
-    {
-        damageText = message;
-        yield return new WaitForSeconds(delay);
-        damageText = "";
-    }*/
 
     public int randomNum(int max)
     {

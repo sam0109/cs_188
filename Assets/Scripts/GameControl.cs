@@ -6,17 +6,19 @@ using GooglePlayGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using GooglePlayGames.BasicApi;
+using UnityEngine.UI;
+using System.Collections;
 
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    public TurnBasedMatch match;
-    public GameState state;
+    private GameState state;
     public string mode;
     public Actor myCharacter;
-    public string playerID;
-	public bool isMyTurn;
+    public Participant myself;
+    public bool isMyTurn;
     public int numMarkers;
+    public GameObject notificationText;
 
     public List<GameObject> models;
     public List<string> model_names;
@@ -28,6 +30,10 @@ public class GameControl : MonoBehaviour
     public GameObject healthbar;
     public ParticleSystem explode;
 
+    /*  Multiplayer Values*/
+    RealTimeMultiplayerListener listener;
+    WaitForState waitForState;
+
     public string getDM()
     {
         return state.dm;
@@ -38,9 +44,73 @@ public class GameControl : MonoBehaviour
         return state.frame_markers[actor];
     }
 
+    public void setMode(string newMode)
+    {
+        mode = newMode;
+    }
+
+    public void setValues(GameState new_state)
+    {
+        state = new_state;
+    }
+
+    public void dealDamage(int actor, int damage)
+    {
+        if (getActor(actor).maxHealth > 0)
+        {
+            getActor(actor).currentHealth -= damage;
+        }
+    }
+
+    public void updateMarker(int frameMarker, string model)
+    {
+        state.frame_markers[frameMarker] = new Actor(actors[model_lookup[model]]);
+        if (mode == "Master")
+        {
+            PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+        }
+        else
+        {
+            state.currentTurnPlayer = getDM();
+            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state)));
+        }
+    }
+
+    public Dictionary<string, string> GetPlayers()
+    {
+        Dictionary<string, string> players = new Dictionary<string, string>();
+        if (Application.isEditor)
+        {
+            return players;
+        }
+        foreach (Participant p in PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants())
+        {
+            if (p.ParticipantId != state.dm)
+            {
+                players.Add(p.Player.userName, p.ParticipantId);
+                Debug.Log("Play Unity adding player " + p.Player.userName);
+            }
+        }
+        return players;
+    }
+
+    void Awake()
+    {
+        if (control == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            control = this;
+        }
+        else if (control != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         frame_markers = new List<FrameMarkerController>();
+        listener = new RTMPListener();
         model_lookup = new Dictionary<string, int>();
         rev_model_lookup = new Dictionary<int, string>();
         for(int i = 0; i < model_names.Count; i++)
@@ -48,11 +118,13 @@ public class GameControl : MonoBehaviour
             model_lookup.Add(model_names[i], i);
             rev_model_lookup.Add(i, model_names[i]);
         }
+
         numMarkers = 31;
+
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 
         // registers a callback for turn based match notifications.
-        .WithMatchDelegate(OnGotMatch)
+        .WithInvitationDelegate(OnInvitationReceived)
 
         .Build();
 
@@ -77,98 +149,36 @@ public class GameControl : MonoBehaviour
         });
     }
 
-    private void OnGotMatch(TurnBasedMatch new_match, bool shouldAutoLaunch)
+    void Update()
     {
-        // get the match data
-        if (new_match.Data != null && new_match.Data.Length > 0)
-        {
-            setValues((GameState)ByteArrayToObject(new_match.Data));
-        }
-        else
-        {
-            state = new GameState();
-            state.frame_markers = new List<Actor>();
-        }
-
-        match = new_match;
-        playerID = match.SelfParticipantId;
-
-        if (mode == "Player")
-        {
-            for (int i = 0; i < state.frame_markers.Count; i++)
-            {
-                if (state.frame_markers[i].player == playerID)
-                {
-                    state.frame_markers[i] = myCharacter;
-                }
-            }
-        }
-        if (SceneManager.GetActiveScene().buildIndex < 1)
-        {
-            SceneManager.LoadScene(1);
-        }
     }
 
-    void Awake()
+    public void PopupMessage(string message)
     {
-        if (control == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            control = this;
-        }
-        else if (control != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-		
-	void Update()
-	{
-        if (match != null)
-        {
-            if (match.Status == TurnBasedMatch.MatchStatus.Active &&
-                match.TurnStatus == TurnBasedMatch.MatchTurnStatus.MyTurn)
-            {
-                isMyTurn = true;
-            }
-            else
-            {
-                isMyTurn = false;
-            }
-        }
-	}
-
-    public void setMode(string newMode)
-    {
-        mode = newMode;
+        /*notificationText = GameObject.FindWithTag("Notification");
+        Text text = notificationText.GetComponent<Text>();
+        text.color = Color.white;
+        text.text = message;
+        WaitAndClear();*/
     }
 
-    public void setValues(GameState new_state)
+    IEnumerator WaitAndClear()
     {
-        state = new_state;
+        yield return new WaitForSeconds(1);
+        notificationText = GameObject.FindWithTag("Notification");
+        Text text = notificationText.GetComponent<Text>();
+        text.text = "";
     }
 
-    public void updateMarker(int frameMarker, string model)
-    {
-        state.frame_markers[frameMarker] = new Actor(actors[model_lookup[model]]);
-    }
+    /******************************************************
+     *      Multiplayer Functions                         *
+     ******************************************************/
 
-    public Dictionary<string, string> GetPlayers()
+    public delegate void WaitForState();
+
+    public void OnInvitationReceived(Invitation invitation, bool shouldAutoLaunch)
     {
-        Dictionary<string, string> players = new Dictionary<string, string>();
-        if (Application.isEditor)
-        {
-            return players;
-        }
-            foreach (Participant p in match.Participants)
-        {
-            if (p.ParticipantId != state.dm)
-            {
-                players.Add(p.Player.userName, p.ParticipantId);
-                Debug.Log("Play Unity adding player " + p.Player.userName);
-            }
-        }
-        return players;
+
     }
 
     public void CreateWithInvitationScreen()
@@ -189,7 +199,7 @@ public class GameControl : MonoBehaviour
             const int MinPlayers = 1;
             const int MaxPlayers = 7;
             const int Variant = 0;  // default
-            PlayGamesPlatform.Instance.TurnBased.CreateWithInvitationScreen(MinPlayers, MaxPlayers, Variant, OnMatchStarted);
+            PlayGamesPlatform.Instance.RealTime.CreateWithInvitationScreen(MinPlayers, MaxPlayers, Variant, listener);
         }
     }
 
@@ -208,77 +218,31 @@ public class GameControl : MonoBehaviour
         }
         else
         {
-            PlayGamesPlatform.Instance.TurnBased.AcceptFromInbox(OnMatchStarted);
+            PlayGamesPlatform.Instance.RealTime.AcceptFromInbox(listener);
         }
     }
 
-    // Callback:
-    void OnMatchStarted(bool success, TurnBasedMatch new_match)
+    public void TakeTurn(string next)
     {
-        if (success)
+        Debug.Log("Take Turn was called");
+        if (control.mode == "Player")
         {
-            // get the match data
-            if (new_match.Data != null && new_match.Data.Length > 0)
+            if (isMyTurn)
             {
-                setValues((GameState)ByteArrayToObject(new_match.Data));
+                Debug.Log("sending player turn");
+                state.currentTurnPlayer = state.dm;
+                PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("takenTurn", control.state)));
             }
             else
             {
-                state = new GameState();
-                state.frame_markers = new List<Actor>();
+                Debug.Log("Not my turn play");
             }
-            match = new_match;
-            playerID = match.SelfParticipantId;
-            if (mode == "Master")
-            {
-                state = new GameState();
-                state.dm = playerID;
-                state.frame_markers = new List<Actor>();
-                for(int i = 0; i < numMarkers; i++)
-                {
-                    state.frame_markers.Add(new Actor(0, state.dm));
-                }
-
-            }
-            if (mode == "Player")
-            {
-                for(int i = 0; i < state.frame_markers.Count; i++)
-                {
-                    if(state.frame_markers[i].player == playerID)
-                    {
-                        state.frame_markers[i] = myCharacter;
-                    }
-                }
-            }
-            SceneManager.LoadScene(1);
         }
-        else {
-            Debug.Log("error starting match");
-        }
-    }
-
-    public bool TakeTurn(string next)
-    {
-        if (isMyTurn)
+        if (control.mode == "Master")
         {
-            byte[] myData = ObjectToByteArray(state);
-
-            PlayGamesPlatform.Instance.TurnBased.TakeTurn(match, myData, next, (bool success) =>
-            {
-                if (success)
-                {
-                    Debug.Log("Sucessfully set turn play");
-                }
-                else {
-                    Debug.Log("failed to set turn play");
-                }
-            });
-            return true;
-        }
-        else
-        {
-            Debug.Log("Not my turn play");
-            return false;
+            Debug.Log("Sending DM Updates");
+            state.currentTurnPlayer = next;
+            PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
         }
     }
 
@@ -292,15 +256,177 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    public static System.Object ByteArrayToObject(byte[] arrBytes)
+    class RTMPListener : RealTimeMultiplayerListener
     {
-        using (var memStream = new MemoryStream())
+
+        private bool showingWaitingRoom = false;
+        /// <summary>
+        /// Called during room setup to notify of room setup progress.
+        /// </summary>
+        /// <param name="percent">The room setup progress in percent (0.0 to 100.0).</param>
+        public void OnRoomSetupProgress(float progress)
         {
-            var binForm = new BinaryFormatter();
-            memStream.Write(arrBytes, 0, arrBytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
-            var obj = binForm.Deserialize(memStream);
-            return obj;
+            // show the default waiting room.
+            if (!showingWaitingRoom)
+            {
+                showingWaitingRoom = true;
+                PlayGamesPlatform.Instance.RealTime.ShowWaitingRoomUI();
+            }
+        }
+
+        /// <summary>
+        /// Notifies that room setup is finished. If <c>success == true</c>, you should
+        /// react by starting to play the game; otherwise, show an error screen.
+        /// </summary>
+        /// <param name="success">Whether setup was successful.</param>
+        public void OnRoomConnected(bool success)
+        {
+            if (success)
+            {
+                control.myself = PlayGamesPlatform.Instance.RealTime.GetSelf();
+
+                if (control.mode == "Master")
+                {
+                    control.state = new GameState();
+                    control.state.dm = control.myself.ParticipantId;
+                    control.state.frame_markers = new List<Actor>();
+                    for (int i = 0; i < control.numMarkers; i++)
+                    {
+                        control.state.frame_markers.Add(new Actor(0, control.state.dm));
+                    }
+                    PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+
+                    if (SceneManager.GetActiveScene().buildIndex < 1)
+                    {
+                        SceneManager.LoadScene(1);
+                    }
+                }
+
+                if (control.mode == "Player")
+                {
+                    control.waitForState = new WaitForState(loadMain);
+                }
+            }
+            else
+            {
+                Debug.Log("Unity Failed to connect to the room");
+            }
+        }
+
+        public void loadMain()
+        {
+            PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("characterUpdate", control.myCharacter)));
+            SceneManager.LoadScene(1);
+        }
+
+        /// <summary>
+        /// Notifies that the current player has left the room. This may have happened
+        /// because you called LeaveRoom, or because an error occurred and the player
+        /// was dropped from the room. You should react by stopping your game and
+        /// possibly showing an error screen (unless leaving the room was the player's
+        /// request, naturally).
+        /// </summary>
+        public void OnLeftRoom()
+        {
+
+        }
+
+        /// <summary>
+        /// Raises the participant left event.
+        /// This is called during room setup if a player declines an invitation
+        /// or leaves.  The status of the participant can be inspected to determine
+        /// the reason.  If all players have left, the room is closed automatically.
+        /// </summary>
+        /// <param name="participant">Participant that left</param>
+        public void OnParticipantLeft(Participant participant)
+        {
+
+        }
+
+        /// <summary>
+        /// Called when peers connect to the room.
+        /// </summary>
+        /// <param name="participantIds">Participant identifiers.</param>
+        public void OnPeersConnected(string[] participantIds)
+        {
+
+        }
+
+        /// <summary>
+        /// Called when peers disconnect from the room.
+        /// </summary>
+        /// <param name="participantIds">Participant identifiers.</param>
+        public void OnPeersDisconnected(string[] participantIds)
+        {
+
+        }
+
+        /// <summary>
+        /// Called when a real-time message is received.
+        /// </summary>
+        /// <param name="isReliable">Whether the message was sent as a reliable message or not.</param>
+        /// <param name="senderId">Sender identifier.</param>
+        /// <param name="data">Data.</param>
+        public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
+        {
+            Debug.Log("unity DM got new message");
+            if (control.mode == "Master")
+            {
+                MessageToDM message = (MessageToDM)ByteArrayToObject(data);
+                switch(message.messageType)
+                {
+                    case("characterUpdate"):
+                        Debug.Log("Message was character update");
+                        for (int i = 0; i < control.state.frame_markers.Count; i++)
+                        {
+                            if (control.state.frame_markers[i].player == senderId)
+                            {
+                                control.state.frame_markers[i] = message.myCharacter;
+                            }
+                        }
+                        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+                        break;
+                    case ("takenTurn"):
+                        Debug.Log("Message was taking a turn");
+                        control.state = message.state;
+                        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (control.mode == "Player")
+            {
+                Debug.Log("unity player got new message, setting values");
+                control.setValues((GameState)ByteArrayToObject(data));
+                if(control.state.currentTurnPlayer == control.myself.ParticipantId)
+                {
+                    control.isMyTurn = true;
+                }
+                else
+                {
+                    control.isMyTurn = false;
+                }
+                if (control.waitForState != null)
+                {
+                    control.waitForState();
+                    control.waitForState = null;
+                }
+            }
+            
+        }
+
+        public static System.Object ByteArrayToObject(byte[] arrBytes)
+        {
+            using (var memStream = new MemoryStream())
+            {
+                var binForm = new BinaryFormatter();
+                memStream.Write(arrBytes, 0, arrBytes.Length);
+                memStream.Seek(0, SeekOrigin.Begin);
+                var obj = binForm.Deserialize(memStream);
+                return obj;
+            }
         }
     }
 }
@@ -308,10 +434,10 @@ public class GameControl : MonoBehaviour
 [System.Serializable]
 public class GameState
 {
+    public string currentTurnPlayer;
     public string dm;
     public List<Actor> frame_markers;
 }
-	
 
 [System.Serializable]
 public class Actor
@@ -367,4 +493,22 @@ public class Actor
     public string leftHandWeapon;
     public string chestArmor;
     public List<string> inventory;
+}
+
+[System.Serializable]
+public class MessageToDM
+{
+    public MessageToDM(string messageTypeIn, Actor myCharacterIn)
+    {
+        messageType = messageTypeIn;
+        myCharacter = myCharacterIn;
+    }
+    public MessageToDM(string messageTypeIn, GameState newState)
+    {
+        messageType = messageTypeIn;
+        state = newState;
+    }
+    public string messageType;
+    public Actor myCharacter;
+    public GameState state;
 }

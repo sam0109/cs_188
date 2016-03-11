@@ -24,7 +24,7 @@
 
 public static class Constants
 {
-        public const string achievement_getting_started = "CgkI5PGpq8kBEAIQAQ"; // <GPGSID>
+        public const string achievement_in_the_money = "CgkIktPjxdUfEAIQAg"; // <GPGSID>
 
 }
 
