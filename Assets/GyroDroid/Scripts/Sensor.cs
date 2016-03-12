@@ -50,7 +50,7 @@ public abstract partial class Sensor : MonoBehaviour
 	public static Vector3 	magneticField 		{ get {	return Value(Type.MagneticField);	} }	// [µT] (micro-Tesla)
 	public static Vector3 	orientation 		{ get { return Value(Type.Orientation);	} }		// [degrees]
 	public static Vector3 	gyroscope 			{ get { return Value(Type.Gyroscope);	} } 	// [radians/second]
-	public static new float light 				{ get { return Value(Type.Light).x;	} }			// [lux]
+	new public static float light 	 			{ get { return Value(Type.Light).x;	} }			// [lux]
 	public static float 	pressure 			{ get { return Value(Type.Pressure).x; } } 
 	public static float 	temperature 		{ get {	return Value(Type.Temperature).x;	} } // [degrees Celsius]
 	public static float 	proximity 			{ get { return Value(Type.Proximity).x;	} } 	// [cm]

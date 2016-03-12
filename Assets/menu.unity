@@ -823,7 +823,6 @@ MonoBehaviour:
     leftHandWeapon: 
     chestArmor: 
     inventory: []
-  myModel: {fileID: 0}
   isMyTurn: 1
   numMarkers: 0
   notificationText: {fileID: 0}
@@ -1574,7 +1573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &872763096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1745,7 +1744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &948349793
 CanvasRenderer:
   m_ObjectHideFlags: 0

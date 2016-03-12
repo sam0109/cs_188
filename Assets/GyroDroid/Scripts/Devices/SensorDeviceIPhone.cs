@@ -1,4 +1,4 @@
-#define SENSOR_DEBUG
+//#define SENSOR_DEBUG
 #if UNITY_IPHONE || SENSOR_DEBUG
 using UnityEngine;
 

@@ -1,6 +1,6 @@
 -----------------------
 
-prefrontal cortex, 2011-2014
+prefrontal cortex, 2011-2015
 contact@prefrontalcortex.de
 
 IMPORTANT:
@@ -8,13 +8,16 @@ The plugins folder MUST be child to the root folder (/Assets/). Otherwise Unity 
 It may be that the plugins folder got moved in the upload process, so you have to move it back by hand.
 
 -----------------------
-GyroDroid 5.0
+GyroDroid 5.2
 -----------------------
 
 
 
 Change notes
 ============
+
+5.2
+* updated to support Unity 5
 
 5.1
 * fixed regression errors
@@ -77,13 +80,13 @@ You find an .unitypackage with the most important things in the GyroDroid folder
 
 Tested with
 ===========
-	- Nexus 5					- Android 4.1, 4.2, 4.3, 4.4
+	- Nexus 5					- Android 4.1, 4.2, 4.3, 4.4, 5.0
 	- Moto G					- Android 4.2, 4.3
 	- Asus Transformer TF300T	- Android 4.0 and Android 4.1
 	- Samsung Galaxy Nexus		- Android 4.0 and Android 4.1
 	- Samsung Galaxy Tab 7" 	- Android 2.2
-	- Samsung Galaxy Tab 10.1v 	- Android 3.0
-	- Motorola Xoom 			- Android 3.1, 3.2, 4.0, 4.1, 4.2
+	- Samsung Galaxy Tab 10.1v 	- Android 3.0, Android 4.2
+	- Motorola Xoom 			- Android 3.1, 3.2, 4.0, 4.1, 4.2 (not supported in Unity 5 anymore)
 	- Samsung Google Nexus S 	- Android 2.3.3, 2.3.4, 4.1, 4.2, 4.3
 	- Motorola Milestone 		- Android 2.2, 2.3, 4.0
 	- LG P920 (Optimus 3D)
@@ -91,6 +94,8 @@ Tested with
 	- Samsung Galaxy S
 	- Galaxy Nexus
 	- LG Optimus P700			(does not work very well)
+	- Acer Iconia 8 (x86)
+	- freevi FlightDeck			(does not work very well)
 	- ...and so on.
 	
 iOS-crosscompile tested with
@@ -99,7 +104,7 @@ iOS-crosscompile tested with
 	- iPhone 4
 	- iPad 2 (older GyroDroid version, not sure whether it still works!)
 	If you have test results to share, please do!
-	We get reports ranging from "everything is fine" to "nothing works" and have not all devices for testing...
+	We get reports ranging from "everything is fine" to "nothing works" and don't have all devices for testing...
 
 
 Simple Usage
@@ -156,6 +161,7 @@ Technical Explanation and API usage
 		    Sensor.Type.RotationVector
 		    Sensor.Type.RelativeHumidity
 		    Sensor.Type.AmbientTemperature
+		    ...
 		    
 		2) Then, simply use the predefined variable for this type from anywhere inside your project:
 			For faster access to the rotation quaternion:
