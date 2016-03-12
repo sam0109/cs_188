@@ -47,6 +47,7 @@ public class LightSensor : MonoBehaviour
             if (!Application.isEditor)
             {
                 lightValue = Mathf.Clamp(Sensor.light / 110000.0f,0,1);
+                Debug.Log("Light value from sensor: " + lightValue.ToString());
             }
 
             RenderSettings.ambientIntensity = lightValue;
