@@ -39,6 +39,11 @@ public class GameControl : MonoBehaviour
         return state.dm;
     }
 
+    public Actor getPlayerModels(string playerID)
+    {
+        return control.state.players[playerID];
+    }
+
     public Actor getActor(int actor)
     {
         return state.frame_markers[actor];
@@ -72,8 +77,23 @@ public class GameControl : MonoBehaviour
         else
         {
             state.currentTurnPlayer = getDM();
-            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state)));
+            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
         }
+    }
+
+    public void updateMarker(int frameMarker, Actor actor)
+    {
+        state.frame_markers[frameMarker] = actor;
+        if (mode == "Master")
+        {
+            PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+        }
+        else
+        {
+            state.currentTurnPlayer = getDM();
+            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+        }
+
     }
 
     public Dictionary<string, string> GetPlayers()
@@ -231,7 +251,7 @@ public class GameControl : MonoBehaviour
             {
                 Debug.Log("sending player turn");
                 state.currentTurnPlayer = state.dm;
-                PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("takenTurn", control.state)));
+                PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
             }
             else
             {
@@ -290,6 +310,15 @@ public class GameControl : MonoBehaviour
                     control.state = new GameState();
                     control.state.dm = control.myself.ParticipantId;
                     control.state.frame_markers = new List<Actor>();
+                    control.state.players = new Dictionary<string, Actor>();
+                    foreach (Participant p in PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants())
+                    {
+                        if (p.ParticipantId != control.state.dm)
+                        {
+                            control.state.players.Add(p.ParticipantId, new Actor());
+                            Debug.Log("Play Unity adding player " + p.Player.userName);
+                        }
+                    }
                     for (int i = 0; i < control.numMarkers; i++)
                     {
                         control.state.frame_markers.Add(new Actor(0, control.state.dm));
@@ -315,7 +344,7 @@ public class GameControl : MonoBehaviour
 
         public void loadMain()
         {
-            PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("characterUpdate", control.myCharacter)));
+            PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("characterUpdate", control.myCharacter, control.myself.ParticipantId)));
             SceneManager.LoadScene(1);
         }
 
@@ -377,13 +406,7 @@ public class GameControl : MonoBehaviour
                 {
                     case("characterUpdate"):
                         Debug.Log("Message was character update");
-                        for (int i = 0; i < control.state.frame_markers.Count; i++)
-                        {
-                            if (control.state.frame_markers[i].player == senderId)
-                            {
-                                control.state.frame_markers[i] = message.myCharacter;
-                            }
-                        }
+                        control.state.players[message.myID] = message.myCharacter;
                         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
                         break;
                     case ("takenTurn"):
@@ -437,6 +460,7 @@ public class GameState
     public string currentTurnPlayer;
     public string dm;
     public List<Actor> frame_markers;
+    public Dictionary<string, Actor> players;
 }
 
 [System.Serializable]
@@ -498,16 +522,19 @@ public class Actor
 [System.Serializable]
 public class MessageToDM
 {
-    public MessageToDM(string messageTypeIn, Actor myCharacterIn)
+    public MessageToDM(string messageTypeIn, Actor myCharacterIn, string ID)
     {
         messageType = messageTypeIn;
         myCharacter = myCharacterIn;
+        myID = ID;
     }
-    public MessageToDM(string messageTypeIn, GameState newState)
+    public MessageToDM(string messageTypeIn, GameState newState, string ID)
     {
         messageType = messageTypeIn;
         state = newState;
+        myID = ID;
     }
+    public string myID;
     public string messageType;
     public Actor myCharacter;
     public GameState state;
