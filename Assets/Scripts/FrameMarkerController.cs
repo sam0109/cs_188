@@ -45,10 +45,10 @@ public class FrameMarkerController : MonoBehaviour {
             {
                 Destroy(myHealthBar);
             }
-            if (GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.myself.ParticipantId &&
+            if ((Application.isEditor || GameControl.control.getActor(frame_marker_identifier).player == GameControl.control.myself.ParticipantId) &&
                 GameControl.control.getActor(frame_marker_identifier).isPlayer == true)
             {
-                GameControl.control.myModel = current_model;
+                GameControl.control.myModel = this;
             }
         }
         else

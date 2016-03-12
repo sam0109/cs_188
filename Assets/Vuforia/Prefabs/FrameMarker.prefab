@@ -122,7 +122,7 @@ MonoBehaviour:
   mPreviousScale: {x: 1, y: 1, z: 1}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mMarkerID: 0
+  mMarkerID: -1
 --- !u!1002 &11400005
 EditorExtensionImpl:
   serializedVersion: 6
@@ -165,24 +165,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb7ba7911e913448957d902a55a25c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  models:
-  - {fileID: 124632, guid: 65ea256b0af8a9648a3d44fbcf1eeb72, type: 2}
-  - {fileID: 150606, guid: 9a3e964ad192cf44791d428df1f36d19, type: 2}
-  - {fileID: 104396, guid: d0047b00372d5744f9f9266282b61c53, type: 2}
-  - {fileID: 172362, guid: 209f2b73e68addc4f8e340d313a852c3, type: 2}
-  - {fileID: 192212, guid: 55cb859f30e40484785d7d10a56d3d71, type: 2}
-  DropdownButton: {fileID: 0}
-  gameController: {fileID: 0}
-  targeter: {fileID: 0}
   frame_marker_identifier: 0
-  highlighted: {fileID: 19800000, guid: 3c6519cf7319347b8a36a69c2173518c, type: 2}
+  marker: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: mMarkerID
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}

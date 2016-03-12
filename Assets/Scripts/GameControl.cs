@@ -16,7 +16,7 @@ public class GameControl : MonoBehaviour
     public string mode;
     public Actor myCharacter;
     public Participant myself;
-    public GameObject myModel;
+    public FrameMarkerController myModel;
     public bool isMyTurn;
     public int numMarkers;
     public GameObject notificationText;

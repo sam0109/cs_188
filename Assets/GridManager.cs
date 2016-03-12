@@ -11,6 +11,8 @@ public class GridManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        currentX = -1;
+        currentZ = -1;
         grid = new List<List<GameObject>>();
 	    for(int i = 0; i < dimensions; i++)
         {
@@ -38,6 +40,12 @@ public class GridManager : MonoBehaviour {
                 currentX = x;
                 currentZ = z;
             }
+        }
+        else if (currentX != -1 && currentZ != -1)
+        {
+            SetGridPiece(currentX, currentZ, 0);
+            currentX = -1;
+            currentZ = -1;
         }
 	}
 
