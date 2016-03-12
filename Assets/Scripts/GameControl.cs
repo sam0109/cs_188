@@ -30,6 +30,10 @@ public class GameControl : MonoBehaviour
     public GameObject healthbar;
     public ParticleSystem explode;
 
+    AudioSource audioSourceFX;
+    AudioSource audioSourceOverWorld;
+    public AudioClip overworld;
+
     /*  Multiplayer Values*/
     RealTimeMultiplayerListener listener;
     WaitForState waitForState;
@@ -132,6 +136,16 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
+        audioSourceFX = gameObject.AddComponent<AudioSource>();
+        audioSourceOverWorld = gameObject.AddComponent<AudioSource>();
+
+        if (overworld != null)
+        {
+            audioSourceOverWorld.loop = true;
+            audioSourceOverWorld.clip = overworld;
+            audioSourceOverWorld.Play();
+        }
+
         frame_markers = new List<FrameMarkerController>();
         listener = new RTMPListener();
         model_lookup = new Dictionary<string, int>();
@@ -170,6 +184,11 @@ public class GameControl : MonoBehaviour
                 Debug.Log("did not log in properly");
             }
         });
+    }
+
+    public void playFXSound(AudioClip sound)
+    {
+        audioSourceFX.PlayOneShot(sound);
     }
 
     void Update()
