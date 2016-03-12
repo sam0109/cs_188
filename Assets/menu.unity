@@ -798,6 +798,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 
+  myCharacter:
+    isPlayer: 0
+    model: 0
+    player: 
+    characterName: 
+    characterClass: 
+    characterRace: 
+    str: 0
+    dex: 0
+    con: 0
+    intelligence: 0
+    wiz: 0
+    cha: 0
+    maxHealth: 0
+    currentHealth: 0
+    range: 0
+    chestItem: 
+    rightHandWeapon: 
+    leftHandWeapon: 
+    chestArmor: 
+    inventory: []
   isMyTurn: 1
   numMarkers: 0
   notificationText: {fileID: 0}
@@ -2879,7 +2900,6 @@ GameObject:
   - 223: {fileID: 1833732507}
   - 114: {fileID: 1833732506}
   - 114: {fileID: 1833732505}
-  - 114: {fileID: 1833732509}
   m_Layer: 5
   m_Name: PlayerScene
   m_TagString: Untagged
@@ -2967,19 +2987,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1833732509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1833732504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aad7675950b08e244b7de32a22c202b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  found: {fileID: 0}
-  light: {fileID: 0}
 --- !u!1 &1878860564 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 107232, guid: 46e9aa6a3b179164683c14b94c2b7f3c, type: 2}

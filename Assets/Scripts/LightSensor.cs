@@ -5,9 +5,10 @@ using System.Collections;
 public class LightSensor : MonoBehaviour
 {
     public Button btn;
-    public Light light;
+    public Light my_light;
+    public float lightValue;
 
-    private bool sensorOn = false;
+    public bool sensorOn = false;
 
     void Start()
     {
@@ -43,10 +44,13 @@ public class LightSensor : MonoBehaviour
     {
         if (sensorOn)
         {
-            float lightValue = Sensor.light;
+            if (!Application.isEditor)
+            {
+                lightValue = Mathf.Clamp(Sensor.light / 110000.0f,0,1);
+            }
 
             RenderSettings.ambientIntensity = lightValue;
-            light.intensity = lightValue;
+            my_light.intensity = lightValue;
         }
     }
 }
