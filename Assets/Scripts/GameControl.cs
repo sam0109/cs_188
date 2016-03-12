@@ -12,7 +12,7 @@ using System.Collections;
 public class GameControl : MonoBehaviour
 {
     public static GameControl control;
-    private GameState state;
+    public GameState state;
     public string mode;
     public Actor myCharacter;
     public Participant myself;
@@ -70,14 +70,17 @@ public class GameControl : MonoBehaviour
     public void updateMarker(int frameMarker, string model)
     {
         state.frame_markers[frameMarker] = new Actor(actors[model_lookup[model]]);
-        if (mode == "Master")
+        if (!Application.isEditor)
         {
-            PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
-        }
-        else
-        {
-            state.currentTurnPlayer = getDM();
-            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+            if (mode == "Master")
+            {
+                PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+            }
+            else
+            {
+                state.currentTurnPlayer = getDM();
+                PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+            }
         }
     }
 
