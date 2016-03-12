@@ -1,55 +1,52 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.iOS;
 using UnityEngine.UI;
+using System.Collections;
 
 public class LightSensor : MonoBehaviour
 {
-    private string platform;
-    AndroidJavaClass androidClass;
-    AndroidJavaObject jo;
-    double sensorValue;
-    public Text found;
-    public Text light;
+    public Button btn;
+    public Light light;
 
-    void Start ()
+    private bool sensorOn = false;
+
+    void Start()
     {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            platform = "android";
-            AndroidJNI.AttachCurrentThread();
-            androidClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            jo = androidClass.GetStatic<AndroidJavaObject>("currentActivity");
-            object[] args = new[] { this.gameObject.name, "checkSensor" };
-            androidClass.Call("initSensor", args);
-            androidClass.Call("startSensor");
-        }
-        else if(Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            platform = "ios";
-        }
-
+        //Sensor.Activate(Sensor.Type.Light);
+        btn.onClick.AddListener(delegate { onSense(); });
     }
 
-    public void checkSensor(string message)
+    public void onSense()
     {
-        if (message == "Update Sensor")
+        if(sensorOn == false)
         {
-            sensorValue = jo.Call<double>("getSensorValue");
-            light.text = "" + sensorValue;
+            if (!Application.isEditor)
+            {
+                sensorOn = Sensor.Activate(Sensor.Type.Light);
+            }
+            else
+            {
+                sensorOn = true;
+            }
         }
-        else if(message == "Sensor Exists")
+        else
         {
-            found.text = "FOUND!";
-        }
-        else if(message == "Sensor Not Found")
-        {
-            found.text = "DNE";
+            sensorOn = false;
+
+            if (!Application.isEditor)
+            {
+                Sensor.Deactivate(Sensor.Type.Light);
+            }
         }
     }
 
-    public string getPlatformType()
+    public void Update()
     {
-        return platform;
+        if (sensorOn)
+        {
+            float lightValue = Sensor.light;
+
+            RenderSettings.ambientIntensity = lightValue;
+            light.intensity = lightValue;
+        }
     }
 }

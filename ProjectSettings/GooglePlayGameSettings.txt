@@ -1,4 +1,4 @@
-lastUpgrade=00932
+lastUpgrade=00930
 ios.ClientId=54046390500-2k5t3d7f606fbqad0q0ruu7p5nuei49g.apps.googleusercontent.com
 ios.BundleId=com.cs188.cksgame
 proj.ConstantsClassName=Constants
