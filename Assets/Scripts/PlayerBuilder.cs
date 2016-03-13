@@ -91,11 +91,6 @@ public class PlayerBuilder : MonoBehaviour
         GameControl.control.myCharacter.beard = beard;
     }
 
-    void Awake()
-    {
-        drawCharacter();
-    }
-
     void drawCharacter()
     {
         bodies.transform.GetChild(body).gameObject.SetActive(false);

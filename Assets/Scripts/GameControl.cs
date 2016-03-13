@@ -269,6 +269,7 @@ public class GameControl : MonoBehaviour
             {
                 state.frame_markers.Add(new Actor(0, state.dm));
             }
+            state.frame_markers[1] = myCharacter;
             SceneManager.LoadScene(1);
         }
         else
