@@ -137,6 +137,8 @@ public class GameControl : MonoBehaviour
         audioSourceFX = gameObject.AddComponent<AudioSource>();
         audioSourceOverWorld = gameObject.AddComponent<AudioSource>();
 
+        myCharacter = new Actor();
+
         if (overworld != null)
         {
             audioSourceOverWorld.loop = true;
@@ -505,6 +507,13 @@ public class Actor
     public Actor()
     {
         inventory = new List<string>();
+
+        hat = PlayerBuilder.hatMax;
+        hairStyle = 0;
+        hairColor = 0;
+        body = 0;
+        clothes = 0;
+        beard = PlayerBuilder.beardsMax;
     }
 
     public Actor(int new_model, string new_player)
@@ -512,6 +521,14 @@ public class Actor
         model = new_model;
         player = new_player;
         inventory = new List<string>();
+
+        hat = PlayerBuilder.hatMax;
+        hairStyle = 0;
+        hairColor = 0;
+        body = 0;
+        clothes = 0;
+        beard = PlayerBuilder.beardsMax;
+
     }
 
     public Actor(Actor old_actor)
@@ -536,6 +553,13 @@ public class Actor
         leftHandWeapon = old_actor.leftHandWeapon;
         chestArmor = old_actor.chestArmor;
         inventory = new List<string>(old_actor.inventory);
+
+        hat = old_actor.hat;
+        hairStyle = old_actor.hairStyle;
+        hairColor = old_actor.hairColor;
+        body = old_actor.body;
+        clothes = old_actor.clothes;
+        beard = old_actor.beard;
     }
 
     public bool isPlayer;
@@ -553,6 +577,14 @@ public class Actor
     public string leftHandWeapon;
     public string chestArmor;
     public List<string> inventory;
+
+    //Custom Character Model
+    public int hat;
+    public int hairStyle;
+    public int hairColor;
+    public int body;
+    public int clothes;
+    public int beard;
 }
 
 [System.Serializable]
