@@ -16,11 +16,15 @@ public class PlayerBuilder : MonoBehaviour
     public int body;
     public int clothes;
     public int beard;
+    public string leftHandWeapon;
+    public string rightHandWeapon;
 
     public GameObject beards;
     public GameObject hair;
     public GameObject hats;
     public GameObject bodies;
+    public GameObject leftHand;
+    public GameObject rightHand;
 
     public Button leftHats;
     public Button rightHats;
