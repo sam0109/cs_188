@@ -125,43 +125,8 @@ public class FrameMarkerController : MonoBehaviour {
                     GameControl.control.updateMarker(targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Sphere");
                 }
                 else {
-					/*attacker = current_model;
-					Animation anim;
-					anim = attacker.GetComponent<Animation> ();
-					//attacker = GameObject.FindGameObjectWithTag ("Player");
-
-					//This is a crappy way to do this, but each character's attack animation is named something different and it won't let me change the names.
-					//Doing a null check should remove the crash issue from last time.
-
-					if(anim["Attack"] != null)
-						anim.Play ("Attack");
-
-					if(anim["attack"] != null)
-						anim.Play ("attack");
-
-					if(anim["1HAttack"] != null)
-						anim.Play ("1HAttack");*/
-
-                    int diceRollHitOrNot = randomNum(20);
-
-                    int strength = GameControl.control.myCharacter.str;
-
-                    stat_converter mod = new stat_converter(strength);
-                    int strengthMod = mod.modifierValue;
-
-                    int diceRollDamage = randomNum(8);
-                    int attackDamage = strengthMod + diceRollDamage;
-
-                    attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
-
-                    //if ((targeter.target.transform.position - transform.position).magnitude > GameControl.control.getActor(frame_marker_identifier).range)
-                    //{
-                    //    print("Too far away!");
-                    //}
-                    //else
-                    //{
-                    targeter.target.transform.parent.BroadcastMessage("Damage", values);
-                    //}
+                    Action();
+                    GameControl.control.TakeTurn(GameControl.control.state.dm);
                 }
             }
             else
@@ -169,6 +134,23 @@ public class FrameMarkerController : MonoBehaviour {
                 print("Nothing selected!");
             }
         }
+    }
+
+    public void Action()
+    {
+        int diceRollHitOrNot = randomNum(20);
+
+        int strength = GameControl.control.myCharacter.str;
+
+        stat_converter mod = new stat_converter(strength);
+        int strengthMod = mod.modifierValue;
+
+        int diceRollDamage = randomNum(8);
+        int attackDamage = strengthMod + diceRollDamage;
+
+        attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
+
+        targeter.target.transform.parent.BroadcastMessage("Damage", values, SendMessageOptions.DontRequireReceiver);
     }
 
     void Damage(attack_values values)
@@ -220,7 +202,7 @@ public class stat_converter
 {
     public stat_converter(int stat)
     {
-        modifierValue = (stat / 2) - 5;
+        modifierValue = (Mathf.Max((stat / 2) - 5, 0));
     }
 
     public int modifierValue;

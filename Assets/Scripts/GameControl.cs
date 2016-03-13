@@ -65,7 +65,10 @@ public class GameControl : MonoBehaviour
         if (state.frame_markers[actor].maxHealth > 0)
         {
             state.frame_markers[actor].currentHealth -= damage;
-            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+            if (!Application.isEditor)
+            {
+                PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+            }
         }
     }
 

@@ -3758,7 +3758,8 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11437996, guid: c149abe96a93dd14e898635056c84267, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c149abe96a93dd14e898635056c84267, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &1232092258 stripped
@@ -3787,6 +3788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f29cc9f660f7744945bd6b65fa0f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedFrameMarker: {fileID: 0}
 --- !u!1 &1250859407
 GameObject:
   m_ObjectHideFlags: 0
