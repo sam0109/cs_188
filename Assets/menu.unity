@@ -983,6 +983,7 @@ MonoBehaviour:
     currentTurnPlayer: 
     dm: 
     frame_markers: []
+    lightValue: 0
   mode: 
   myCharacter:
     isPlayer: 0
@@ -1014,7 +1015,7 @@ MonoBehaviour:
   myModel: {fileID: 0}
   isMyTurn: 1
   numMarkers: 0
-  notificationText: {fileID: 0}
+  notificationText: {fileID: 187586, guid: 58da45a24d23caf468dd1cd91822505f, type: 2}
   models:
   - {fileID: 124632, guid: 65ea256b0af8a9648a3d44fbcf1eeb72, type: 2}
   - {fileID: 150606, guid: 9a3e964ad192cf44791d428df1f36d19, type: 2}
