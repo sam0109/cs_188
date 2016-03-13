@@ -81,6 +81,16 @@ public class PlayerBuilder : MonoBehaviour
         }
     }
 
+    public void setGameControl()
+    {
+        GameControl.control.myCharacter.hat = hat;
+        GameControl.control.myCharacter.hairStyle = hairStyle;
+        GameControl.control.myCharacter.hairColor = hairColor;
+        GameControl.control.myCharacter.body = body;
+        GameControl.control.myCharacter.clothes = clothes;
+        GameControl.control.myCharacter.beard = beard;
+    }
+
     void Awake()
     {
         drawCharacter();

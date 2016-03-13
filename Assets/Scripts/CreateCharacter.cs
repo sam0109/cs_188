@@ -8,7 +8,6 @@ using System;
 
 public class CreateCharacter : MonoBehaviour {
 
-    public Dropdown model;
     public InputField characterName;
     public Dropdown characterClass;
     public Dropdown characterRace;
@@ -18,6 +17,7 @@ public class CreateCharacter : MonoBehaviour {
     public InputField intelligence;
     public InputField wiz;
     public InputField cha;
+    public InputField lvl;
 
     public void SaveCharacter ()
     {
@@ -26,9 +26,9 @@ public class CreateCharacter : MonoBehaviour {
         newCharacter.characterName = characterName.text;
         newCharacter.isPlayer = true;
         newCharacter.player = "";
-        newCharacter.model = GameControl.control.model_lookup[model.options[model.value].text];
+        newCharacter.model = 5;
         newCharacter.characterClass = characterClass.options[characterClass.value].text;
-        newCharacter.characterRace = characterRace.options[characterRace.value].text;
+        newCharacter.characterRace = "";
 
         try
         {
@@ -83,6 +83,22 @@ public class CreateCharacter : MonoBehaviour {
         {
             newCharacter.cha = 8;
         }
+
+        try
+        {
+            newCharacter.level = int.Parse(lvl.text);
+        }
+        catch(FormatException)
+        {
+            newCharacter.level = 1;
+        }
+
+        newCharacter.hat = GameControl.control.myCharacter.hat;
+        newCharacter.hairStyle = GameControl.control.myCharacter.hairStyle;
+        newCharacter.hairColor = GameControl.control.myCharacter.hairColor;
+        newCharacter.body = GameControl.control.myCharacter.body;
+        newCharacter.clothes = GameControl.control.myCharacter.clothes;
+        newCharacter.beard = GameControl.control.myCharacter.beard;
 
         newCharacter.maxHealth = (Mathf.Max(newCharacter.level, 1)) * Mathf.Max(((newCharacter.con / 2) - 5), 1);
         newCharacter.currentHealth = newCharacter.maxHealth;

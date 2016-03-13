@@ -563,6 +563,8 @@ public class Actor
         body = old_actor.body;
         clothes = old_actor.clothes;
         beard = old_actor.beard;
+
+        level = old_actor.level;
     }
 
     public bool isPlayer;
