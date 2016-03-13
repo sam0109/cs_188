@@ -235,17 +235,18 @@ public class DragItem : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDr
                                 firstItemRectTransform.localPosition = Vector3.zero;
                             }
                             else
-                            {                                
+                            {
                                 firstItemGameObject.transform.SetParent(newSlot.transform);
                                 firstItemRectTransform.localPosition = Vector3.zero;
 
                                 if (newSlot.transform.parent.parent.GetComponent<EquipmentSystem>() == null && oldSlot.transform.parent.parent.GetComponent<EquipmentSystem>() != null)
+                                {
                                     oldSlot.transform.parent.parent.GetComponent<Inventory>().UnEquipItem1(firstItem);
+                                }
                             }
                         }
                     }
                 }
-
 
 
                 //dragging into a Hotbar            
@@ -417,6 +418,10 @@ public class DragItem : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDr
                                     if (secondItem.itemType != ItemType.Backpack)
                                         Inventory.GetComponent<Inventory>().UnEquipItem1(secondItem);
                                 }
+                            }
+                            else
+                            {
+                                Inventory.GetComponent<Inventory>().SwapItem(firstItem,secondItem);
                             }
 
                             if (fromHot)
@@ -615,6 +620,7 @@ public class DragItem : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDr
 
             }
         }
+
         inventory.OnUpdateItemList();
     }
 

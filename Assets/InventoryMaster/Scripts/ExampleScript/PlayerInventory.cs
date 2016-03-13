@@ -62,7 +62,7 @@ public class PlayerInventory : MonoBehaviour
         Inventory.ItemEquip -= EquipWeapon;
     }
 
-    void EquipWeapon(Item item)
+    void EquipWeapon(Item item, Item item2)
     {
         if (item.itemType == ItemType.Weapon)
         {
@@ -70,29 +70,69 @@ public class PlayerInventory : MonoBehaviour
             //add the weapon if you unequip the weapon
             for(int i = 0; i < GameControl.control.state.frame_markers.Count; i++) 
             {
-                //Actor player = GameControl.control.state.frame_markers[i];
-                //if (player.isPlayer && player.player == GameControl.control.myself.ParticipantId)
-                //{
-                 //   mine = i;
-                  //  break;
-                //}
+                Actor player = GameControl.control.state.frame_markers[i];
+                if (player.isPlayer && player.player == GameControl.control.myself.ParticipantId)
+                {
+                    mine = i;
+                    break;
+                }
             }
 
-            int itemPos = characterSystemInventory.getPositionOfItem(item);
-            Debug.Log(itemPos);
+            if(characterSystemInventory.getPositionOfItem(item) == 0)
+            {
+                GameControl.control.state.frame_markers[mine].leftHandWeapon = item.itemName;
+            }
+            else if(characterSystemInventory.getPositionOfItem(item) == 1)
+            {
+                GameControl.control.state.frame_markers[mine].rightHandWeapon = item.itemName;
+            }
+
+            if(item2 != null)
+            {
+                if (characterSystemInventory.getPositionOfItem(item2) == 0)
+                {
+                    GameControl.control.state.frame_markers[mine].leftHandWeapon = item.itemName;
+                }
+                else if (characterSystemInventory.getPositionOfItem(item2) == 1)
+                {
+                    GameControl.control.state.frame_markers[mine].rightHandWeapon = item.itemName;
+                }
+            }
             //Actor actor = GameControl.control.state.frame_markers[mine];
+            GameControl.control.updateMarker(mine, GameControl.control.state.frame_markers[mine]);
         }
     }
 
-    void UnEquipWeapon(Item item)
+    void UnEquipWeapon(Item item, Item item2)
     {
         if (item.itemType == ItemType.Weapon)
         {
-            //delete the weapon if you unequip the weapon
+            int mine = 0;
+            //add the weapon if you unequip the weapon
+            for (int i = 0; i < GameControl.control.state.frame_markers.Count; i++)
+            {
+                Actor player = GameControl.control.state.frame_markers[i];
+                if (player.isPlayer && player.player == GameControl.control.myself.ParticipantId)
+                {
+                    mine = i;
+                    break;
+                }
+            }
+
+            if (characterSystemInventory.getPositionOfItem(item) == 0 && item.itemName == GameControl.control.state.frame_markers[mine].leftHandWeapon)
+            {
+                GameControl.control.state.frame_markers[mine].leftHandWeapon = "";
+            }
+            else if (characterSystemInventory.getPositionOfItem(item) == 1 && item.itemName == GameControl.control.state.frame_markers[mine].rightHandWeapon)
+            {
+                GameControl.control.state.frame_markers[mine].rightHandWeapon = "";
+            }
+
+            GameControl.control.updateMarker(mine, GameControl.control.state.frame_markers[mine]);
         }
     }
 
-    void OnBackpack(Item item)
+    void OnBackpack(Item item, Item item2)
     {
         if (item.itemType == ItemType.Backpack)
         {
@@ -107,7 +147,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    void UnEquipBackpack(Item item)
+    void UnEquipBackpack(Item item, Item item2)
     {
         if (item.itemType == ItemType.Backpack)
             changeInventorySize(normalSize);
@@ -224,7 +264,7 @@ public class PlayerInventory : MonoBehaviour
     //}
 
 
-    public void OnConsumeItem(Item item)
+    public void OnConsumeItem(Item item, Item item2)
     {
         for (int i = 0; i < item.itemAttributes.Count; i++)
         {
@@ -264,7 +304,7 @@ public class PlayerInventory : MonoBehaviour
         //}
     }
 
-    public void OnGearItem(Item item)
+    public void OnGearItem(Item item, Item item2)
     {
         for (int i = 0; i < item.itemAttributes.Count; i++)
         {
@@ -284,7 +324,7 @@ public class PlayerInventory : MonoBehaviour
         //}
     }
 
-    public void OnUnEquipItem(Item item)
+    public void OnUnEquipItem(Item item, Item item2)
     {
         for (int i = 0; i < item.itemAttributes.Count; i++)
         {

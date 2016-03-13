@@ -84,9 +84,10 @@ public class Inventory : MonoBehaviour
     InputManager inputManagerDatabase;
 
     //event delegates for consuming, gearing
-    public delegate void ItemDelegate(Item item);
+    public delegate void ItemDelegate(Item item, Item item2 = null);
     public static event ItemDelegate ItemConsumed;
     public static event ItemDelegate ItemEquip;
+    public static event ItemDelegate ItemSwapEquip;
     public static event ItemDelegate UnEquipItem;
 
     public delegate void InventoryOpened();
@@ -197,6 +198,13 @@ public class Inventory : MonoBehaviour
     {
         if (ItemEquip != null)
             ItemEquip(item);
+    }
+
+    public void SwapItem(Item item1, Item item2)
+    {
+        if (ItemSwapEquip != null)
+            ItemSwapEquip(item1, item2);
+
     }
 
     public void UnEquipItem1(Item item)
