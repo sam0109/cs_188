@@ -36,7 +36,7 @@ public class CreateCharacter : MonoBehaviour {
         }
         catch (FormatException)
         {
-            newCharacter.str = 0;
+            newCharacter.str = 8;
         }
 
         try
@@ -45,7 +45,7 @@ public class CreateCharacter : MonoBehaviour {
         }
         catch (FormatException)
         {
-            newCharacter.dex = 0;
+            newCharacter.dex = 8;
         }
 
         try
@@ -54,7 +54,7 @@ public class CreateCharacter : MonoBehaviour {
         }
         catch (FormatException)
         {
-            newCharacter.con = 0;
+            newCharacter.con = 8;
         }
 
         try
@@ -63,7 +63,7 @@ public class CreateCharacter : MonoBehaviour {
         }
         catch (FormatException)
         {
-            newCharacter.intelligence = 0;
+            newCharacter.intelligence = 8;
         }
 
         try
@@ -72,7 +72,7 @@ public class CreateCharacter : MonoBehaviour {
         }
         catch (FormatException)
         {
-            newCharacter.wiz = 0;
+            newCharacter.wiz = 8;
         }
 
         try
@@ -81,8 +81,11 @@ public class CreateCharacter : MonoBehaviour {
         }
         catch (FormatException)
         {
-            newCharacter.cha = 0;
+            newCharacter.cha = 8;
         }
+
+        newCharacter.maxHealth = (Mathf.Max(newCharacter.level, 1)) * Mathf.Max(((newCharacter.con / 2) - 5), 1);
+        newCharacter.currentHealth = newCharacter.maxHealth;
 
         IFormatter formatter = new BinaryFormatter();
 

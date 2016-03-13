@@ -569,6 +569,7 @@ public class Actor
     public string characterClass;
     public string characterRace;
     public int str, dex, con, intelligence, wiz, cha;
+    public int level;
     public int maxHealth;
     public int currentHealth;
     public int range;
