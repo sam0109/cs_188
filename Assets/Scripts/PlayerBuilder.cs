@@ -114,7 +114,17 @@ public class PlayerBuilder : MonoBehaviour
             beards.transform.GetChild(hairColor).GetChild(beard).gameObject.SetActive(false);
         }
 
-        if(isMenu)
+        for(int i = 0; i < leftHand.transform.childCount; i++)
+        {
+            leftHand.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < rightHand.transform.childCount; i++)
+        {
+            rightHand.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        if (isMenu)
         {
             hat = GameControl.control.myCharacter.hat;
             hairStyle = GameControl.control.myCharacter.hairStyle;
@@ -131,9 +141,41 @@ public class PlayerBuilder : MonoBehaviour
             body = GameControl.control.state.frame_markers[gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].body;
             clothes = GameControl.control.state.frame_markers[gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].clothes;
             beard = GameControl.control.state.frame_markers[gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].beard;
+            leftHandWeapon = GameControl.control.state.frame_markers[gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].leftHandWeapon;
+            rightHandWeapon = GameControl.control.state.frame_markers[gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].rightHandWeapon;
         }
         
-        
+        if(leftHandWeapon != "")
+        {
+            if(leftHandWeapon == "Basic Axe")
+            {
+                leftHand.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else if (leftHandWeapon == "Wood Shield")
+            {
+                leftHand.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else if (leftHandWeapon == "Regular Sword")
+            {
+                leftHand.transform.GetChild(2).gameObject.SetActive(true);
+            }
+        }
+
+        if (rightHandWeapon != "")
+        {
+            if (rightHandWeapon == "Basic Axe")
+            {
+                rightHand.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else if (rightHandWeapon == "Wood Shield")
+            {
+                rightHand.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else if (rightHandWeapon == "Regular Sword")
+            {
+                rightHand.transform.GetChild(2).gameObject.SetActive(true);
+            }
+        }
 
         if (hat < hatMax)
         {
