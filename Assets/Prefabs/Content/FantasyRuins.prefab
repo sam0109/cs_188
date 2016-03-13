@@ -399,6 +399,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 496526}
+  - 65: {fileID: 6599992}
   m_Layer: 0
   m_Name: FantasyRuins
   m_TagString: Untagged
@@ -4380,6 +4381,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100990}
   m_Mesh: {fileID: 4300026, guid: aa0ac727f99fa6a4d80a2a0478a06c32, type: 3}
+--- !u!65 &6599992
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

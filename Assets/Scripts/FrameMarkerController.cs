@@ -15,6 +15,7 @@ public class FrameMarkerController : MonoBehaviour {
     static ItemDataBaseList inventoryItemList;
     string rightHandWeapon;
     string leftHandWeapon;
+    bool isDead;
 
     public void Start()
     {
@@ -45,6 +46,7 @@ public class FrameMarkerController : MonoBehaviour {
                 {
                     myHealthBar = (GameObject)Instantiate(GameControl.control.healthbar, new Vector3(0, 1.5f, 0), Quaternion.identity);
                     myHealthBar.transform.SetParent(gameObject.transform, false);
+                    isDead = false;
                 }
             }
             else if(myHealthBar)
@@ -73,7 +75,9 @@ public class FrameMarkerController : MonoBehaviour {
                 SetModel(current_model_num);
             }
 
-            if (rightHandWeapon != GameControl.control.state.frame_markers[frame_marker_identifier].rightHandWeapon || leftHandWeapon != GameControl.control.state.frame_markers[frame_marker_identifier].leftHandWeapon)
+            if (GameControl.control.state.frame_markers[frame_marker_identifier].isPlayer && 
+                    (rightHandWeapon != GameControl.control.state.frame_markers[frame_marker_identifier].rightHandWeapon || 
+                    leftHandWeapon != GameControl.control.state.frame_markers[frame_marker_identifier].leftHandWeapon))
             {
                 ((PlayerBuilder)GameControl.control.frame_markers[frame_marker_identifier].current_model.GetComponent<PlayerBuilder>()).drawCharacter();
                 rightHandWeapon = GameControl.control.state.frame_markers[frame_marker_identifier].rightHandWeapon;
@@ -162,11 +166,16 @@ public class FrameMarkerController : MonoBehaviour {
         attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
 
         targeter.target.transform.parent.BroadcastMessage("Damage", values, SendMessageOptions.DontRequireReceiver);
+        Animator anim = GetComponent<Animator>();
+        if (anim)
+        {
+            anim.SetTrigger("Attack");
+        }
     }
 
     void Damage(attack_values values)
     {
-        if (GameControl.control.state.frame_markers[frame_marker_identifier].maxHealth > 0)
+        if (GameControl.control.state.frame_markers[frame_marker_identifier].maxHealth > 0 && isDead == false)
         {
             int chanceToHit = values.diceRollToHit;
             int attackDamage = values.attackDamageWithDice;
@@ -179,8 +188,13 @@ public class FrameMarkerController : MonoBehaviour {
                 GameControl.control.dealDamage(frame_marker_identifier, attackDamage);
                 if (GameControl.control.state.frame_markers[frame_marker_identifier].currentHealth <= 0)
                 {
-                    Instantiate(GameControl.control.explode, transform.position, Quaternion.identity);
-                    GameControl.control.updateMarker(frame_marker_identifier, "Sphere");
+                    GameControl.control.state.frame_markers[frame_marker_identifier].currentHealth = 0;
+                    Animator anim = GetComponent<Animator>();
+                    if (anim)
+                    {
+                        anim.SetBool("isDead", true);
+                        isDead = true;
+                    }
                 }
             }
             else

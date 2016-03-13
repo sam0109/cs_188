@@ -288,7 +288,10 @@ public class GameControl : MonoBehaviour
             {
                 Debug.Log("sending player turn");
                 state.currentTurnPlayer = state.dm;
-                PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+                if (!Application.isEditor)
+                {
+                    PlayGamesPlatform.Instance.RealTime.SendMessage(true, control.state.dm, ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
+                }
             }
             else
             {

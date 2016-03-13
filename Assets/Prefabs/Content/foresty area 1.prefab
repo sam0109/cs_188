@@ -693,6 +693,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 415226}
+  - 65: {fileID: 6531586}
   m_Layer: 0
   m_Name: foresty area 1
   m_TagString: Untagged
@@ -3560,6 +3561,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105004}
   m_Mesh: {fileID: 4300014, guid: 60b0c007919133f45a3c108d6cf8aced, type: 3}
+--- !u!65 &6531586
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &11402848
 MonoBehaviour:
   m_ObjectHideFlags: 1
