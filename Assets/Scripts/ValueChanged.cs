@@ -7,6 +7,6 @@ public class ValueChanged : MonoBehaviour {
 
 	public void DropdownChanged(int value)
 	{
-        GameControl.control.getActor(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).model = value;
+        GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].model = value;
 	}
 }

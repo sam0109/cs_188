@@ -5,7 +5,6 @@ using System.Collections;
 public class LightSensor : MonoBehaviour
 {
     public Button btn;
-    public Light my_light;
     public float lightValue;
 
     public bool sensorOn = false;
@@ -46,12 +45,10 @@ public class LightSensor : MonoBehaviour
         {
             if (!Application.isEditor)
             {
-                lightValue = Mathf.Clamp(Sensor.light / 110000.0f,0,1);
+                lightValue = Mathf.Clamp(Sensor.light / 5000.0f,0,1);
                 Debug.Log("Light value from sensor: " + lightValue.ToString());
             }
-
-            RenderSettings.ambientIntensity = lightValue;
-            my_light.intensity = lightValue;
+            GameControl.control.state.lightValue = lightValue;
         }
     }
 }

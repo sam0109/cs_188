@@ -20,6 +20,7 @@ public class GameControl : MonoBehaviour
     public bool isMyTurn;
     public int numMarkers;
     public GameObject notificationText;
+    float oldLightSensorValue;
 
     public List<GameObject> models;
     public List<string> model_names;
@@ -49,11 +50,6 @@ public class GameControl : MonoBehaviour
         return control.state.players[playerID];
     }
 
-    public Actor getActor(int actor)
-    {
-        return state.frame_markers[actor];
-    }
-
     public void setMode(string newMode)
     {
         mode = newMode;
@@ -66,9 +62,10 @@ public class GameControl : MonoBehaviour
 
     public void dealDamage(int actor, int damage)
     {
-        if (getActor(actor).maxHealth > 0)
+        if (state.frame_markers[actor].maxHealth > 0)
         {
-            getActor(actor).currentHealth -= damage;
+            state.frame_markers[actor].currentHealth -= damage;
+            PlayGamesPlatform.Instance.RealTime.SendMessage(true, getDM(), ObjectToByteArray(new MessageToDM("takenTurn", control.state, control.myself.ParticipantId)));
         }
     }
 
@@ -194,23 +191,33 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
+        if (oldLightSensorValue != state.lightValue)
+        {
+            oldLightSensorValue = state.lightValue;
+            PopupMessage("Light value is now " + state.lightValue.ToString());
+            RenderSettings.ambientIntensity = state.lightValue;
+            GameObject.FindGameObjectWithTag("Light").GetComponent<Light>().intensity = state.lightValue;
+            if (!Application.isEditor)
+            {
+                PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+            }
+        }
     }
 
     public void PopupMessage(string message)
     {
-        /*notificationText = GameObject.FindWithTag("Notification");
-        Text text = notificationText.GetComponent<Text>();
-        text.color = Color.white;
+        GameObject textObject = Instantiate(notificationText);
+        if(mode == "Player")
+        {
+            textObject.transform.SetParent(GameObject.FindGameObjectWithTag("Player Canvas").transform, false);
+        }
+        else
+        {
+            textObject.transform.SetParent(GameObject.FindGameObjectWithTag("DM Canvas").transform, false);
+        }
+        Text text = textObject.GetComponent<Text>();
+        text.color = Color.red;
         text.text = message;
-        WaitAndClear();*/
-    }
-
-    IEnumerator WaitAndClear()
-    {
-        yield return new WaitForSeconds(1);
-        notificationText = GameObject.FindWithTag("Notification");
-        Text text = notificationText.GetComponent<Text>();
-        text.text = "";
     }
 
     /******************************************************
@@ -421,9 +428,9 @@ public class GameControl : MonoBehaviour
         /// <param name="data">Data.</param>
         public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
         {
-            Debug.Log("unity DM got new message");
             if (control.mode == "Master")
             {
+                Debug.Log("unity DM got new message");
                 MessageToDM message = (MessageToDM)ByteArrayToObject(data);
                 switch(message.messageType)
                 {
@@ -434,6 +441,11 @@ public class GameControl : MonoBehaviour
                         break;
                     case ("takenTurn"):
                         Debug.Log("Message was taking a turn");
+                        control.state = message.state;
+                        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
+                        break;
+                    case ("takenDamage"):
+                        Debug.Log("Message was taking damage");
                         control.state = message.state;
                         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));
                         break;
@@ -484,6 +496,7 @@ public class GameState
     public string dm;
     public List<Actor> frame_markers;
     public Dictionary<string, Actor> players;
+    public float lightValue;
 }
 
 [System.Serializable]

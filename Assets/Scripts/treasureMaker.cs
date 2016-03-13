@@ -45,7 +45,7 @@ public class treasureMaker : MonoBehaviour {
         else
         {
             GameControl.control.updateMarker(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier, "Treasure Chest");
-            GameControl.control.getActor(targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier).chestItem = button.GetComponentInChildren<Text>().text;
+            GameControl.control.state.frame_markers[targetSel.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].chestItem = button.GetComponentInChildren<Text>().text;
             objectSelector.SetActive(true);
             gameObject.transform.parent.gameObject.SetActive(false);
         }

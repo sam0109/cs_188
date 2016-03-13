@@ -25,6 +25,9 @@ TagManager:
   - MainInventory
   - PlayerCharacter
   - Notification
+  - Player Canvas
+  - DM Canvas
+  - Light
   layers:
   - Default
   - TransparentFX

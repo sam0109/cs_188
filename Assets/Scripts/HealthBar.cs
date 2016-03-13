@@ -9,25 +9,24 @@ public class HealthBar : MonoBehaviour {
     public float minValue;
     public float maxValue;
     UnityEngine.UI.Image image_target;
-    Actor parentFrameMarker;
+    int parentFrameMarker;
     TrackableBehaviour marker;
 	// Use this for initialization
 	void Start () {
         image_target = gameObject.GetComponent<UnityEngine.UI.Image>();
-        parentFrameMarker = GameControl.control.getActor(gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier);
+        parentFrameMarker = gameObject.GetComponentInParent<FrameMarkerController>().frame_marker_identifier;
         marker = gameObject.transform.parent.parent.GetComponent<MarkerBehaviour>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-
         if(marker.CurrentStatus != TrackableBehaviour.Status.TRACKED)
         {
             transform.localScale = Vector3.zero;
         }
         else
         {
-            transform.localScale = new Vector3((float)parentFrameMarker.currentHealth / (float)parentFrameMarker.maxHealth, 1, 1);
+            transform.localScale = new Vector3((float)GameControl.control.state.frame_markers[parentFrameMarker].currentHealth / (float)GameControl.control.state.frame_markers[parentFrameMarker].maxHealth, 1, 1);
             image_target.color = Color.Lerp(minColor, maxColor, transform.localScale.x);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ChooseCanvas : MonoBehaviour 
 {
@@ -15,7 +16,7 @@ public class ChooseCanvas : MonoBehaviour
 
 	void OnGUI()
     {
-        if (Application.loadedLevelName == "main")
+        if (SceneManager.GetActiveScene().name == "main")
         {
             if (GameControl.control.mode == "Master")
             {

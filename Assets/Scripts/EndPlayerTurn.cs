@@ -13,6 +13,7 @@ public class EndPlayerTurn : MonoBehaviour {
     
 	public void EndTurn()
     {
+        GameControl.control.PopupMessage("Done!");
         GameControl.control.TakeTurn(GameControl.control.getDM());
     }
 
