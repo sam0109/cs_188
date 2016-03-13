@@ -121,6 +121,8 @@ public class FrameMarkerController : MonoBehaviour {
                 {
                     string item = GameControl.control.state.frame_markers[targeter.target.GetComponentInParent<FrameMarkerController>().frame_marker_identifier].chestItem;
 
+                    GameControl.control.PopupMessage("You got a " + item + "!");
+
                     GameControl.control.state.frame_markers[frame_marker_identifier].inventory.Add(item);
 
                     Inventory mainInventory = inventory.GetComponent<Inventory>();
@@ -166,10 +168,15 @@ public class FrameMarkerController : MonoBehaviour {
         attack_values values = new attack_values(diceRollHitOrNot, attackDamage);
 
         targeter.target.transform.parent.BroadcastMessage("Damage", values, SendMessageOptions.DontRequireReceiver);
-        Animator anim = GetComponent<Animator>();
+        Animator anim = GetComponentInChildren<Animator>();
         if (anim)
         {
+            print("playing attack");
             anim.SetTrigger("Attack");
+        }
+        else
+        {
+            print("No Animator!");
         }
     }
 
@@ -189,11 +196,19 @@ public class FrameMarkerController : MonoBehaviour {
                 if (GameControl.control.state.frame_markers[frame_marker_identifier].currentHealth <= 0)
                 {
                     GameControl.control.state.frame_markers[frame_marker_identifier].currentHealth = 0;
-                    Animator anim = GetComponent<Animator>();
+                    Animator anim = GetComponentInChildren<Animator>();
                     if (anim)
                     {
                         anim.SetBool("isDead", true);
                         isDead = true;
+                    }
+                }
+                else
+                {
+                    Animator anim = GetComponentInChildren<Animator>();
+                    if (anim)
+                    {
+                        anim.SetTrigger("TakeDamage");
                     }
                 }
             }

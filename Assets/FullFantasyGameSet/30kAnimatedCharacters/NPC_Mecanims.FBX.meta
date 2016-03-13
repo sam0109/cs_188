@@ -133,7 +133,19 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'CATSpine3' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'CATLForearm' has translation
+      animation that will be discarded.\n\t'CATLFingers1' has translation animation
+      that will be discarded.\n\t'CATLFingers2' has scale animation that will be discarded.\n\t'CATLThumb2'
+      has scale animation that will be discarded.\n\t'CATRForearm' has translation
+      animation that will be discarded.\n\t'CATRHand' has scale animation that will
+      be discarded.\n\t'CATRFingers1' has scale animation that will be discarded.\n\t'CATRFingers2'
+      has scale animation that will be discarded.\n\t'CATRThumb2' has scale animation
+      that will be discarded.\n\t'CATLCalf' has scale animation that will be discarded.\n\t'CATLFoot'
+      has scale animation that will be discarded.\n\t'CATRigLLegDigit11' has scale
+      animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 1
@@ -294,8 +306,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
