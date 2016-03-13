@@ -66,7 +66,21 @@ public class PlayerInventory : MonoBehaviour
     {
         if (item.itemType == ItemType.Weapon)
         {
+            int mine = 0;
             //add the weapon if you unequip the weapon
+            for(int i = 0; i < GameControl.control.state.frame_markers.Count; i++) 
+            {
+                //Actor player = GameControl.control.state.frame_markers[i];
+                //if (player.isPlayer && player.player == GameControl.control.myself.ParticipantId)
+                //{
+                 //   mine = i;
+                  //  break;
+                //}
+            }
+
+            int itemPos = characterSystemInventory.getPositionOfItem(item);
+            Debug.Log(itemPos);
+            //Actor actor = GameControl.control.state.frame_markers[mine];
         }
     }
 

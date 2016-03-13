@@ -92,6 +92,7 @@ public class GameControl : MonoBehaviour
     public void updateMarker(int frameMarker, Actor actor)
     {
         state.frame_markers[frameMarker] = actor;
+
         if (mode == "Master")
         {
             PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, ObjectToByteArray(control.state));

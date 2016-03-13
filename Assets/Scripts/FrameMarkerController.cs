@@ -9,10 +9,12 @@ public class FrameMarkerController : MonoBehaviour {
     GameObject particles;
     bool particlesPlaying;
     int current_model_num;
-    GameObject current_model;
+    public GameObject current_model;
     public Vuforia.MarkerBehaviour marker;
     GameObject myHealthBar;
     static ItemDataBaseList inventoryItemList;
+    string rightHandWeapon;
+    string leftHandWeapon;
 
     public void Start()
     {
@@ -20,6 +22,8 @@ public class FrameMarkerController : MonoBehaviour {
 
         particlesPlaying = false;
         current_model_num = -1;
+        rightHandWeapon = "";
+        leftHandWeapon = "";
         targeter = GameObject.FindGameObjectWithTag("Targeter").GetComponent<target_selector>();
         marker = gameObject.GetComponent<Vuforia.MarkerBehaviour>();
         frame_marker_identifier = marker.Marker.MarkerID;
@@ -67,6 +71,13 @@ public class FrameMarkerController : MonoBehaviour {
             {
                 current_model_num = GameControl.control.state.frame_markers[frame_marker_identifier].model;
                 SetModel(current_model_num);
+            }
+
+            if (rightHandWeapon != GameControl.control.state.frame_markers[frame_marker_identifier].rightHandWeapon || leftHandWeapon != GameControl.control.state.frame_markers[frame_marker_identifier].leftHandWeapon)
+            {
+                ((PlayerBuilder)GameControl.control.frame_markers[frame_marker_identifier].current_model.GetComponent<PlayerBuilder>()).drawCharacter();
+                rightHandWeapon = GameControl.control.state.frame_markers[frame_marker_identifier].rightHandWeapon;
+                leftHandWeapon = GameControl.control.state.frame_markers[frame_marker_identifier].leftHandWeapon;
             }
 
             if (targeter.target == current_model)
