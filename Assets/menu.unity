@@ -1204,7 +1204,7 @@ MonoBehaviour:
     body: 0
     clothes: 0
     beard: 0
-  - isPlayer: 1
+  - isPlayer: 0
     model: 6
     player: 
     characterName: 
@@ -1231,7 +1231,7 @@ MonoBehaviour:
     body: 0
     clothes: 0
     beard: 0
-  - isPlayer: 1
+  - isPlayer: 0
     model: 7
     player: 
     characterName: 

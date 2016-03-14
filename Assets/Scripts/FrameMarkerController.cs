@@ -187,7 +187,7 @@ public class FrameMarkerController : MonoBehaviour {
             int chanceToHit = values.diceRollToHit;
             int attackDamage = values.attackDamageWithDice;
 
-            int targetArmor = 10; //This needs to change
+            int targetArmor = 0; //This needs to change
             if (chanceToHit > targetArmor)
             {
 				Handheld.Vibrate ();
@@ -223,6 +223,10 @@ public class FrameMarkerController : MonoBehaviour {
     {
         int answ = Random.Range(1, max);
         return answ;
+    }
+    public void FinishedDying()
+    {
+        GameControl.control.updateMarker(frame_marker_identifier, "Sphere");
     }
 }
 

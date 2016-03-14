@@ -684,7 +684,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 427120}
-  - 111: {fileID: 11128190}
   - 95: {fileID: 9557122}
   - 65: {fileID: 6508142}
   m_Layer: 0
@@ -1374,39 +1373,16 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193806}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 726f7bbbc15b37b4fa67395e59732711, type: 3}
-  m_Controller: {fileID: 9100000, guid: ded9b919659350944900207b3b7ebd69, type: 2}
-  m_CullingMode: 1
+  m_Controller: {fileID: 9100000, guid: ee057e948fae14346a6e24dd8e2759dc, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &11128190
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193806}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400002, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400004, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400006, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400008, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400010, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400012, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400014, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  - {fileID: 7400016, guid: e91d9f4abbcb83642ab39c2f6116245f, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!137 &13711296
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1482,7 +1458,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 726f7bbbc15b37b4fa67395e59732711, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ee057e948fae14346a6e24dd8e2759dc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193806}
